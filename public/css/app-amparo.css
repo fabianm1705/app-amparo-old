@@ -1,0 +1,80 @@
+.margenTotal {
+  margin: 1rem;
+}
+
+.bgAzul {
+  background-color: #0000FF;
+}
+
+.bgPurple {
+  background-color: #9c27b0;
+}
+
+.bgDeepPurple {
+  background-color: #673ab7;
+}
+
+.bgOrange {
+  background-color: #ff9800;
+}
+
+/* Amarillo */
+.bgAmber {
+  background-color: #ffc107;
+}
+
+.bgIndigo {
+  background-color: #3f51b5;
+}
+
+.bgCeleste {
+  background-color: #03a9f4;
+}
+
+/* Celeste */
+.bgCyan {
+  background-color: #6cb2eb;
+}
+
+.centrado {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+a:link > div {
+  color: black;
+}
+
+/* visited link */
+a:visited > div {
+  color: black;
+}
+
+/* mouse over link */
+a:hover > div {
+  color: black;
+}
+
+/* selected link */
+a:active > div {
+  color: black;
+}
+
+a:link {
+  color: white;
+}
+
+/* visited link */
+a:visited {
+  color: white;
+}
+
+/* mouse over link */
+a:hover {
+  color: white;
+}
+
+/* selected link */
+a:active {
+  color: white;
+}

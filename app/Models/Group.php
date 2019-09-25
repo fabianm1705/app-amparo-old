@@ -1,0 +1,34 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Group extends Model
+{
+  /**
+   * The attributes that are mass assignable.
+   *
+   * @var array
+   */
+  protected $fillable = [
+      'nroSocio', 'fechaAlta', 'email', 'telefono', 'direccion',
+      'direccionCobro', 'diaCobro', 'horaCobro', 'total', 'activo',
+  ];
+
+  public function partners()
+  {
+    return $this->hasMany('App\Models\Partner','group_id');
+  }
+
+  public function plans()
+  {
+    return $this->hasMany('App\Models\Plan','group_id');
+  }
+
+  public function sales()
+  {
+    return $this->hasMany('App\Models\Sale','group_id');
+  }
+
+}

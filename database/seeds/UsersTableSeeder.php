@@ -2,7 +2,9 @@
 
 use Illuminate\Database\Seeder;
 use \App\User;
-use Illuminate\Support\Facades\Storage;
+use \App\Models\Group;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UsersTableSeeder extends Seeder
 {
@@ -13,21 +15,27 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $user = new User();
         $lineas = file('storage/app/public/socios.txt');
         foreach ($lineas as $linea)
         {
           $datos = explode("|", $linea);
+          $user = new User();
           $user->nroAdh = utf8_encode(trim($datos[0]));
-          $user->name = utf8_encode(trim($datos[1]));
-          $user->password = "amparo";
-          $user->nroDoc = utf8_encode(trim($datos[2]));
+          $user->name = Str::title(utf8_encode(trim($datos[1])));
+          $user->password = Hash::make('amparo');
+          $user->nroDoc = str_replace(".","",utf8_encode(trim($datos[2])));
           $user->tipoDoc=1;
           $time = strtotime($datos[3]);
           $user->fechaNac = date('Y-m-d',$time);
           $user->sexo=utf8_encode(trim($datos[4]));
           $user->vigenteOrden=intval(trim($datos[5]));
           $user->activo=intval(trim($datos[6]));
+
+          $group = Group::where('nroSocio', '=', utf8_encode(trim($datos[7])))
+                                    ->get()->first();
+          if ($group != null) {
+            $user->group_id=$group->id;
+          }
 
           $user->save();
         }

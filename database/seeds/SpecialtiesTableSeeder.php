@@ -57,7 +57,7 @@ class SpecialtiesTableSeeder extends Seeder
           "monto_a" => 270, "vigente" => true, "vigenteOrden" => true
         ]);
         Specialty::create([
-          "descripcion" => "Anátomo Patóloga (pap)", "monto_s" => 0,
+          "descripcion" => "Anátomo Patología", "monto_s" => 0,
           "monto_a" => 0, "vigente" => true, "vigenteOrden" => false
         ]);
         Specialty::create([

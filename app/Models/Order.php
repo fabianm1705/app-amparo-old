@@ -12,7 +12,7 @@ class Order extends Model
    * @var array
    */
   protected $fillable = [
-    'fecha', 'fechaImpresion', 'numero', 'monto_s', 'monto_a',
+    'fecha', 'fechaImpresion', 'monto_s', 'monto_a',
     'obs', 'estado', 'lugarEmision', 'pacient_id', 'doctor_id',
   ];
 
@@ -21,9 +21,9 @@ class Order extends Model
     'fechaImpresion' => 'date:Y-m-d',
   ];
 
-  public function partner()
+  public function user()
   {
-    return $this->belongsTo('App\Models\Partner','pacient_id');
+    return $this->belongsTo('App\User','pacient_id');
   }
 
   public function doctor()

@@ -1,5 +1,7 @@
-<template>
-  <section class="seccion-contacto my-5">
+@extends('layouts.app')
+
+@section('content')
+<div class="container seccion-contacto my-5">
     <div class="row">
       <div class="col-md-4 card shadow-sm margenTotal">
         <div class="card-body card-header-raised text-center">
@@ -75,13 +77,5 @@
         </div>
       </div>
     </div>
-  </section>
-</template>
-
-<script>
-    export default {
-        mounted() {
-            console.log('Componente Otros Montado.')
-        }
-    }
-</script>
+</div>
+@endsection

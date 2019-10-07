@@ -3,8 +3,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="images/icon-hires.png" rel="icon" sizes="192x192" />
-    <link href="images/icon-normal.png" rel="icon" sizes="128x128" />
     <link rel="apple-touch-icon" sizes="76x76" href="images/apple-icon.png">
     <link rel="icon" type="image/png" href="images/favicon.png">
 
@@ -61,16 +59,16 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                          <a class="nav-link" href="#emision">Ordenes</a>
+                          <a class="nav-link" href="{{ route('getOrders') }}">Ordenes</a>
                         </li>
                         <li class="nav-item active">
-                          <a class="nav-link" href="{{ route('getSpecialties') }}">Listado de Profesionales</a>
+                          <a class="nav-link" href="{{ route('getSpecialties') }}">Profesionales</a>
                         </li>
                         <li class="nav-item active">
                           <a class="nav-link" href="{{ route('getProducts') }}">Celulares</a>
                         </li>
                         <li class="nav-item active">
-                          <a class="nav-link" href="{{ route('home') }}">Más Servicios</a>
+                          <a class="nav-link" href="{{ route('otros') }}">+Servicios</a>
                         </li>
                         <li class="nav-item active">
                           <a class="nav-link" href="{{ route('contacto') }}">Contacto</a>
@@ -96,7 +94,7 @@
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         <div class="">
-                                          @lang('messages.logout') 
+                                          @lang('messages.logout')
                                         </div>
                                     </a>
 

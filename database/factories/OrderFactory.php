@@ -14,7 +14,6 @@ $factory->define(App\Models\Order::class, function (Faker $faker) {
   return [
     'fecha' => $faker->date($format = 'Y-m-d', $max = 'now'),
     'fechaImpresion' => $faker->date($format = 'Y-m-d', $max = 'now'),
-    'numero' => $faker->unique()->numberBetween(1,10000),
     'monto_s' => 180,
     'monto_a' => 220,
     'estado' => $faker->randomElement($array = array ('Emitida','Pagada','Cancelada')),

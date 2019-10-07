@@ -4,7 +4,7 @@
   <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10">
-          <dinamic-doctors-component></dinamic-doctors-component>
+          <specialty-doctors-table-component></specialty-doctors-table-component>
         </div>
     </div>
   </div>

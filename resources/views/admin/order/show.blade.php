@@ -1,0 +1,130 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+<style type="text/css">
+    .Estilo1 {
+      font-family: Verdana, Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      line-height: 2;
+    }
+</style>
+<div class="container">
+  <table class="Estilo1">
+    <tr>
+      <td><img src="{{ asset("images/logoSmall.png") }}"></td>
+      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+      <td>
+        <span>Lugar de Emisión: Sede Amparo</span><br>
+        <span>Emisión: {{ \Carbon\Carbon::parse($order->fecha)->format('d/m/Y') }}</span><br>
+        <span>Impresión: {{ \Carbon\Carbon::parse($order->fechaImpresion)->format('d/m/Y') }}</span><br>
+        <span>Número de Orden: {{ $order->id }}</span>
+      </td>
+    </tr>
+  </table>
+	<table class="Estilo1">
+  	<tr>
+    	<td align="right"><br><br><span>Socio N&ordm;:</span></td>
+    	<td >&nbsp;</td>
+    	<td align="left"><br><br><span>{{ $order->user->group->nroSocio }}</span></td>
+  	</tr>
+  	<tr>
+    	<td align="right">Titular:</td>
+    	<td align="right">&nbsp;</td>
+    	<td  align="left">{{ $order->user->name }}</td>
+  	</tr>
+  	<tr>
+    	<td align="right">Domicilio:</td>
+    	<td align="right">&nbsp;</td>
+    	<td  align="left">{{ $order->user->group->direccion }}</td>
+  	</tr>
+  	<tr>
+    	<td align="right">Teléfono:</td>
+    	<td align="right">&nbsp;</td>
+    	<td  align="left">{{ $order->user->group->telefono }}</td>
+  	</tr>
+  	<tr>
+    	<td colspan=3>
+    		<hr>
+    	</td>
+  	</tr>
+  	<tr>
+    	<td align="right">Paciente:</td>
+    	<td align="right">&nbsp;</td>
+    	<td align="left">{{ $order->user->name }}</td>
+  	</tr>
+  	<tr>
+    	<td align="right">Documento:</td>
+    	<td align="right">&nbsp;</td>
+    	<td align="left">{{ $order->user->nroDoc }}</td>
+  	</tr>
+  	<tr>
+    	<td align="right">Fecha Nacimiento:</td>
+    	<td align="right">&nbsp;</td>
+    	<td align="left">{{ \Carbon\Carbon::parse($order->user->fechaNac)->format('d/m/Y') }}</td>
+  	</tr>
+  	<tr>
+    	<td colspan=3>
+    		<hr>
+    	</td>
+  	</tr>
+  	<tr>
+    	<td align="right">Especialidad:</td>
+    	<td align="right">&nbsp;</td>
+    	<td class="alignLeft">{{ $order->doctor->specialty->descripcion }}</td>
+  	</tr>
+  	<tr>
+    	<td align="right">Profesional:</td>
+    	<td align="right">&nbsp;</td>
+    	<td align="left">{{ $order->doctor->apeynom }}</td>
+  	</tr>
+  	<tr>
+    	<td align="right">Consultorio:</td>
+    	<td align="right">&nbsp;</td>
+    	<td align="left">{{ $order->doctor->direccion }}</td>
+  	</tr>
+  	<tr>
+    	<td align="right">Obs:</td>
+    	<td align="right">&nbsp;</td>
+    	<td class="alignLeft">{{ $order->obs }}</td>
+  	</tr>
+    <tr>
+    	<td align="center" colspan="3" style="font-size:14;">Coseguro único a abonar en consultorio: ${{ $order->monto_s }}</td>
+  	</tr>
+  	<tr>
+    	<td height="38" colspan="3">
+    	 <div>
+          <table  width="551" align="center">
+            <tr>
+              <td colspan="3"><br><br><br><br></td>
+            </tr>
+            <tr>
+              <td colspan="3"  height="1"></td>
+            </tr>
+            <tr>
+              <td>_______________________________</td>
+              <td>&nbsp;</td>
+              <td>_______________________________</td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Profesional</td>
+              <td>&nbsp;&nbsp;</td>
+              <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Paciente</td>
+            </tr>
+      	  </table>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3"><br><br><br></td>
+    </tr>
+    <tr>
+      <td align="right">Token de Seguridad:</td>
+      <td align="right">&nbsp;</td>
+      <td align="left">{{ $order->id+4532678 }}</td>
+    </tr>
+    <tr>
+      <td colspan="3" align="center">
+          2019 Amparo, Cura Alvarez 615, Tel.:4235108. Powered by Amparo.
+      </td>
+    </tr>
+  </table>
+</div>

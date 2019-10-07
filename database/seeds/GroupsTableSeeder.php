@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\Group;
+use Illuminate\Support\Str;
 
 class GroupsTableSeeder extends Seeder
 {
@@ -21,10 +22,10 @@ class GroupsTableSeeder extends Seeder
         $group->fechaAlta = utf8_encode(trim($datos[1]));
         $group->email=utf8_encode(trim($datos[2]));
         $group->telefono=utf8_encode(trim($datos[3]));
-        $group->direccion = utf8_encode(trim($datos[4]));
-        $group->direccionCobro = utf8_encode(trim($datos[5]));
-        $group->diaCobro = utf8_encode(trim($datos[6]));
-        $group->horaCobro = utf8_encode(trim($datos[7]));
+        $group->direccion = Str::title(utf8_encode(trim($datos[4])));
+        $group->direccionCobro = Str::title(utf8_encode(trim($datos[5])));
+        $group->diaCobro = Str::lower(utf8_encode(trim($datos[6])));
+        $group->horaCobro = Str::lower(utf8_encode(trim($datos[7])));
         $group->total = intval(trim($datos[8]));
         $group->activo=1;
         $group->save();

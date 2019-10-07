@@ -3,8 +3,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="images/icon-hires.png" rel="icon" sizes="192x192" />
-    <link href="images/icon-normal.png" rel="icon" sizes="128x128" />
     <link rel="apple-touch-icon" sizes="76x76" href="images/apple-icon.png">
     <link rel="icon" type="image/png" href="images/favicon.png">
 

@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Doctor;
+use App\User;
 use Illuminate\Http\Request;
+use Auth;
+use Illuminate\Support\Carbon;
 
 class OrderController extends Controller
 {
@@ -37,21 +41,21 @@ class OrderController extends Controller
     public function store(Request $request)
     {
       $order = new Order();
-      $order->fecha = $request->input('fecha');
-      $order->fechaImpresion = $request->input('fechaImpresion');
-      $order->numero = $request->input('numero');
-      $order->monto_s = $request->input('monto_s');
-      $order->monto_a = $request->input('monto_a');
-      $order->obs = $request->input('obs');
-      $order->estado = $request->input('estado');
-      $order->lugarEmision = $request->input('lugarEmision');
+      $order->fecha = Carbon::now();
+      $order->fechaImpresion = Carbon::now();
+      $doctor = Doctor::find($request->input('doctor_id'));
+      $order->monto_s = $doctor->specialty->monto_s;
+      $order->monto_a = $doctor->specialty->monto_a;
+      $order->obs = "";
+      $order->estado = "Impresa";
+      $order->lugarEmision = "Sede Amparo";
       $order->pacient_id = $request->input('pacient_id');
       $order->doctor_id = $request->input('doctor_id');
 
       $order->save();
 
       return redirect()
-        ->route('orders.show',['order' => $order])
+        ->route('getOrders')
         ->with('message','Orden Registrada');
     }
 
@@ -88,7 +92,6 @@ class OrderController extends Controller
     {
       $order->fecha = $request->input('fecha');
       $order->fechaImpresion = $request->input('fechaImpresion');
-      $order->numero = $request->input('numero');
       $order->monto_s = $request->input('monto_s');
       $order->monto_a = $request->input('monto_a');
       $order->obs = $request->input('obs');
@@ -115,5 +118,14 @@ class OrderController extends Controller
       $order->delete();
       return redirect()
         ->route('orders.index');
+    }
+
+    public function getOrders(Request $request)
+    {
+      $user_id = Auth::user()->id;
+      $group_id = Auth::user()->group_id;
+      $users = User::where('group_id',$group_id)->get();
+      $orders = Order::where('pacient_id',$user_id)->get();
+      return view('orders',compact("orders","users"));
     }
 }

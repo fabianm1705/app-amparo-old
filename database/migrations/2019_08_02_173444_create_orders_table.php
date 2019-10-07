@@ -17,7 +17,6 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->date('fecha');
             $table->date('fechaImpresion');
-            $table->bigInteger('numero');
             $table->bigInteger('monto_s');
             $table->bigInteger('monto_a');
             $table->text('obs')->nullable();

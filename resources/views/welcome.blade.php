@@ -93,10 +93,9 @@
             <div class="content">
                 <div class="title m-b-md fontAmparo">
                   <div class="d-flex justify-content-end">
-                    <div class="mr-4">
-                      <img src="{{ asset("images/logoSmall.png") }}">
+                    <div class="mr-4"><br>
+                      <img src="{{ asset("images/logo300x68.png") }}">
                     </div>
-                    {{ config('app.name', 'Laravel') }}
                   </div>
                 </div>
                 <div class="">

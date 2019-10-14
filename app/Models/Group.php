@@ -16,9 +16,9 @@ class Group extends Model
       'direccionCobro', 'diaCobro', 'horaCobro', 'total', 'activo',
   ];
 
-  public function partners()
+  public function users()
   {
-    return $this->hasMany('App\Models\Partner','group_id');
+    return $this->hasMany('App\User','group_id');
   }
 
   public function plans()

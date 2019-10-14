@@ -1923,47 +1923,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    var _this = this;
-
-    axios.get('getSpecialties').then(function (response) {
-      _this.specialties = response.data;
-    });
-  },
-  data: function data() {
-    return {
-      doctors: [{
-        apeynom: 'Seleccione especialidad...',
-        direccion: '',
-        telefono: ''
-      }],
-      specialties: []
-    };
-  },
-  methods: {
-    getDoctors: function getDoctors() {
-      var _this2 = this;
-
-      var id = document.getElementById('specialty').value;
-      axios.post('getDoctors/' + id).then(function (resp) {
-        _this2.doctors = resp.data;
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    }
-  }
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -1994,31 +1955,96 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      doctors: [],
+      specialties: [],
+      users: [],
+      messageCostoOrden: "",
+      montoCostoOrden: "",
+      outlimit: false
+    };
+  },
   mounted: function mounted() {
     var _this = this;
 
     axios.get('getSpecialties').then(function (response) {
       _this.specialties = response.data;
     });
-  },
-  data: function data() {
-    return {
-      doctors: [{
-        apeynom: 'Seleccione especialidad...',
-        direccion: '',
-        telefono: ''
-      }],
-      specialties: []
-    };
+    axios.get('getUsers').then(function (response) {
+      _this.users = response.data;
+    });
   },
   methods: {
+    printCostoOrden: function printCostoOrden() {
+      var id = document.getElementById('specialty').value;
+      var i;
+
+      for (i = 0; i < Object.keys(this.specialties).length; i++) {
+        if (this.specialties[i].id == id) {
+          this.messageCostoOrden = "Coseguro único a abonar en consultorio $";
+
+          if (this.outLimit) {
+            var suma = parseInt(this.specialties[i].monto_s) + parseInt(this.specialties[i].monto_a / 2);
+            this.montoCostoOrden = suma;
+            document.getElementById('monto_s').value = suma;
+            document.getElementById('monto_a').value = this.specialties[i].monto_a / 2;
+          } else {
+            this.montoCostoOrden = this.specialties[i].monto_s;
+            document.getElementById('monto_s').value = this.specialties[i].monto_s;
+            document.getElementById('monto_a').value = this.specialties[i].monto_a;
+          }
+
+          i = Object.keys(this.specialties).length;
+        }
+      }
+
+      ;
+    },
     getDoctors: function getDoctors() {
       var _this2 = this;
 
       var id = document.getElementById('specialty').value;
       axios.post('getDoctors/' + id).then(function (resp) {
         _this2.doctors = resp.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    limitOrders: function limitOrders() {
+      var _this3 = this;
+
+      var id = document.getElementById('pacient_id').value;
+      this.messageCostoOrden = "";
+      this.montoCostoOrden = "";
+      document.getElementById('specialty').value = 0;
+      document.getElementById('specialty').text = "Seleccione Especialidad";
+      document.getElementById('doctor_id').value = 0;
+      document.getElementById('doctor_id').text = "Seleccione Profesional";
+      axios.post('limitOrders/' + id).then(function (respu) {
+        if (respu.data < 2) {
+          document.getElementById('costoOrden').style.color = '#000000';
+          _this3.outLimit = false;
+        } else {
+          alert("Ya ha emitido " + respu.data + " órdenes en el mes para este socio, la que está por generar tendrá un costo más elevado.");
+          document.getElementById('costoOrden').style.color = '#FF0000';
+          _this3.outLimit = true;
+        }
       })["catch"](function (error) {
         console.log(error);
       });
@@ -37520,43 +37546,14 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", [
-    _c("div", { staticClass: "row" }, [
-      _c(
-        "div",
-        { staticClass: "col-md-6" },
-        [
-          _c("center", [
-            _c("h4", {
-              staticClass: "card-title",
-              attrs: { id: "costoorden2" }
-            })
-          ])
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _vm._m(0)
-    ])
-  ])
+  return _vm._m(0)
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-6" }, [
-      _c("div", { staticClass: "footer text-center" }, [
-        _c("input", {
-          staticClass: "btn btn-success",
-          attrs: {
-            id: "btnGenerarOrden",
-            type: "submit",
-            value: "Generar Orden"
-          }
-        })
-      ])
-    ])
+    return _c("section", [_c("div", { staticClass: "footer text-center" })])
   }
 ]
 render._withStripped = true
@@ -37585,12 +37582,38 @@ var render = function() {
       _c(
         "select",
         {
+          staticClass: "custom-select form-control",
+          attrs: { name: "pacient_id", id: "pacient_id" },
+          on: { click: _vm.limitOrders }
+        },
+        [
+          _c("option", { attrs: { selected: "" } }, [
+            _vm._v("Seleccione Paciente")
+          ]),
+          _vm._v(" "),
+          _vm._l(_vm.users, function(user) {
+            return _c(
+              "option",
+              { key: user.id, domProps: { value: user.id } },
+              [_vm._v(_vm._s(user.name))]
+            )
+          })
+        ],
+        2
+      )
+    ]),
+    _c("br"),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c(
+        "select",
+        {
           staticClass: "custom-select",
           attrs: { name: "specialty", id: "specialty" },
           on: { click: _vm.getDoctors }
         },
         [
-          _c("option", { attrs: { selected: "" } }, [
+          _c("option", { attrs: { value: "0", selected: "" } }, [
             _vm._v("Seleccione Especialidad")
           ]),
           _vm._v(" "),
@@ -37612,10 +37635,11 @@ var render = function() {
         "select",
         {
           staticClass: "custom-select form-control",
-          attrs: { name: "doctor_id", id: "doctor_id" }
+          attrs: { name: "doctor_id", id: "doctor_id" },
+          on: { click: _vm.printCostoOrden }
         },
         [
-          _c("option", { attrs: { selected: "" } }, [
+          _c("option", { attrs: { value: "0", selected: "" } }, [
             _vm._v("Seleccione Profesional")
           ]),
           _vm._v(" "),
@@ -37630,10 +37654,41 @@ var render = function() {
         2
       )
     ]),
-    _c("br")
+    _c("br"),
+    _vm._v(" "),
+    _c("div", { staticClass: "text-center" }, [
+      _c("h5", { staticClass: "card-title", attrs: { id: "costoOrden" } }, [
+        _c("small", [_vm._v(_vm._s(_vm.messageCostoOrden))]),
+        _vm._v(_vm._s(_vm.montoCostoOrden))
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "hidden", name: "monto_s", id: "monto_s" }
+      }),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "hidden", name: "monto_a", id: "monto_a" }
+      })
+    ]),
+    _vm._v(" "),
+    _vm._m(0)
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "text-center" }, [
+      _c("input", {
+        staticClass: "btn btn-outline-success btn-block",
+        attrs: { id: "btnGenerarOrden", type: "submit", value: "Generar Orden" }
+      })
+    ])
+  }
+]
 render._withStripped = true
 
 

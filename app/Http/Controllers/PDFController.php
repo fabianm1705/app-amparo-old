@@ -9,27 +9,23 @@ use PDF;
 
 class PDFController extends Controller
 {
-    public function invoice()
+    public function invoice($id)
       {
-        $user_id = Auth::user()->id;
-        $order = Order::where('pacient_id',$user_id)->latest()->first();
-        $data = $this->getData();
-        // dd($order);
-        $view =  \View::make('admin.order.show', compact('order'))->render();
-        $pdf = \App::make('dompdf.wrapper');
-        $pdf->loadHTML($view);
+        $orden = $this->getData($id);
+        foreach ($orden as $order)
+        {
+          $view =  \View::make('admin.order.show', compact('order'))->render();
+          $pdf = \App::make('dompdf.wrapper');
+          $pdf->loadHTML($view);
+        }
         return $pdf->stream('invoice');
       }
 
-    public function getData()
+    public function getData($id)
       {
-        $data =  [
-            'quantity'      => '1' ,
-            'description'   => 'some ramdom text',
-            'price'   => '500',
-            'total'     => '500'
-        ];
-        return $data;
+        // $user_id = Auth::user()->id;
+        $order = Order::where('id',$id)->get();
+        return $order;
       }
 
 }

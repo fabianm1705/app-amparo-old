@@ -41,9 +41,8 @@
                 <a class="navbar-brand fontAmparo" href="{{ url('/home') }}">
                   <div class="d-flex justify-content-end">
                     <div class="mr-2">
-                      <img src="{{ asset("images/logoSmall.png") }}" height="30">
+                      <img src="{{ asset('images/logoSinSSSmall.png') }}" height="35">
                     </div>
-                    <font size="5">{{ config('app.name', 'Laravel') }}</font>
                   </div>
                 </a>
                 <div class="">

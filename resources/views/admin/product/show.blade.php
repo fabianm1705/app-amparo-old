@@ -18,6 +18,12 @@
           <div class="row justify-content-server">
             <div class="col-sm-12">
               <div class="form-group">
+                <label for="content">Categoría</label>
+                <select class="custom-select" name="categoria" id="categoria">
+                  <option value="{{ $product->categoria }}">{{ $product->categoria }}</option>
+                </select>
+              </div>
+              <div class="form-group">
                 <label for="modelo">Modelo</label>
                 <input type="text" class="form-control" name="modelo" id="modelo" value="{{ $product->modelo }}">
               </div>

@@ -21,6 +21,13 @@
           <div class="card-body">
             <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data">
               @csrf
+              <div class="form-group">
+                <label for="content">Categoría</label>
+                <select class="custom-select" name="categoria" id="categoria">
+                  <option value="Celulares" selected>Celulares</option>
+                  <option value="Electrodomésticos">Electrodomésticos</option>
+                </select>
+              </div>
               <div class="row d-flex justify-content-center">
                 <div class="col-sm-8">
                   <div class="form-group">

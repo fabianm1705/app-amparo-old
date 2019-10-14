@@ -6,6 +6,7 @@ use App\Models\Specialty;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class SpecialtyController extends Controller
 {
@@ -120,9 +121,16 @@ class SpecialtyController extends Controller
 
     public function getSpecialties(Request $request)
     {
-      $specialties = Cache::remember('specialties', now()->addMonths(1), function () {
-          return Specialty::orderBy('descripcion','asc')->get();
-      });
+      // $specialties = Cache::remember('specialties', now()->addMonths(1), function () {
+      //     return Specialty::orderBy('descripcion','asc')->get();
+      // });
+      $specialties = DB::table('specialties')
+                            ->where([
+                                        ['vigenteOrden', '=', 1],
+                                        ['vigente', '=', 1],
+                                    ])
+                            ->orderBy('descripcion','asc')
+                            ->get();
 
       if($request->ajax()){
         return $specialties->toJson();

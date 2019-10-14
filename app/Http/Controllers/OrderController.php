@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -44,8 +45,8 @@ class OrderController extends Controller
       $order->fecha = Carbon::now();
       $order->fechaImpresion = Carbon::now();
       $doctor = Doctor::find($request->input('doctor_id'));
-      $order->monto_s = $doctor->specialty->monto_s;
-      $order->monto_a = $doctor->specialty->monto_a;
+      $order->monto_s = $request->input('monto_s');
+      $order->monto_a = $request->input('monto_a');
       $order->obs = "";
       $order->estado = "Impresa";
       $order->lugarEmision = "Sede Amparo";
@@ -55,7 +56,7 @@ class OrderController extends Controller
       $order->save();
 
       return redirect()
-        ->route('getOrders')
+        ->route('pdf',['id' => $order->id])
         ->with('message','Orden Registrada');
     }
 
@@ -122,10 +123,33 @@ class OrderController extends Controller
 
     public function getOrders(Request $request)
     {
-      $user_id = Auth::user()->id;
+      $group_id = Auth::user()->group_id;
+      //Tomar los Id de todos los usuarios del grupo
+      $usersId = User::where('group_id',$group_id)->pluck('id')->toArray();
+      //Para buscar las órdenes de todos
+      $orders = Order::whereIn('pacient_id',$usersId)->orderBy('fecha', 'desc')->paginate(4);
+
+      return view('orders',compact("orders"));
+    }
+
+    public function getUsers(Request $request)
+    {
       $group_id = Auth::user()->group_id;
       $users = User::where('group_id',$group_id)->get();
-      $orders = Order::where('pacient_id',$user_id)->get();
-      return view('orders',compact("orders","users"));
+      if($request->ajax()){
+        return $users->toJson();
+      }
+      return $users;
+    }
+
+    public function limitOrders($id)
+    {
+      $limitOrders = DB::table('orders')
+                     ->select(DB::raw('count(*) as order_count'))
+                     ->where('pacient_id', '=', $id)
+                     ->whereMonth('fecha','=',now()->month)
+                     ->whereYear('fecha','=',now()->year)
+                     ->get();
+      return $limitOrders->pluck('order_count');
     }
 }

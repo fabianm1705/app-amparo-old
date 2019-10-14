@@ -28,6 +28,13 @@
           <form action="{{ route('products.update', ['product' => $product]) }}" method="post">
             @method('PUT')
             @csrf
+            <div class="form-group">
+              <label for="content">Categoría</label>
+              <select class="custom-select" name="categoria" id="categoria">
+                <option value="Celulares" selected>Celulares</option>
+                <option value="Electrodomésticos">Electrodomésticos</option>
+              </select>
+            </div>
             <div class="row justify-content-server">
               <div class="col-sm-12">
                 <div class="form-group">

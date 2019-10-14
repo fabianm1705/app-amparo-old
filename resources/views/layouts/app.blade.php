@@ -41,9 +41,8 @@
                 <a class="navbar-brand fontAmparo" href="{{ url('/home') }}">
                   <div class="d-flex justify-content-end">
                     <div class="mr-2">
-                      <img src="{{ asset("images/logoSmall.png") }}" height="30">
+                      <img src="{{ asset('images/logoSinSSSmall.png') }}" height="35">
                     </div>
-                    <font size="5">{{ config('app.name', 'Laravel') }}</font>
                   </div>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -65,7 +64,10 @@
                           <a class="nav-link" href="{{ route('getSpecialties') }}">Profesionales</a>
                         </li>
                         <li class="nav-item active">
-                          <a class="nav-link" href="{{ route('getProducts') }}">Celulares</a>
+                          <a class="nav-link" href="{{ route('getCels') }}">Celulares</a>
+                        </li>
+                        <li class="nav-item active">
+                          <a class="nav-link" href="{{ route('getElectros') }}">Electrodomésticos</a>
                         </li>
                         <li class="nav-item active">
                           <a class="nav-link" href="{{ route('otros') }}">+Servicios</a>

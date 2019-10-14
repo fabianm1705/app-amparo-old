@@ -8,7 +8,7 @@
       <div class="card shadow-sm">
         <div class="card-header bgOrange d-flex">
           <h5 class="card-title text-white">Especialidades</h5>
-          <div class="ml-auto">
+          <div class="ml-auto blanco">
             <a href="{{ route('specialties.create') }}" title="Nueva">
               Agregar Nueva
             </a>

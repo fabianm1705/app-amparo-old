@@ -27,13 +27,13 @@
     <div class="card text-center shadow-sm">
       <div class="card-header bgOrange text-white">
         <ul class="nav nav-tabs card-header-tabs">
-          <li class="nav-item">
+          <li class="nav-item blanco">
             <a class="nav-link active" href="#sos" data-toggle="tab">Ambulancia</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item blanco">
             <a class="nav-link" href="#sepelio" data-toggle="tab">Sepelio</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item blanco">
             <a class="nav-link" href="#asistencia" data-toggle="tab">Viajero</a>
           </li>
         </ul>

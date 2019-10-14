@@ -116,10 +116,22 @@ class ProductController extends Controller
         ->route('products.index');
     }
 
-    public function getProducts(Request $request)
+    public function getCels(Request $request)
     {
       $image_url = config('app.url');
-      $products = Product::where('vigente', 1)
+      $products = Product::where('vigente', 1)->where('categoria', 'Celulares')
+        ->orderBy('montoCuota','asc')
+        ->get();
+      if($request->ajax()){
+        return $products->toJson();
+      }
+      return view('productsList',compact("products","image_url"));
+    }
+
+    public function getElectros(Request $request)
+    {
+      $image_url = config('app.url');
+      $products = Product::where('vigente', 1)->where('categoria', 'Electrodomésticos')
         ->orderBy('montoCuota','asc')
         ->get();
       if($request->ajax()){

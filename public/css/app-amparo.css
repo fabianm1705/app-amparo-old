@@ -60,21 +60,22 @@ a:active > div {
   color: black;
 }
 
-a:link {
+
+.blanco a:link  {
   color: white;
 }
 
 /* visited link */
-a:visited {
+.blanco a:visited {
   color: white;
 }
 
 /* mouse over link */
-a:hover {
+.blanco a:hover {
   color: white;
 }
 
 /* selected link */
-a:active {
+.blanco a:active {
   color: white;
 }

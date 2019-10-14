@@ -9,7 +9,7 @@
         <div class="card-header bgOrange d-flex">
           <h5 class="card-title text-white">Profesionales</h5>
           <ul class="nav justify-content-end ml-auto">
-              <li class="nav-item ml-2">
+              <li class="nav-item ml-2 blanco">
                 <a href="{{ route('doctors.create') }}" title="Nuevo">Agregar Nuevo</a>
               </li>
           </ul>

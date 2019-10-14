@@ -7,7 +7,7 @@
     <div class="col-md-11 seccion-contacto my-5">
       <div class="card shadow-sm">
         <div class="card-header bgOrange d-flex">
-          <h5 class="card-title text-white">Celulares</h5>
+          <h5 class="card-title text-white">Productos</h5>
           <div class="ml-auto">
             <a href="{{ route('products.create') }}" title="Nuevo">
               Agregar Nuevo
@@ -17,6 +17,7 @@
         <div class="card-body centrado">
           <table class="table table-hover table-sm table-responsive">
             <thead>
+              <th>Categoría</th>
               <th>Modelo</th>
               <th>Descripcion</th>
               <th class="text-center">Monto</th>
@@ -27,6 +28,7 @@
             <tbody>
               @foreach($products as $product)
                 <tr>
+                  <td>{{ $product->categoria }}</td>
                   <td>{{ $product->modelo }}</td>
                   <td class="text-justify">{{ $product->descripcion }}</td>
                   <td class="text-center">${{ $product->montoCuota }}</td>

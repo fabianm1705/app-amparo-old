@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
           'doctors',
           'groups',
           'plans',
+          'layers',
           'orders',
           'sales'
         ]);
@@ -28,6 +29,7 @@ class DatabaseSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         $this->call(UsersTableSeeder::class);
         $this->call(PlansTableSeeder::class);
+        $this->call(LayersTableSeeder::class);
         $this->call(OrdersTableSeeder::class);
         $this->call(SalesTableSeeder::class);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');

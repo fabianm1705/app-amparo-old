@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Plan extends Model
+class Layer extends Model
 {
   /**
    * The attributes that are mass assignable.
@@ -12,12 +12,11 @@ class Plan extends Model
    * @var array
    */
   protected $fillable = [
-      'nombre', 'monto', 'group_id',
+      'nombre', 'monto', 'user_id',
   ];
 
-  public function group()
+  public function user()
   {
-    return $this->belongsTo('App\Models\Group');
+    return $this->belongsTo('App\User');
   }
-
 }

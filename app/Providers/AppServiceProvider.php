@@ -18,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap any application services.
-     *
+     * Acá puedo meter cualquier variable y estará disponible en todas las vistas
      * @return void
      */
     public function boot()

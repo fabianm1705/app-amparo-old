@@ -1907,32 +1907,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/GenerarOrdenComponent.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/GenerarOrdenComponent.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {}
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SpecialtyDoctorsSelectComponent.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SpecialtyDoctorsSelectComponent.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/GenOrdersComponent.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/GenOrdersComponent.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1975,9 +1953,12 @@ __webpack_require__.r(__webpack_exports__);
       doctors: [],
       specialties: [],
       users: [],
+      plans: [],
+      layers: [],
       messageCostoOrden: "",
       montoCostoOrden: "",
-      outlimit: false
+      outlimit: false,
+      habilitaOrden: false
     };
   },
   mounted: function mounted() {
@@ -1989,8 +1970,65 @@ __webpack_require__.r(__webpack_exports__);
     axios.get('getUsers').then(function (response) {
       _this.users = response.data;
     });
+    axios.get('getPlans').then(function (response) {
+      _this.plans = response.data;
+    });
   },
   methods: {
+    checkUser: function checkUser() {
+      var _this2 = this;
+
+      var i;
+
+      for (i = 0; i < Object.keys(this.plans).length; i++) {
+        if (this.plans[i].emiteOrden == 1) {
+          this.habilitaOrden = true;
+          i = Object.keys(this.plans).length;
+        }
+      }
+
+      ;
+
+      if (this.habilitaOrden == false) {
+        var id = document.getElementById('pacient_id').value;
+        axios.post('getLayers/' + id).then(function (resp) {
+          _this2.layers = resp.data;
+        })["catch"](function (error) {
+          console.log(error);
+        });
+
+        for (i = 0; i < Object.keys(this.layers).length; i++) {
+          if (this.layers[i].emiteOrden == 1) {
+            this.habilitaOrden = true;
+            i = Object.keys(this.layers).length;
+          }
+        }
+
+        ;
+      }
+
+      if (this.habilitaOrden) {
+        var id = document.getElementById('pacient_id').value;
+        this.messageCostoOrden = "";
+        this.montoCostoOrden = "";
+        document.getElementById('specialty').value = 0;
+        document.getElementById('specialty').text = "Seleccione Especialidad";
+        document.getElementById('doctor_id').value = 0;
+        document.getElementById('doctor_id').text = "Seleccione Profesional";
+        axios.post('cantOrders/' + id).then(function (respu) {
+          if (respu.data < 2) {
+            document.getElementById('costoOrden').style.color = '#000000';
+            _this2.outLimit = false;
+          } else {
+            alert("Ya ha emitido " + respu.data + " órdenes en el mes para este socio, la que está por generar tendrá un costo más elevado.");
+            document.getElementById('costoOrden').style.color = '#FF0000';
+            _this2.outLimit = true;
+          }
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
+    },
     printCostoOrden: function printCostoOrden() {
       var id = document.getElementById('specialty').value;
       var i;
@@ -2017,34 +2055,11 @@ __webpack_require__.r(__webpack_exports__);
       ;
     },
     getDoctors: function getDoctors() {
-      var _this2 = this;
+      var _this3 = this;
 
       var id = document.getElementById('specialty').value;
       axios.post('getDoctors/' + id).then(function (resp) {
-        _this2.doctors = resp.data;
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    limitOrders: function limitOrders() {
-      var _this3 = this;
-
-      var id = document.getElementById('pacient_id').value;
-      this.messageCostoOrden = "";
-      this.montoCostoOrden = "";
-      document.getElementById('specialty').value = 0;
-      document.getElementById('specialty').text = "Seleccione Especialidad";
-      document.getElementById('doctor_id').value = 0;
-      document.getElementById('doctor_id').text = "Seleccione Profesional";
-      axios.post('limitOrders/' + id).then(function (respu) {
-        if (respu.data < 2) {
-          document.getElementById('costoOrden').style.color = '#000000';
-          _this3.outLimit = false;
-        } else {
-          alert("Ya ha emitido " + respu.data + " órdenes en el mes para este socio, la que está por generar tendrá un costo más elevado.");
-          document.getElementById('costoOrden').style.color = '#FF0000';
-          _this3.outLimit = true;
-        }
+        _this3.doctors = resp.data;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -37531,41 +37546,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/GenerarOrdenComponent.vue?vue&type=template&id=261fe8f4&":
-/*!************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/GenerarOrdenComponent.vue?vue&type=template&id=261fe8f4& ***!
-  \************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", [_c("div", { staticClass: "footer text-center" })])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SpecialtyDoctorsSelectComponent.vue?vue&type=template&id=35933d10&":
-/*!**********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SpecialtyDoctorsSelectComponent.vue?vue&type=template&id=35933d10& ***!
-  \**********************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/GenOrdersComponent.vue?vue&type=template&id=8029005a&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/GenOrdersComponent.vue?vue&type=template&id=8029005a& ***!
+  \*********************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -37584,7 +37568,7 @@ var render = function() {
         {
           staticClass: "custom-select form-control",
           attrs: { name: "pacient_id", id: "pacient_id" },
-          on: { click: _vm.limitOrders }
+          on: { click: _vm.checkUser }
         },
         [
           _c("option", { attrs: { selected: "" } }, [
@@ -37673,22 +37657,21 @@ var render = function() {
       })
     ]),
     _vm._v(" "),
-    _vm._m(0)
+    _c("div", { staticClass: "text-center" }, [
+      _vm.habilitaOrden
+        ? _c("input", {
+            staticClass: "btn btn-outline-success btn-block",
+            attrs: {
+              id: "btnGenerarOrden",
+              type: "submit",
+              value: "Generar Orden"
+            }
+          })
+        : _vm._e()
+    ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "text-center" }, [
-      _c("input", {
-        staticClass: "btn btn-outline-success btn-block",
-        attrs: { id: "btnGenerarOrden", type: "submit", value: "Generar Orden" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -49971,9 +49954,8 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 Vue.component('dinamic-products-component', __webpack_require__(/*! ./components/DinamicProductsComponent.vue */ "./resources/js/components/DinamicProductsComponent.vue")["default"]);
-Vue.component('specialty-doctors-select-component', __webpack_require__(/*! ./components/SpecialtyDoctorsSelectComponent.vue */ "./resources/js/components/SpecialtyDoctorsSelectComponent.vue")["default"]);
+Vue.component('gen-orders-component', __webpack_require__(/*! ./components/GenOrdersComponent.vue */ "./resources/js/components/GenOrdersComponent.vue")["default"]);
 Vue.component('specialty-doctors-table-component', __webpack_require__(/*! ./components/SpecialtyDoctorsTableComponent.vue */ "./resources/js/components/SpecialtyDoctorsTableComponent.vue")["default"]);
-Vue.component('generar-orden-component', __webpack_require__(/*! ./components/GenerarOrdenComponent.vue */ "./resources/js/components/GenerarOrdenComponent.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -50182,17 +50164,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/GenerarOrdenComponent.vue":
-/*!***********************************************************!*\
-  !*** ./resources/js/components/GenerarOrdenComponent.vue ***!
-  \***********************************************************/
+/***/ "./resources/js/components/GenOrdersComponent.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/GenOrdersComponent.vue ***!
+  \********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _GenerarOrdenComponent_vue_vue_type_template_id_261fe8f4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GenerarOrdenComponent.vue?vue&type=template&id=261fe8f4& */ "./resources/js/components/GenerarOrdenComponent.vue?vue&type=template&id=261fe8f4&");
-/* harmony import */ var _GenerarOrdenComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GenerarOrdenComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/GenerarOrdenComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _GenOrdersComponent_vue_vue_type_template_id_8029005a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GenOrdersComponent.vue?vue&type=template&id=8029005a& */ "./resources/js/components/GenOrdersComponent.vue?vue&type=template&id=8029005a&");
+/* harmony import */ var _GenOrdersComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GenOrdersComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/GenOrdersComponent.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -50202,9 +50184,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _GenerarOrdenComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _GenerarOrdenComponent_vue_vue_type_template_id_261fe8f4___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _GenerarOrdenComponent_vue_vue_type_template_id_261fe8f4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _GenOrdersComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _GenOrdersComponent_vue_vue_type_template_id_8029005a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _GenOrdersComponent_vue_vue_type_template_id_8029005a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -50214,107 +50196,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/GenerarOrdenComponent.vue"
+component.options.__file = "resources/js/components/GenOrdersComponent.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/GenerarOrdenComponent.vue?vue&type=script&lang=js&":
-/*!************************************************************************************!*\
-  !*** ./resources/js/components/GenerarOrdenComponent.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************/
+/***/ "./resources/js/components/GenOrdersComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/GenOrdersComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GenerarOrdenComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./GenerarOrdenComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/GenerarOrdenComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GenerarOrdenComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GenOrdersComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./GenOrdersComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/GenOrdersComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GenOrdersComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/GenerarOrdenComponent.vue?vue&type=template&id=261fe8f4&":
-/*!******************************************************************************************!*\
-  !*** ./resources/js/components/GenerarOrdenComponent.vue?vue&type=template&id=261fe8f4& ***!
-  \******************************************************************************************/
+/***/ "./resources/js/components/GenOrdersComponent.vue?vue&type=template&id=8029005a&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/GenOrdersComponent.vue?vue&type=template&id=8029005a& ***!
+  \***************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GenerarOrdenComponent_vue_vue_type_template_id_261fe8f4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./GenerarOrdenComponent.vue?vue&type=template&id=261fe8f4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/GenerarOrdenComponent.vue?vue&type=template&id=261fe8f4&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GenerarOrdenComponent_vue_vue_type_template_id_261fe8f4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GenOrdersComponent_vue_vue_type_template_id_8029005a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./GenOrdersComponent.vue?vue&type=template&id=8029005a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/GenOrdersComponent.vue?vue&type=template&id=8029005a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GenOrdersComponent_vue_vue_type_template_id_8029005a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GenerarOrdenComponent_vue_vue_type_template_id_261fe8f4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/SpecialtyDoctorsSelectComponent.vue":
-/*!*********************************************************************!*\
-  !*** ./resources/js/components/SpecialtyDoctorsSelectComponent.vue ***!
-  \*********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _SpecialtyDoctorsSelectComponent_vue_vue_type_template_id_35933d10___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SpecialtyDoctorsSelectComponent.vue?vue&type=template&id=35933d10& */ "./resources/js/components/SpecialtyDoctorsSelectComponent.vue?vue&type=template&id=35933d10&");
-/* harmony import */ var _SpecialtyDoctorsSelectComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SpecialtyDoctorsSelectComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/SpecialtyDoctorsSelectComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _SpecialtyDoctorsSelectComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _SpecialtyDoctorsSelectComponent_vue_vue_type_template_id_35933d10___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _SpecialtyDoctorsSelectComponent_vue_vue_type_template_id_35933d10___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/SpecialtyDoctorsSelectComponent.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/SpecialtyDoctorsSelectComponent.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************!*\
-  !*** ./resources/js/components/SpecialtyDoctorsSelectComponent.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SpecialtyDoctorsSelectComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./SpecialtyDoctorsSelectComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SpecialtyDoctorsSelectComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SpecialtyDoctorsSelectComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/SpecialtyDoctorsSelectComponent.vue?vue&type=template&id=35933d10&":
-/*!****************************************************************************************************!*\
-  !*** ./resources/js/components/SpecialtyDoctorsSelectComponent.vue?vue&type=template&id=35933d10& ***!
-  \****************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SpecialtyDoctorsSelectComponent_vue_vue_type_template_id_35933d10___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./SpecialtyDoctorsSelectComponent.vue?vue&type=template&id=35933d10& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SpecialtyDoctorsSelectComponent.vue?vue&type=template&id=35933d10&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SpecialtyDoctorsSelectComponent_vue_vue_type_template_id_35933d10___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SpecialtyDoctorsSelectComponent_vue_vue_type_template_id_35933d10___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GenOrdersComponent_vue_vue_type_template_id_8029005a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

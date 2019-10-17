@@ -73,7 +73,10 @@
                         <a class="nav-link" href="{{ route('doctors.index') }}">Profesionales</a>
                       </li>
                       <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('products.index') }}">Celulares</a>
+                        <a class="nav-link" href="{{ route('categories.index') }}">Categorías</a>
+                      </li>
+                      <li class="nav-item active">
+                        <a class="nav-link" href="{{ route('products.index') }}">Productos</a>
                       </li>
                       <!-- Authentication Links -->
                       @guest

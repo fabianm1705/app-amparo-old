@@ -22,7 +22,6 @@ class DatabaseSeeder extends Seeder
           'orders',
           'sales'
         ]);
-        $this->call(ProductsTableSeeder::class);
         $this->call(SpecialtiesTableSeeder::class);
         $this->call(DoctorsTableSeeder::class);
         $this->call(GroupsTableSeeder::class);
@@ -31,7 +30,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PlansTableSeeder::class);
         $this->call(LayersTableSeeder::class);
         $this->call(OrdersTableSeeder::class);
-        $this->call(SalesTableSeeder::class);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 

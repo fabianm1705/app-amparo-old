@@ -21,9 +21,8 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('dinamic-products-component', require('./components/DinamicProductsComponent.vue').default);
-Vue.component('specialty-doctors-select-component', require('./components/SpecialtyDoctorsSelectComponent.vue').default);
+Vue.component('gen-orders-component', require('./components/GenOrdersComponent.vue').default);
 Vue.component('specialty-doctors-table-component', require('./components/SpecialtyDoctorsTableComponent.vue').default);
-Vue.component('generar-orden-component', require('./components/GenerarOrdenComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

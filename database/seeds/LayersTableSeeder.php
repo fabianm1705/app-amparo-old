@@ -20,6 +20,7 @@ class LayersTableSeeder extends Seeder
         $layer = new Layer();
         $layer->nombre = utf8_encode(trim($datos[2]));
         $layer->monto = intval(trim($datos[3]));
+        $layer->emiteOrden = intval(trim($datos[5]));
 
         $user = User::where('name', '=', utf8_encode(trim($datos[4])))
                                   ->get()->first();

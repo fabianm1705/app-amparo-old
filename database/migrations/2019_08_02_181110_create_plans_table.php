@@ -17,6 +17,7 @@ class CreatePlansTable extends Migration
             $table->bigIncrements('id');
             $table->string('nombre');
             $table->bigInteger('monto');
+            $table->boolean('emiteOrden')->default(false);
             $table->timestamps();
         });
     }

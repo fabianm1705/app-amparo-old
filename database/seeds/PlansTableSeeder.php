@@ -20,6 +20,7 @@ class PlansTableSeeder extends Seeder
         $plan = new Plan();
         $plan->nombre = utf8_encode(trim($datos[1]));
         $plan->monto = intval(trim($datos[2]));
+        $plan->emiteOrden = intval(trim($datos[3]));
 
         $group = Group::where('nroSocio', '=', utf8_encode(trim($datos[0])))
                                   ->get()->first();

@@ -110,10 +110,6 @@ class SpecialtyController extends Controller
      */
     public function destroy(Specialty $specialty)
     {
-      // if (Auth::user()->cant('delete', $specialty)){
-      //   return redirect()->route('specialties.index')
-      //     ->with('message','No tienes permisos para esta operación');
-      // }
       $specialty->delete();
       return redirect()
         ->route('specialties.index');

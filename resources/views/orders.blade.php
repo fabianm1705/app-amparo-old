@@ -11,7 +11,7 @@
             </h3>
             <form action="{{ route('orders.store') }}" method="post">
                 @csrf
-                <specialty-doctors-select-component></specialty-doctors-select-component>
+                <gen-orders-component></gen-orders-component>
             </form><br>
         </div>
         <div class="col-md-7 ml-auto mr-auto">

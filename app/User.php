@@ -48,4 +48,9 @@ class User extends Authenticatable
       return $this->hasMany('App\Models\Order','pacient_id');
     }
 
+    public function layers()
+    {
+      return $this->hasMany('App\Models\Layer','user_id');
+    }
+
 }

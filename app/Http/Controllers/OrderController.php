@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Doctor;
 use App\User;
-use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -19,7 +19,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-      $orders = Order::all()->sortByDesc('id');
+      $orders = Order::orderBy('fecha', 'desc')->take(60)->paginate(15);
       return view('admin.order.index',compact("orders"));
     }
 
@@ -142,14 +142,14 @@ class OrderController extends Controller
       return $users;
     }
 
-    public function limitOrders($id)
+    public function cantOrders($id)
     {
-      $limitOrders = DB::table('orders')
+      $cantOrders = DB::table('orders')
                      ->select(DB::raw('count(*) as order_count'))
                      ->where('pacient_id', '=', $id)
                      ->whereMonth('fecha','=',now()->month)
                      ->whereYear('fecha','=',now()->year)
                      ->get();
-      return $limitOrders->pluck('order_count');
+      return $cantOrders->pluck('order_count');
     }
 }

@@ -31,8 +31,8 @@
                   <td>{{ $order->numero }}</td>
                   <td>{{ \Carbon\Carbon::parse($order->fecha)->format('d/m/Y') }}</td>
                   <td>{{ \Carbon\Carbon::parse($order->fechaImpresion)->format('d/m/Y') }}</td>
-                  <td>{{ $order->partner->group->nroSocio }}</td>
-                  <td>{{ $order->partner->apeynom }}</td>
+                  <td>{{ $order->user->group->nroSocio }}</td>
+                  <td>{{ $order->user->apeynom }}</td>
                   <td>{{ $order->doctor->apeynom }}</td>
                   <td>{{ $order->monto_s }}</td>
                   <td>{{ $order->monto_a }}</td>
@@ -57,6 +57,7 @@
               @endforeach
             </tbody>
           </table>
+          {{ $orders->links() }}
         </div>
       </div>
     </div>

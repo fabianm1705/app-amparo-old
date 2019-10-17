@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLayersTable extends Migration
+class CreateCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateLayersTable extends Migration
      */
     public function up()
     {
-        Schema::create('layers', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre');
-            $table->bigInteger('monto');
-            $table->boolean('emiteOrden')->default(false);
-            $table->unsignedBigInteger('user_id')->default(1);
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->bigInteger('activa')->default(1);
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateLayersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('layers');
+        Schema::dropIfExists('categories');
     }
 }

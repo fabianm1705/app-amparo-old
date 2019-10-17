@@ -28,6 +28,8 @@ Route::group(['prefix' => 'admin'], function() {
               ->name('doctors.indexSocios');
   Route::resource('doctors', 'DoctorController')
               ->middleware('auth');
+  Route::resource('categories', 'CategoryController')
+              ->middleware('auth');
   Route::resource('orders', 'OrderController')
               ->middleware('auth');
   Route::resource('products', 'ProductController')
@@ -40,6 +42,9 @@ Route::get('pdf/{id}', 'PDFController@invoice')
 Route::get('getSpecialties', 'SpecialtyController@getSpecialties')
               ->middleware('auth')
               ->name('getSpecialties');
+Route::get('getPlans', 'PlanController@getPlans')
+              ->middleware('auth')
+              ->name('getPlans');
 Route::get('getCels', 'ProductController@getCels')
               ->middleware('auth')
               ->name('getCels');
@@ -55,9 +60,12 @@ Route::get('getUsers', 'OrderController@getUsers')
 Route::post('getDoctors/{id}', 'DoctorController@getDoctors')
               ->middleware('auth')
               ->name('getDoctors');
-Route::post('limitOrders/{id}', 'OrderController@limitOrders')
+Route::post('getLayers/{id}', 'LayerController@getLayers')
               ->middleware('auth')
-              ->name('limitOrders');
+              ->name('getLayers');
+Route::post('cantOrders/{id}', 'OrderController@cantOrders')
+              ->middleware('auth')
+              ->name('cantOrders');
 Route::get('otros', function () {return view('otros');})
               ->middleware('auth')
               ->name('otros');

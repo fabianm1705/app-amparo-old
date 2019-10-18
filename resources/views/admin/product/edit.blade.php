@@ -30,9 +30,14 @@
             @csrf
             <div class="form-group">
               <label for="content">Categoría</label>
-              <select class="custom-select" name="categoria" id="categoria">
-                <option value="Celulares" selected>Celulares</option>
-                <option value="Electrodomésticos">Electrodomésticos</option>
+              <select class="custom-select" name="category_id" id="category_id">
+                @foreach($categories as $category)
+                  @if($product->category_id == $category->id)
+                    <option selected value="{{ $category->id }}">{{ $category->nombre }}</option>
+                  @else
+                    <option value="{{ $category->id }}">{{ $category->nombre }}</option>
+                  @endif
+                @endforeach
               </select>
             </div>
             <div class="row justify-content-server">

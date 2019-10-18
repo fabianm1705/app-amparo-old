@@ -28,7 +28,7 @@
             <tbody>
               @foreach($products as $product)
                 <tr>
-                  <td>{{ $product->categoria }}</td>
+                  <td>{{ $product->categories->nombre }}</td>
                   <td>{{ $product->modelo }}</td>
                   <td class="text-justify">{{ $product->descripcion }}</td>
                   <td class="text-center">${{ $product->montoCuota }}</td>

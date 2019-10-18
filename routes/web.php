@@ -34,6 +34,8 @@ Route::group(['prefix' => 'admin'], function() {
               ->middleware('auth');
   Route::resource('products', 'ProductController')
               ->middleware('auth');
+  Route::resource('menus', 'MenuController')
+              ->middleware('auth');
 });
 
 Route::get('pdf/{id}', 'PDFController@invoice')

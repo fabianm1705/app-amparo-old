@@ -23,9 +23,11 @@
               @csrf
               <div class="form-group">
                 <label for="content">Categoría</label>
-                <select class="custom-select" name="categoria" id="categoria">
-                  <option value="Celulares" selected>Celulares</option>
-                  <option value="Electrodomésticos">Electrodomésticos</option>
+                <select class="custom-select" name="category_id" id="category_id">
+                  <option selected>Seleccione Categoría</option>
+                  @foreach($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->nombre }}</option>
+                  @endforeach
                 </select>
               </div>
               <div class="row d-flex justify-content-center">

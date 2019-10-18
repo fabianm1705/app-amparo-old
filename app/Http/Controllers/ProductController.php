@@ -15,8 +15,9 @@ class ProductController extends Controller
      */
     public function index()
     {
+      $categories = Category::orderBy('nombre','asc')->get();
       $products = Product::all();
-      return view('admin.product.index',compact("products"));
+      return view('admin.product.index',compact("products","categories"));
     }
 
     /**
@@ -26,7 +27,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-      return view('admin.product.create');
+      $categories = Category::orderBy('nombre','asc')->get();
+      return view('admin.product.create', compact('categories'));
     }
 
     /**
@@ -66,7 +68,8 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-      return view('admin.product.show', compact("product"));
+      $categories = Category::orderBy('nombre','asc')->get();
+      return view('admin.product.show', compact("product","categories"));
     }
 
     /**
@@ -77,7 +80,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-      return view('admin.product.edit', compact("product"));
+      $categories = Category::orderBy('nombre','asc')->get();
+      return view('admin.product.edit', compact("product","categories"));
     }
 
     /**

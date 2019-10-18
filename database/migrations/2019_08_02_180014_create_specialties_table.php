@@ -21,6 +21,8 @@ class CreateSpecialtiesTable extends Migration
             $table->boolean('vigente')->default(0);
             $table->boolean('vigenteOrden')->default(0);
             $table->timestamps();
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_spanish_ci';
         });
     }
 

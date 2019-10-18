@@ -23,6 +23,8 @@ class CreateOrdersTable extends Migration
             $table->string('estado');
             $table->string('lugarEmision');
             $table->timestamps();
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_spanish_ci';
         });
     }
 

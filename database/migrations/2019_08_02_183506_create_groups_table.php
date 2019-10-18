@@ -26,6 +26,8 @@ class CreateGroupsTable extends Migration
             $table->bigInteger('total');
             $table->boolean('activo');
             $table->timestamps();
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_spanish_ci';
         });
     }
 

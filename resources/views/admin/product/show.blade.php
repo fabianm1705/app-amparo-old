@@ -19,8 +19,14 @@
             <div class="col-sm-12">
               <div class="form-group">
                 <label for="content">Categoría</label>
-                <select class="custom-select" name="categoria" id="categoria">
-                  <option value="{{ $product->categoria }}">{{ $product->categoria }}</option>
+                <select class="custom-select" name="category_id" id="category_id">
+                  @foreach($categories as $category)
+                    @if($product->category_id == $category->id)
+                      <option selected value="{{ $category->id }}">{{ $category->nombre }}</option>
+                    @else
+                      <option value="{{ $category->id }}">{{ $category->nombre }}</option>
+                    @endif
+                  @endforeach
                 </select>
               </div>
               <div class="form-group">

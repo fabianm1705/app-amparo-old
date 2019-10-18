@@ -19,6 +19,8 @@ class CreatePlansTable extends Migration
             $table->bigInteger('monto');
             $table->boolean('emiteOrden')->default(false);
             $table->timestamps();
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_spanish_ci';
         });
     }
 

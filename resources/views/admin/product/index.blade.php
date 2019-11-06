@@ -8,7 +8,7 @@
       <div class="card shadow-sm">
         <div class="card-header bgOrange d-flex">
           <h5 class="card-title text-white">Productos</h5>
-          <div class="ml-auto">
+          <div class="ml-auto blanco">
             <a href="{{ route('products.create') }}" title="Nuevo">
               Agregar Nuevo
             </a>
@@ -28,7 +28,7 @@
             <tbody>
               @foreach($products as $product)
                 <tr>
-                  <td>{{ $product->categories->nombre }}</td>
+                  <td>{{ $product->category->nombre }}</td>
                   <td>{{ $product->modelo }}</td>
                   <td class="text-justify">{{ $product->descripcion }}</td>
                   <td class="text-center">${{ $product->montoCuota }}</td>

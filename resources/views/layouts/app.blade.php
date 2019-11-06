@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="76x76" href="images/apple-icon.png">
     <link rel="icon" type="image/png" href="images/favicon.png">
 
@@ -33,6 +33,7 @@
             font-family: 'iProton';
         }
    </style>
+   @yield('myLinks')
 </head>
 <body>
     <div id="app">
@@ -61,13 +62,10 @@
                           <a class="nav-link" href="{{ route('getOrders') }}">Ordenes</a>
                         </li>
                         <li class="nav-item active">
-                          <a class="nav-link" href="{{ route('getSpecialties') }}">Profesionales</a>
+                          <a class="nav-link" href="{{ route('profesionales') }}">Profesionales</a>
                         </li>
                         <li class="nav-item active">
-                          <a class="nav-link" href="{{ route('getCels') }}">Celulares</a>
-                        </li>
-                        <li class="nav-item active">
-                          <a class="nav-link" href="{{ route('getElectros') }}">Electrodomésticos</a>
+                          <a class="nav-link" href="{{ route('Shopping') }}">Shopping</a>
                         </li>
                         <li class="nav-item active">
                           <a class="nav-link" href="{{ route('otros') }}">+Servicios</a>
@@ -115,5 +113,6 @@
             @yield('content')
         </main>
     </div>
+    @yield('myScripts')
 </body>
 </html>

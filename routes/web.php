@@ -23,9 +23,6 @@ Route::get('/home', 'HomeController@index')
 Route::group(['prefix' => 'admin'], function() {
   Route::resource('specialties', 'SpecialtyController')
               ->middleware('auth');
-  Route::get('indexSocios', 'DoctorController@indexSocios')
-              ->middleware('auth')
-              ->name('doctors.indexSocios');
   Route::resource('doctors', 'DoctorController')
               ->middleware('auth');
   Route::resource('categories', 'CategoryController')
@@ -34,40 +31,78 @@ Route::group(['prefix' => 'admin'], function() {
               ->middleware('auth');
   Route::resource('products', 'ProductController')
               ->middleware('auth');
-  Route::resource('menus', 'MenuController')
-              ->middleware('auth');
 });
 
-Route::get('pdf/{id}', 'PDFController@invoice')
+//Buscar socios
+Route::get('getOnlyUsers', 'OrderController@getOnlyUsers')
+              ->middleware('auth')
+              ->name('getOnlyUsers');
+Route::post('getOnlyUsersAdmin/{name?}/{nroDoc?}/', 'OrderController@getOnlyUsersAdmin')
+              ->middleware('auth')
+              ->where(['nroDoc' => '[0-9]+'])
+              ->name('getOnlyUsersAdmin');
+Route::post('getOnlyUsersNroDocAdmin/{nroDoc?}/', 'OrderController@getOnlyUsersNroDocAdmin')
+              ->middleware('auth')
+              ->where(['nroDoc' => '[0-9]+'])
+              ->name('getOnlyUsersNroDocAdmin');
+
+Route::get('pdf', 'PDFController@invoice')
               ->middleware('auth')
               ->name('pdf');
-Route::get('getSpecialties', 'SpecialtyController@getSpecialties')
+
+//Especialidades y médicos
+Route::get('profesionales', function () {
+    return view('doctorsList');
+})->name('profesionales');
+Route::get('getOnlySpecialties', 'SpecialtyController@getOnlySpecialties')
               ->middleware('auth')
-              ->name('getSpecialties');
-Route::get('getPlans', 'PlanController@getPlans')
+              ->name('getOnlySpecialties');
+Route::get('getOnlyAllActiveSpecialties', 'SpecialtyController@getOnlyAllActiveSpecialties')
               ->middleware('auth')
-              ->name('getPlans');
-Route::get('getCels', 'ProductController@getCels')
-              ->middleware('auth')
-              ->name('getCels');
-Route::get('getElectros', 'ProductController@getElectros')
-              ->middleware('auth')
-              ->name('getElectros');
-Route::get('getOrders', 'OrderController@getOrders')
-              ->middleware('auth')
-              ->name('getOrders');
-Route::get('getUsers', 'OrderController@getUsers')
-              ->middleware('auth')
-              ->name('getUsers');
+              ->name('getOnlyAllActiveSpecialties');
 Route::post('getDoctors/{id}', 'DoctorController@getDoctors')
               ->middleware('auth')
               ->name('getDoctors');
-Route::post('getLayers/{id}', 'LayerController@getLayers')
+
+//Shopping y productos
+Route::get('Shopping', 'ProductController@shopping')
               ->middleware('auth')
-              ->name('getLayers');
+              ->name('Shopping');
+Route::get('getCategories', 'CategoryController@getCategories')
+              ->middleware('auth')
+              ->name('getCategories');
+Route::post('getCategory/{id}', 'ProductController@getCategory')
+              ->middleware('auth')
+              ->name('getCategory');
+
+//Ordenes
+Route::get('OrdersAdmin', function () {
+                  return view('ordersAdmin');
+              })
+              ->middleware('auth')
+              ->name('OrdersAdmin');
+Route::get('getOrders', 'OrderController@getOrders')
+              ->middleware('auth')
+              ->name('getOrders');
+Route::post('getOnlyOrders/{id}', 'OrderController@getOnlyOrders')
+              ->middleware('auth')
+              ->name('getOnlyOrders');
 Route::post('cantOrders/{id}', 'OrderController@cantOrders')
               ->middleware('auth')
               ->name('cantOrders');
+Route::post('storeOrden', 'OrderController@store')
+              ->middleware('auth')
+              ->name('storeOrden');
+
+//Planes de grupo e individuales del socio
+Route::post('getPlans/{idGroup}', 'PlanController@getPlans')
+              ->middleware('auth')
+              ->name('getPlans');
+Route::post('getLayers/{id}', 'LayerController@getLayers')
+              ->middleware('auth')
+              ->name('getLayers');
+
+
 Route::get('otros', function () {return view('otros');})
               ->middleware('auth')
               ->name('otros');

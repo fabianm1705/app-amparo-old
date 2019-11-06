@@ -53,4 +53,15 @@ class User extends Authenticatable
       return $this->hasMany('App\Models\Layer','user_id');
     }
 
+    public function scopeName($query, $name)
+    {
+      if($name)
+          return $query->where('name','LIKE',"%$name%");
+    }
+
+    public function scopeNroDoc($query, $nroDoc)
+    {
+      if($nroDoc)
+          return $query->where('nroDoc','LIKE',"%$nroDoc%");
+    }
 }

@@ -9,9 +9,9 @@ use PDF;
 
 class PDFController extends Controller
 {
-    public function invoice($id)
+    public function invoice()
       {
-        $orden = $this->getData($id);
+        $orden = $this->getData();
         foreach ($orden as $order)
         {
           $view =  \View::make('admin.order.show', compact('order'))->render();
@@ -21,10 +21,12 @@ class PDFController extends Controller
         return $pdf->stream('invoice');
       }
 
-    public function getData($id)
+    public function getData()
       {
-        // $user_id = Auth::user()->id;
-        $order = Order::where('id',$id)->get();
+        // $user_id = Auth::user()->id; Order::where('id',$id)->get();
+        $order = DB::table('orders')
+                ->latest()
+                ->first();
         return $order;
       }
 

@@ -108,4 +108,15 @@ class CategoryController extends Controller
       return redirect()
         ->route('categories.index');
     }
+
+    public function getCategories(Request $request)
+    {
+      $categories = Category::where('activa', 1)
+        ->get();
+      if($request->ajax()){
+        return $categories->toJson();
+      }
+      return view('productsList', compact("categories"));
+    }
+
 }

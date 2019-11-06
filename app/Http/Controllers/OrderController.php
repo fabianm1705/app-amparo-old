@@ -30,7 +30,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-      return view('admin.order.create');
+      return view('ordersAdmin');
     }
 
     /**
@@ -47,17 +47,17 @@ class OrderController extends Controller
       $doctor = Doctor::find($request->input('doctor_id'));
       $order->monto_s = $request->input('monto_s');
       $order->monto_a = $request->input('monto_a');
-      $order->obs = "";
-      $order->estado = "Impresa";
-      $order->lugarEmision = "Sede Amparo";
+      $order->obs = $request->input('obs');;
+      $order->estado = $request->input('estado');
+      $order->lugarEmision = $request->input('lugarEmision');
       $order->pacient_id = $request->input('pacient_id');
       $order->doctor_id = $request->input('doctor_id');
 
       $order->save();
 
-      return redirect()
-        ->route('pdf',['id' => $order->id])
-        ->with('message','Orden Registrada');
+      // return redirect()
+      //   ->route('pdf',['id' => $order->id])
+      //   ->with('message','Orden Registrada');
     }
 
     /**
@@ -132,13 +132,45 @@ class OrderController extends Controller
       return view('orders',compact("orders"));
     }
 
-    public function getUsers(Request $request)
+    public function getOnlyOrders($id)
+    {
+      $orders = Order::with('doctor')
+          ->where('pacient_id', '=', $id)
+          ->get();
+      return $orders;
+    }
+
+    public function getOrdersAdmin()
+    {
+      return view('ordersAdmin');
+    }
+
+    public function getOnlyUsers(Request $request)
     {
       $group_id = Auth::user()->group_id;
       $users = User::where('group_id',$group_id)->get();
       if($request->ajax()){
         return $users->toJson();
       }
+      return $users;
+    }
+
+    public function getOnlyUsersAdmin($name,$nroDoc = "")
+    {
+      $users = User::with('group')
+          ->orderBy('name','desc')
+          ->name($name)
+          ->nroDoc($nroDoc)
+          ->get();
+      return $users;
+    }
+
+    public function getOnlyUsersNroDocAdmin($nroDoc)
+    {
+      $users = User::with('group')
+          ->orderBy('name','desc')
+          ->nroDoc($nroDoc)
+          ->get();
       return $users;
     }
 

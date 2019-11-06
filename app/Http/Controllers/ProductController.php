@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -120,27 +122,25 @@ class ProductController extends Controller
         ->route('products.index');
     }
 
-    public function getCels(Request $request)
+    public function shopping(Request $request)
     {
       $image_url = config('app.url');
-      $products = Product::where('vigente', 1)->where('categoria', 'Celulares')
+      $products = Product::where('vigente', 1)
         ->orderBy('montoCuota','asc')
         ->get();
       if($request->ajax()){
         return $products->toJson();
       }
-      return view('productsList',compact("products","image_url"));
+      return view('shopping', compact("products"));
     }
 
-    public function getElectros(Request $request)
+    public function getCategory($id)
     {
-      $image_url = config('app.url');
-      $products = Product::where('vigente', 1)->where('categoria', 'Electrodomésticos')
-        ->orderBy('montoCuota','asc')
-        ->get();
-      if($request->ajax()){
-        return $products->toJson();
+      if($id==0){
+        $products = DB::table('products')->get();
+      }else{
+        $products = DB::table('products')->where('category_id', '=', $id)->get();
       }
-      return view('productsList',compact("products","image_url"));
+      return $products;
     }
 }

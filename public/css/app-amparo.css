@@ -1,3 +1,7 @@
+.radio-inline, .checkbox-inline {
+    max-height: 12px;
+}
+
 .margenTotal {
   margin: 1rem;
 }

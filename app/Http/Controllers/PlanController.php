@@ -86,11 +86,9 @@ class PlanController extends Controller
         //
     }
 
-    public function getPlans(Request $request)
+    public function getPlans($idGroup)
     {
-      $group_id = Auth::user()->group_id;
-
-      $plans = DB::table('plans')->where('group_id', '=', $group_id)->get();
+      $plans = DB::table('plans')->where('group_id', '=', $idGroup)->get();
       return $plans;
     }
 

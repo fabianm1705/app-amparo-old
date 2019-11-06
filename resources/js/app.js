@@ -18,11 +18,15 @@ window.Vue = require('vue');
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('dinamic-products-component', require('./components/DinamicProductsComponent.vue').default);
-Vue.component('gen-orders-component', require('./components/GenOrdersComponent.vue').default);
 Vue.component('specialty-doctors-table-component', require('./components/SpecialtyDoctorsTableComponent.vue').default);
+Vue.component('ecommerce-component', require('./components/EcommerceComponent.vue').default);
+Vue.component('card-ecommerce-component', require('./components/CardEcommerceComponent.vue').default);
+Vue.component('card-big-ecommerce-component', require('./components/CardBigEcommerceComponent.vue').default);
+Vue.component('gen-orders-component', require('./components/GenOrdersComponent.vue').default);
+Vue.component('gen-orders-admin-component', require('./components/GenOrdersAdminComponent.vue').default);
+Vue.component('orders-old-component', require('./components/OrdersOldComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

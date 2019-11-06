@@ -37,7 +37,7 @@
 <script>
     export default {
       mounted() {
-        axios.get('getSpecialties').then(response=>{
+        axios.get('getOnlySpecialties').then(response=>{
           this.specialties = response.data;
         });
       },

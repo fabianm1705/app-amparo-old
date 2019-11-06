@@ -45,10 +45,10 @@
       }
     },
     mounted() {
-      axios.get('getSpecialties').then(response=>{
+      axios.get('getOnlySpecialties').then(response=>{
         this.specialties = response.data;
       });
-      axios.get('getUsers').then(response=>{
+      axios.get('getOnlyUsers').then(response=>{
         this.users = response.data;
       });
       axios.get('getPlans').then(response=>{

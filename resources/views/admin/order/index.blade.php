@@ -8,6 +8,11 @@
       <div class="card shadow-sm">
         <div class="card-header bgOrange d-flex">
           <h5 class="card-title text-white">Órdenes Médicas</h5>
+          <div class="ml-auto blanco">
+            <a href="{{ route('OrdersAdmin') }}" title="Nueva">
+              Agregar Nueva
+            </a>
+           </div>
         </div>
         <div class="card-body">
           <table class="table table-hover table-sm table-responsive">
@@ -32,7 +37,7 @@
                   <td>{{ \Carbon\Carbon::parse($order->fecha)->format('d/m/Y') }}</td>
                   <td>{{ \Carbon\Carbon::parse($order->fechaImpresion)->format('d/m/Y') }}</td>
                   <td>{{ $order->user->group->nroSocio }}</td>
-                  <td>{{ $order->user->apeynom }}</td>
+                  <td>{{ $order->user->name }}</td>
                   <td>{{ $order->doctor->apeynom }}</td>
                   <td>{{ $order->monto_s }}</td>
                   <td>{{ $order->monto_a }}</td>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Layer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LayerController extends Controller
 {
@@ -85,8 +86,6 @@ class LayerController extends Controller
 
     public function getLayers($id)
     {
-      $id = Auth::user()->id;
-
       $layers = DB::table('layers')->where('user_id', '=', $id)->get();
       return $layers;
     }

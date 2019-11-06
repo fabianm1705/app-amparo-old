@@ -26,20 +26,12 @@
                   <div class="form-group">
                     <label for="title">Nombre</label>
                     <input type="text" class="form-control" name="apeynom" id="apeynom" value="{{ old('apeynom') }}">
-                  </div>
-                  <div class="form-group">
                     <label for="content">Consultorio</label>
                     <input type="text" class="form-control" name="direccion" id="direccion" value="{{ old('direccion') }}">
-                  </div>
-                  <div class="form-group">
                     <label for="content">Teléfono</label>
                     <input type="text" class="form-control" name="telefono" id="telefono" value="{{ old('telefono') }}">
-                  </div>
-                  <div class="form-group">
                     <label for="content">Email</label>
                     <input type="text" class="form-control" name="email" id="email" value="{{ old('email') }}">
-                  </div>
-                  <div class="form-group">
                     <label for="content">Especialidad</label>
                     <select class="custom-select" name="specialty_id" id="specialty_id">
                       <option selected>Seleccione especialidad</option>

@@ -14,4 +14,10 @@ class Product extends Model
   protected $fillable = [
       'modelo', 'descripcion', 'montoCuota', 'cantidadCuotas', 'vigente', 'image_url',
   ];
+
+  public function category()
+  {
+    return $this->belongsTo('App\Models\Category');
+  }
+
 }

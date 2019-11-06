@@ -20,12 +20,15 @@ class DatabaseSeeder extends Seeder
           'plans',
           'layers',
           'orders',
+          'categories',
           'sales'
         ]);
         $this->call(SpecialtiesTableSeeder::class);
         $this->call(DoctorsTableSeeder::class);
         $this->call(GroupsTableSeeder::class);
+        $this->call(CategoriesTableSeeder::class);
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        $this->call(ProductsTableSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(PlansTableSeeder::class);
         $this->call(LayersTableSeeder::class);

@@ -31,4 +31,9 @@ class Group extends Model
     return $this->hasMany('App\Models\Sale','group_id');
   }
 
+  public function scopeDireccion($query, $direccion)
+  {
+    if($direccion)
+        return $query->where('direccion','LIKE',"%$direccion%");
+  }
 }

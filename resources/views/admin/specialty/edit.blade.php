@@ -1,23 +1,7 @@
-@extends('layouts.appAdmin')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
-  @if(Session::has('message'))
-    <div class="container alert alert-success">
-      {{ Session::get('message') }}
-    </div>
-  @endif
-
-  @if($errors->any())
-    <div class="container alert alert-danger">
-      <ul>
-        @foreach($errors->all() as $error)
-          <li>{{ $error }}</li>
-        @endforeach
-      </ul>
-    </div>
-  @endif
-
   <div class="row justify-content-center">
     <div class="col-md-7 seccion-contacto my-5">
       <div class="card shadow-sm"><br>
@@ -52,8 +36,6 @@
                       <input type="hidden" class="form-check-input" name="vigente" value="0">
                       <input type="checkbox" class="form-check-input" id="vigente" name="vigente" value="1" {{ $specialty->vigente ? 'checked="checked"' : '' }}>
                       <label class="form-check-label" for="vigente">Activa</label>
-                    </div>
-                    <div class="form-check">
                       <input type="hidden" class="form-check-input" name="vigenteOrden" value="0">
                       <input type="checkbox" class="form-check-input" id="vigenteOrden" name="vigenteOrden" value="1" {{ $specialty->vigenteOrden ? 'checked="checked"' : '' }}>
                       <label class="form-check-label" for="vigente">Permitir órdenes online</label>

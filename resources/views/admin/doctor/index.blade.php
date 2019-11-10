@@ -1,7 +1,6 @@
-@extends('layouts.appAdmin')
+@extends('layouts.app')
 
 @section('content')
-
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-12 seccion-contacto my-5">
@@ -10,7 +9,9 @@
           <h5 class="card-title text-white">Profesionales</h5>
           <ul class="nav justify-content-end ml-auto">
               <li class="nav-item ml-2 blanco">
+                @can('doctors.create')
                 <a href="{{ route('doctors.create') }}" title="Nuevo">Agregar Nuevo</a>
+                @endcan
               </li>
           </ul>
         </div>
@@ -41,16 +42,21 @@
                     <input type="checkbox" class="form-check-input" id="coseguroConsultorio" name="coseguroConsultorio" disabled value="1" {{ $doctor->coseguroConsultorio ? 'checked="checked"' : '' }}>
                   </td>
                   <td class="text-right d-flex">
+                    @can('doctors.show')
                     <a href="{{ route('doctors.show', ['doctor' => $doctor ]) }}" title="Ver" class="">
                       <div class="">
                         <i class="material-icons">search</i>
                       </div>
                     </a>&nbsp;
+                    @endcan
+                    @can('doctors.edit')
                     <a href="{{ route('doctors.edit', ['doctor' => $doctor ]) }}" title="Editar" class="">
                       <div class="">
                         <i class="material-icons">edit</i>
                       </div>
                     </a>&nbsp;
+                    @endcan
+                    @can('doctors.destroy')
                     <form action="{{ route('doctors.destroy', ['doctor' => $doctor ]) }}" method="post" style="background-color: transparent;">
                       @method('DELETE')
                       @csrf
@@ -58,6 +64,7 @@
                         Borrar
                       </button>
                     </form>
+                    @endcan
                   </td>
                 </tr>
               @endforeach

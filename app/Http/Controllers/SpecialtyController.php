@@ -10,6 +10,14 @@ use Illuminate\Support\Facades\DB;
 
 class SpecialtyController extends Controller
 {
+    public function __construct()
+    {
+      $this->middleware('can:specialties.index')->only('index');
+      $this->middleware('can:specialties.show')->only('show');
+      $this->middleware('can:specialties.destroy')->only('destroy');
+      $this->middleware('can:specialties.edit')->only(['edit','update']);
+      $this->middleware('can:specialties.create')->only(['create','store']);
+    }
     /**
      * Display a listing of the resource.
      *

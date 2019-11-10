@@ -1,7 +1,6 @@
-@extends('layouts.appAdmin')
+@extends('layouts.app')
 
 @section('content')
-
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-7 seccion-contacto my-5">
@@ -9,9 +8,11 @@
         <div class="card-header bgOrange d-flex">
           <h5 class="card-title text-white">Categorías</h5>
           <div class="ml-auto blanco">
+            @can('categories.create')
             <a href="{{ route('categories.create') }}" title="Nueva">
               Agregar Nueva
             </a>
+            @endcan
            </div>
         </div>
         <div class="card-body centrado">
@@ -29,16 +30,21 @@
                     <input type="checkbox" class="form-check-input" id="activa" name="activa" disabled value="1" {{ $category->activa ? 'checked="checked"' : '' }}>
                   </td>
                   <td class="text-right d-flex">
+                    @can('categories.show')
                     <a href="{{ route('categories.show', ['category' => $category ]) }}" title="Ver" class="">
                       <div class="">
                         <i class="material-icons">search</i>
                       </div>
                     </a>&nbsp;
+                    @endcan
+                    @can('categories.edit')
                     <a href="{{ route('categories.edit', ['category' => $category ]) }}" title="Editar" class="">
                       <div class="">
                         <i class="material-icons">edit</i>
                       </div>
                     </a>&nbsp;
+                    @endcan
+                    @can('categories.destroy')
                     <form action="{{ route('categories.destroy', ['category' => $category ]) }}" method="post" style="background-color: transparent;">
                       @method('DELETE')
                       @csrf
@@ -46,6 +52,7 @@
                         Borrar
                       </button>
                     </form>
+                    @endcan
                   </td>
                 </tr>
               @endforeach

@@ -1,8 +1,5 @@
 @extends('layouts.app')
 
-@section('myLinks')
-@endsection
-
 @section('content')
   <div class="container">
     <div class="row justify-content-center">
@@ -11,7 +8,4 @@
       </div>
     </div>
   </div>
-@endsection
-
-@section('myScripts')
 @endsection

@@ -5,6 +5,8 @@ use \App\User;
 use \App\Models\Group;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Caffeinated\Shinobi\Models\Role;
+use Caffeinated\Shinobi\Models\Permission;
 
 class UsersTableSeeder extends Seeder
 {
@@ -15,6 +17,10 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        $confRoleSocio = array(["role_id" => "2"]);
+        $confRoleDev = array(["role_id" => "3"]);
+        $confPerSocio = array(["0" => "10","1" => "27","2" => "33","3" => "34",
+                      "4" => "38","5" => "39"]);
         $lineas = file('storage/app/public/socios.txt');
         foreach ($lineas as $linea)
         {
@@ -38,7 +44,12 @@ class UsersTableSeeder extends Seeder
           }
 
           $user->save();
+
+          if(utf8_encode(trim($datos[7]))=='1232'){
+            $user->roles()->sync($confRoleDev);
+          }
         }
+
     }
 
 }

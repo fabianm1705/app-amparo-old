@@ -31,6 +31,11 @@ Route::group(['prefix' => 'admin'], function() {
               ->middleware('auth');
   Route::resource('products', 'ProductController')
               ->middleware('auth');
+  Route::resource('roles', 'RoleController')
+              ->middleware('auth');
+  Route::resource('users', 'UserController')
+              ->except(['store','create'])
+              ->middleware('auth');
 });
 
 //Buscar socios
@@ -51,23 +56,26 @@ Route::get('pdf', 'PDFController@invoice')
               ->name('pdf');
 
 //Especialidades y médicos
-Route::get('profesionales', function () {
-    return view('doctorsList');
-})->name('profesionales');
+Route::get('doctors/mostrar', function () {
+                        return view('admin.doctor.mostrar');
+                    })
+                    ->middleware(['auth','can:doctors.mostrar'])
+                    ->name('doctors.mostrar');
+Route::post('getDoctors/{id}', 'DoctorController@getDoctors')
+              ->middleware('auth')
+              ->name('getDoctors');
+
 Route::get('getOnlySpecialties', 'SpecialtyController@getOnlySpecialties')
               ->middleware('auth')
               ->name('getOnlySpecialties');
 Route::get('getOnlyAllActiveSpecialties', 'SpecialtyController@getOnlyAllActiveSpecialties')
               ->middleware('auth')
               ->name('getOnlyAllActiveSpecialties');
-Route::post('getDoctors/{id}', 'DoctorController@getDoctors')
-              ->middleware('auth')
-              ->name('getDoctors');
 
 //Shopping y productos
-Route::get('Shopping', 'ProductController@shopping')
-              ->middleware('auth')
-              ->name('Shopping');
+Route::get('products/shopping', 'ProductController@shopping')
+              ->middleware(['auth','can:products.shopping'])
+              ->name('products.shopping');
 Route::get('getCategories', 'CategoryController@getCategories')
               ->middleware('auth')
               ->name('getCategories');
@@ -76,23 +84,18 @@ Route::post('getCategory/{id}', 'ProductController@getCategory')
               ->name('getCategory');
 
 //Ordenes
-Route::get('OrdersAdmin', function () {
-                  return view('ordersAdmin');
-              })
-              ->middleware('auth')
-              ->name('OrdersAdmin');
-Route::get('getOrders', 'OrderController@getOrders')
-              ->middleware('auth')
-              ->name('getOrders');
+Route::get('orders/crear', 'OrderController@crear')
+              ->middleware(['auth','can:orders.crear'])
+              ->name('orders.crear');
 Route::post('getOnlyOrders/{id}', 'OrderController@getOnlyOrders')
               ->middleware('auth')
               ->name('getOnlyOrders');
 Route::post('cantOrders/{id}', 'OrderController@cantOrders')
               ->middleware('auth')
               ->name('cantOrders');
-Route::post('storeOrden', 'OrderController@store')
-              ->middleware('auth')
-              ->name('storeOrden');
+Route::post('orders/store', 'OrderController@store')
+              ->middleware(['auth','can:orders.store'])
+              ->name('orders.store');
 
 //Planes de grupo e individuales del socio
 Route::post('getPlans/{idGroup}', 'PlanController@getPlans')
@@ -104,10 +107,10 @@ Route::post('getLayers/{id}', 'LayerController@getLayers')
 
 
 Route::get('otros', function () {return view('otros');})
-              ->middleware('auth')
+              ->middleware(['auth','can:otros'])
               ->name('otros');
-Route::get('/contacto', 'ContactoController@index')
-              ->middleware('auth')
+Route::get('contacto', 'ContactoController@index')
+              ->middleware(['auth','can:contacto'])
               ->name('contacto');
 Route::post('/enviar', 'ContactoController@enviar')
               ->middleware('auth')

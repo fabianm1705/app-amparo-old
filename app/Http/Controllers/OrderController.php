@@ -12,6 +12,14 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+      $this->middleware('can:orders.index')->only('index');
+      $this->middleware('can:orders.show')->only('show');
+      $this->middleware('can:orders.destroy')->only('destroy');
+      $this->middleware('can:orders.edit')->only(['edit','update']);
+      $this->middleware('can:orders.create')->only(['create','store']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -30,7 +38,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-      return view('ordersAdmin');
+      return view('admin.order.create');
     }
 
     /**
@@ -121,7 +129,7 @@ class OrderController extends Controller
         ->route('orders.index');
     }
 
-    public function getOrders(Request $request)
+    public function crear(Request $request)
     {
       $group_id = Auth::user()->group_id;
       //Tomar los Id de todos los usuarios del grupo
@@ -129,7 +137,7 @@ class OrderController extends Controller
       //Para buscar las órdenes de todos
       $orders = Order::whereIn('pacient_id',$usersId)->orderBy('fecha', 'desc')->paginate(4);
 
-      return view('orders',compact("orders"));
+      return view('admin.order.crear',compact("orders"));
     }
 
     public function getOnlyOrders($id)
@@ -138,11 +146,6 @@ class OrderController extends Controller
           ->where('pacient_id', '=', $id)
           ->get();
       return $orders;
-    }
-
-    public function getOrdersAdmin()
-    {
-      return view('ordersAdmin');
     }
 
     public function getOnlyUsers(Request $request)

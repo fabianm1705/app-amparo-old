@@ -1,22 +1,12 @@
-@extends('layouts.appAdmin')
+@extends('layouts.app')
 
 @section('content')
   <div class="container">
-    @if($errors->any())
-      <div class="container alert alert-danger">
-        <ul>
-          @foreach($errors->all() as $error)
-            <li>{{ $error }}</li>
-          @endforeach
-        </ul>
-      </div>
-    @endif
-
     <div class="row justify-content-center">
       <div class="col-md-6 seccion-contacto my-5">
         <div class="card shadow-sm"><br>
           <header class="centrado">
-            <h4>Cargar Nuevo Celular</h4>
+            <h4>Cargar Nuevo Producto</h4>
           </header>
           <div class="card-body">
             <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data">

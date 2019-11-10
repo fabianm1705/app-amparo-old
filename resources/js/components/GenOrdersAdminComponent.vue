@@ -98,7 +98,7 @@
     },
     methods:{
       storeOrden(){
-        axios.post('storeOrden', {
+        axios.post('orders.store', {
           doctor_id: document.getElementById('doctor_id').value,
           specialty_id: document.getElementById('specialty').value,
           monto_s: document.getElementById('monto_s').value,
@@ -108,7 +108,6 @@
           pacient_id: this.users[0].id,
           obs: document.getElementById('obs').value
         })
-        axios.get('pdf')
       },
       getDoctors(){
         var idSpecialty = document.getElementById('specialty').value;

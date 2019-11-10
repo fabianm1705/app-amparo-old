@@ -1,7 +1,6 @@
-@extends('layouts.appAdmin')
+@extends('layouts.app')
 
 @section('content')
-
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-7 seccion-contacto my-5">
@@ -9,9 +8,11 @@
         <div class="card-header bgOrange d-flex">
           <h5 class="card-title text-white">Especialidades</h5>
           <div class="ml-auto blanco">
-            <a href="{{ route('specialties.create') }}" title="Nueva">
-              Agregar Nueva
-            </a>
+            @can('specialties.create')
+              <a href="{{ route('specialties.create') }}" title="Nueva">
+                Agregar Nueva
+              </a>
+            @endcan
            </div>
         </div>
         <div class="card-body centrado">
@@ -37,23 +38,29 @@
                     <input type="checkbox" class="form-check-input" id="vigenteOrden" name="vigenteOrden" disabled value="1" {{ $specialty->vigenteOrden ? 'checked="checked"' : '' }}>
                   </td>
                   <td class="text-right d-flex">
-                    <a href="{{ route('specialties.show', ['specialty' => $specialty ]) }}" title="Ver" class="">
-                      <div class="">
-                        <i class="material-icons">search</i>
-                      </div>
-                    </a>&nbsp;
-                    <a href="{{ route('specialties.edit', ['specialty' => $specialty ]) }}" title="Editar" class="">
-                      <div class="">
-                        <i class="material-icons">edit</i>
-                      </div>
-                    </a>&nbsp;
-                    <form action="{{ route('specialties.destroy', ['specialty' => $specialty ]) }}" method="post" style="background-color: transparent;">
-                      @method('DELETE')
-                      @csrf
-                      <button class="btn btn-sm" onclick="return confirm('Está seguro de eliminar el registro?')">
-                        Borrar
-                      </button>
-                    </form>
+                    @can('specialties.show')
+                      <a href="{{ route('specialties.show', ['specialty' => $specialty ]) }}" title="Ver" class="">
+                        <div class="">
+                          <i class="material-icons">search</i>
+                        </div>
+                      </a>&nbsp;
+                    @endcan
+                    @can('specialties.edit')
+                      <a href="{{ route('specialties.edit', ['specialty' => $specialty ]) }}" title="Editar" class="">
+                        <div class="">
+                          <i class="material-icons">edit</i>
+                        </div>
+                      </a>&nbsp;
+                    @endcan
+                    @can('specialties.destroy')
+                      <form action="{{ route('specialties.destroy', ['specialty' => $specialty ]) }}" method="post" style="background-color: transparent;">
+                        @method('DELETE')
+                        @csrf
+                        <button class="btn btn-sm" onclick="return confirm('Está seguro de eliminar el registro?')">
+                          Borrar
+                        </button>
+                      </form>
+                    @endcan
                   </td>
                 </tr>
               @endforeach

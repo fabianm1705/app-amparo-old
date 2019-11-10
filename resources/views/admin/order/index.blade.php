@@ -1,7 +1,6 @@
-@extends('layouts.appAdmin')
+@extends('layouts.app')
 
 @section('content')
-
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-12 seccion-contacto my-5">
@@ -9,9 +8,11 @@
         <div class="card-header bgOrange d-flex">
           <h5 class="card-title text-white">Órdenes Médicas</h5>
           <div class="ml-auto blanco">
-            <a href="{{ route('OrdersAdmin') }}" title="Nueva">
-              Agregar Nueva
-            </a>
+            @can('orders.create')
+              <a href="{{ route('orders.create') }}" title="Nueva">
+                Agregar Nueva
+              </a>
+            @endcan
            </div>
         </div>
         <div class="card-body">
@@ -45,18 +46,22 @@
                   <td>{{ $order->estado }}</td>
                   <td>{{ $order->obs }}</td>
                   <td class="text-right d-flex">
+                    @can('orders.edit')
                     <a href="{{ route('orders.edit', ['order' => $order ]) }}" title="Editar" class="">
                       <div class="">
                         <i class="material-icons">edit</i>
                       </div>
                     </a>&nbsp;
-                    <form action="{{ route('orders.destroy', ['order' => $order ]) }}" method="post" style="background-color: transparent;">
-                      @method('DELETE')
-                      @csrf
-                      <button class="btn btn-sm" onclick="return confirm('Está seguro de eliminar el registro?')">
-                        Borrar
-                      </button>
-                    </form>
+                    @endcan
+                    @can('orders.destroy')
+                      <form action="{{ route('orders.destroy', ['order' => $order ]) }}" method="post" style="background-color: transparent;">
+                        @method('DELETE')
+                        @csrf
+                        <button class="btn btn-sm" onclick="return confirm('Está seguro de eliminar el registro?')">
+                          Borrar
+                        </button>
+                      </form>
+                    @endcan
                   </td>
                 </tr>
               @endforeach

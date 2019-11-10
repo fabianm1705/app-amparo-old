@@ -1,28 +1,12 @@
-@extends('layouts.appAdmin')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
-  @if(Session::has('message'))
-    <div class="container alert alert-success">
-      {{ Session::get('message') }}
-    </div>
-  @endif
-
-  @if($errors->any())
-    <div class="container alert alert-danger">
-      <ul>
-        @foreach($errors->all() as $error)
-          <li>{{ $error }}</li>
-        @endforeach
-      </ul>
-    </div>
-  @endif
-
   <div class="row justify-content-center">
     <div class="col-md-6 seccion-contacto my-5">
       <div class="card shadow-sm"><br>
         <header class="centrado">
-          <h4>Modificar Celular</h4>
+          <h4>Modificar Producto</h4>
         </header>
         <div class="card-body">
           <form action="{{ route('products.update', ['product' => $product]) }}" method="post">

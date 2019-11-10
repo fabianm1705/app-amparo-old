@@ -10,6 +10,14 @@ use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+      $this->middleware('can:categories.index')->only('index');
+      $this->middleware('can:categories.show')->only('show');
+      $this->middleware('can:categories.destroy')->only('destroy');
+      $this->middleware('can:categories.edit')->only(['edit','update']);
+      $this->middleware('can:categories.create')->only(['create','store']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -44,11 +52,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-      $category = new Category();
-      $category->nombre = $request->input('nombre');
-      $category->activa = $request->input('activa');
-
-      $category->save();
+      $category->create($request->all());
 
       return redirect()
         ->route('categories.show',['category' => $category])
@@ -86,10 +90,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-      $category->nombre = $request->input('nombre');
-      $category->activa = $request->input('activa');
-
-      $category->save();
+      $category->update($request->all());
 
       return redirect()
         ->route('categories.show',['category' => $category])

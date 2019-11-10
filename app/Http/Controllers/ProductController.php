@@ -10,6 +10,14 @@ use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+      $this->middleware('can:products.index')->only('index');
+      $this->middleware('can:products.show')->only('show');
+      $this->middleware('can:products.destroy')->only('destroy');
+      $this->middleware('can:products.edit')->only(['edit','update']);
+      $this->middleware('can:products.create')->only(['create','store']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -131,7 +139,7 @@ class ProductController extends Controller
       if($request->ajax()){
         return $products->toJson();
       }
-      return view('shopping', compact("products"));
+      return view('admin.product.shopping', compact("products"));
     }
 
     public function getCategory($id)

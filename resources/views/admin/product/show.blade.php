@@ -1,13 +1,7 @@
-@extends('layouts.appAdmin')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
-  @if(Session::has('message'))
-    <div class="container alert alert-success">
-      {{ Session::get('message') }}
-    </div>
-  @endif
-
   <div class="row justify-content-center">
     <div class="col-md-6 seccion-contacto my-5">
       <div class="card shadow-sm"><br>

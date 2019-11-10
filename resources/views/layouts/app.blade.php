@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="images/apple-icon.png">
-    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('images/apple-icon.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -58,21 +58,66 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                      @auth
+                        @can('orders.crear')
+                          <li class="nav-item active">
+                            <a class="nav-link" href="{{ route('orders.crear') }}">Ordenes</a>
+                          </li>
+                        @endcan
+                        @can('doctors.mostrar')
+                          <li class="nav-item active">
+                            <a class="nav-link" href="{{ route('doctors.mostrar') }}">Profesionales</a>
+                          </li>
+                        @endcan
+                        @can('products.shopping')
+                          <li class="nav-item active">
+                            <a class="nav-link" href="{{ route('products.shopping') }}">Shopping</a>
+                          </li>
+                        @endcan
+                        @can('otros')
+                          <li class="nav-item active">
+                            <a class="nav-link" href="{{ route('otros') }}">+Servicios</a>
+                          </li>
+                        @endcan
+                        @can('contacto')
+                          <li class="nav-item active">
+                            <a class="nav-link" href="{{ route('contacto') }}">Contacto</a>
+                          </li>
+                        @endcan
+                        @can('orders.index')
+                          <li class="nav-item active">
+                            <a class="nav-link" href="{{ route('orders.index') }}">Orders</a>
+                          </li>
+                        @endcan
+                        @can('specialties.index')
+                          <li class="nav-item active">
+                            <a class="nav-link" href="{{ route('specialties.index') }}">Specialties</a>
+                          </li>
+                        @endcan
+                        @can('doctors.index')
+                          <li class="nav-item active">
+                            <a class="nav-link" href="{{ route('doctors.index') }}">Doctors</a>
+                          </li>
+                        @endcan
+                        @can('categories.index')
+                          <li class="nav-item active">
+                            <a class="nav-link" href="{{ route('categories.index') }}">Categoríes</a>
+                          </li>
+                        @endcan
+                        @can('products.index')
+                          <li class="nav-item active">
+                            <a class="nav-link" href="{{ route('products.index') }}">Products</a>
+                          </li>
+                        @endcan
+                        @can('roles.index')
                         <li class="nav-item active">
-                          <a class="nav-link" href="{{ route('getOrders') }}">Ordenes</a>
+                          <a class="nav-link" href="{{ route('roles.index') }}">Roles</a>
                         </li>
+                        @endcan
                         <li class="nav-item active">
-                          <a class="nav-link" href="{{ route('profesionales') }}">Profesionales</a>
+                          <a class="nav-link" href="{{ route('users.index') }}">Users</a>
                         </li>
-                        <li class="nav-item active">
-                          <a class="nav-link" href="{{ route('Shopping') }}">Shopping</a>
-                        </li>
-                        <li class="nav-item active">
-                          <a class="nav-link" href="{{ route('otros') }}">+Servicios</a>
-                        </li>
-                        <li class="nav-item active">
-                          <a class="nav-link" href="{{ route('contacto') }}">Contacto</a>
-                        </li>
+                      @endauth
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
@@ -110,7 +155,29 @@
         </nav>
 
         <main class="py-4"><br><br>
-            @yield('content')
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-md-8">
+                @if(Session::has('message'))
+                  <div class="container alert alert-success">
+                    {{ Session::get('message') }}
+                  </div>
+                @endif
+
+                @if($errors->any())
+                  <div class="container alert alert-danger">
+                    <ul>
+                      @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                      @endforeach
+                    </ul>
+                  </div>
+                @endif
+              </div>
+            </div>
+          </div>
+
+          @yield('content')
         </main>
     </div>
     @yield('myScripts')

@@ -13,6 +13,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->truncateTables([
           'users',
+          'permissions',
+          'roles',
           'products',
           'specialties',
           'doctors',
@@ -23,6 +25,7 @@ class DatabaseSeeder extends Seeder
           'categories',
           'sales'
         ]);
+        $this->call(PermissionsTableSeeder::class);
         $this->call(SpecialtiesTableSeeder::class);
         $this->call(DoctorsTableSeeder::class);
         $this->call(GroupsTableSeeder::class);

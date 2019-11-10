@@ -12,6 +12,15 @@ use Illuminate\Support\Facades\Cache;
 
 class DoctorController extends Controller
 {
+    public function __construct()
+    {
+      $this->middleware('can:doctors.index')->only('index');
+      $this->middleware('can:doctors.show')->only('show');
+      $this->middleware('can:doctors.destroy')->only('destroy');
+      $this->middleware('can:doctors.edit')->only(['edit','update']);
+      $this->middleware('can:doctors.create')->only(['create','store']);
+    }
+
     /**
      * Display a listing of the resource.
      *

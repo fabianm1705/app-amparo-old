@@ -3,8 +3,6 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('images/apple-icon.png') }}">
-        <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
 
         <title>Amparo</title>
 
@@ -78,19 +76,6 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Zona Socios</a>
-                    @else
-                        <a href="{{ route('login') }}">@lang('messages.login')</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
 
             <div class="content">
                 <div class="title m-b-md fontAmparo">
@@ -101,12 +86,8 @@
                   </div>
                 </div>
                 <div class="">
-                  Oficina Cura Alvarez 615, Paraná, Entre Ríos<br>
-                  Horario: Lunes a Viernes 8:30 a 18:00hs<br>
-                  Teléfonos Útiles<br>
-                  Sepelio: 4235108 / 154-057991<br>
-                  SOS Emergencias: 4222322 / 4233333<br>
-                  www.amparosrl.com.ar
+                  Error 404 - Página no encontrada
+                  <a href="{{ route('home') }}">Volver a Inicio</a>
                 </div>
             </div>
         </div>

@@ -1,4 +1,4 @@
-@extends('layouts.appAdmin')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -8,6 +8,4 @@
     </div>
   </div>
 </div>
-@endsection
-@section('myScripts')
 @endsection

@@ -1,13 +1,7 @@
-@extends('layouts.appAdmin')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
-  @if(Session::has('message'))
-    <div class="container alert alert-success">
-      {{ Session::get('message') }}
-    </div>
-  @endif
-
   <div class="row justify-content-center">
     <div class="col-md-7 seccion-contacto my-5">
       <div class="card">
@@ -17,8 +11,6 @@
                 <div class="form-group">
                   <label for="apeynom">Nombre</label>
                   <input type="text" class="form-control" name="apeynom" id="apeynom" value="{{ $doctor->apeynom }}">
-                </div>
-                <div class="form-group">
                   <label for="content">Consultorio</label>
                   <input type="text" class="form-control" name="direccion" id="direccion" value="{{ $doctor->direccion }}">
                 </div>
@@ -52,8 +44,6 @@
                   <input type="hidden" class="form-check-input" name="vigente" value="0">
                   <input type="checkbox" class="form-check-input" id="vigente" name="vigente" value="1" {{ $doctor->vigente ? 'checked="checked"' : '' }}>
                   <label class="form-check-label" for="vigente">Activo</label>
-                </div>
-                <div class="form-check">
                   <input type="hidden" class="form-check-input" name="coseguroConsultorio" value="0">
                   <input type="checkbox" class="form-check-input" id="coseguroConsultorio" name="coseguroConsultorio" value="1" {{ $doctor->coseguroConsultorio ? 'checked="checked"' : '' }}>
                   <label class="form-check-label" for="vigente">Cobra coseguro en consultorio</label>

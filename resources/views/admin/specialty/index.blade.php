@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-7 seccion-contacto my-5">
+    <div class="col-md-8">
       <div class="card shadow-sm">
         <div class="card-header bgOrange d-flex">
           <h5 class="card-title text-white">Especialidades</h5>

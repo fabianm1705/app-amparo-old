@@ -10,6 +10,8 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
         <!-- Styles -->
+        <link href="{{ asset('material/material-kit.css?v=2.1.0') }}" rel="stylesheet" />
+        <link href="{{ asset('css/app-amparo.css') }}" rel="stylesheet">
         <style>
             html, body {
                 background-color: #fff;
@@ -62,32 +64,29 @@
                 margin-bottom: 30px;
             }
         </style>
-        <style media="screen">
-            @font-face {
-                font-family: 'iProton';
-                src:
-                url('{{ asset("css/iProton-Bold.otf") }}') format('opentype'),
-                url('{{ asset("css/iProton-Bold.ttf") }}') format('truetype');
-            }
-            .fontAmparo {
-                font-family: 'iProton';
-            }
-       </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+        <div class="flex-center position-ref">
 
             <div class="content">
-                <div class="title m-b-md fontAmparo">
+                <div class="title m-b-md">
                   <div class="d-flex justify-content-end">
                     <div class="mr-4"><br>
                       <img src="{{ asset("images/logo300x68.png") }}">
                     </div>
                   </div>
                 </div>
-                <div class="">
-                  Error 404 - Página no encontrada
-                  <a href="{{ route('home') }}">Volver a Inicio</a>
+                <div class="blanco">
+                  <h4>Error 404 - Destino inexistente</h4>
+                  <button type="submit" class="btn btn-warning btn-lg">
+                      @if (Route::has('login'))
+                          @auth
+                              <a class="" href="{{ url('/home') }}">Volver a Zona Socios</a>
+                          @else
+                              <a class="" href="{{ route('login') }}">Volver a Zona Socios</a>
+                          @endauth
+                      @endif
+                  </button>
                 </div>
             </div>
         </div>

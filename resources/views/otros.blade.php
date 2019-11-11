@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container seccion-contacto my-5">
-    <div class="row">
+<div class="container">
+    <div class="row justify-content-center">
       <div class="col-md-4 card shadow-sm margenTotal">
         <div class="card-body card-header-raised text-center">
           <div class="title"><font style="font-family: 'Nunito';">

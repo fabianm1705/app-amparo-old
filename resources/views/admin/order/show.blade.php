@@ -17,7 +17,7 @@
           <span>Lugar de Emisión: Sede Amparo</span><br>
           <span>Emisión: {{ \Carbon\Carbon::parse($order->fecha)->format('d/m/Y') }}</span><br>
           <span>Impresión: {{ \Carbon\Carbon::parse($order->fechaImpresion)->format('d/m/Y') }}</span><br>
-          <span>Número de Orden: {{ $order->id }}</span>
+          <span>Número de Orden: {{ $order->id+5000 }}</span>
         </td>
       </tr>
     	<tr>

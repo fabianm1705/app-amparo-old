@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-12 seccion-contacto my-5">
+    <div class="col-md-12">
       <div class="card shadow-sm">
         <div class="card-header bgOrange d-flex">
           <h5 class="card-title text-white">Órdenes Médicas</h5>
@@ -34,7 +34,7 @@
             <tbody>
               @foreach($orders as $order)
                 <tr>
-                  <td>{{ $order->numero }}</td>
+                  <td>{{ $order->id+5000 }}</td>
                   <td>{{ \Carbon\Carbon::parse($order->fecha)->format('d/m/Y') }}</td>
                   <td>{{ \Carbon\Carbon::parse($order->fechaImpresion)->format('d/m/Y') }}</td>
                   <td>{{ $order->user->group->nroSocio }}</td>

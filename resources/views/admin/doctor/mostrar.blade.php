@@ -3,7 +3,7 @@
 @section('content')
   <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-11">
           <specialty-doctors-table-component></specialty-doctors-table-component>
         </div>
     </div>

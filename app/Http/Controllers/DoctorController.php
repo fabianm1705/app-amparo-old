@@ -129,6 +129,18 @@ class DoctorController extends Controller
       return redirect()->route('doctors.index');
     }
 
+    public function mostrar(Request $request)
+    {
+      $specialties = DB::table('specialties')
+                            ->where([
+                                        ['vigenteOrden', '=', 1],
+                                        ['vigente', '=', 1],
+                                    ])
+                            ->orderBy('descripcion','asc')
+                            ->get();
+      return view('admin.doctor.mostrar', compact("specialties"));
+    }
+
     public function getDoctors($id)
     {
       $doctors = DB::table('doctors')->where('specialty_id', '=', $id)->get();

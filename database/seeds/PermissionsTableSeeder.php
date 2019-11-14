@@ -183,8 +183,13 @@ class PermissionsTableSeeder extends Seeder
 
         //Ordenes
         Permission::create([
-          'name' => 'Navegar Ordenes',
+          'name' => 'Navegar Ordenes Admin',
           'slug' => 'orders.index',
+          'description' => 'Navega todas las ordenes emitidas'
+        ]);
+        Permission::create([
+          'name' => 'Navegar Ordenes Socio',
+          'slug' => 'orders.indice',
           'description' => 'Navega todas las ordenes emitidas'
         ]);
         Permission::create([

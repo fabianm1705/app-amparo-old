@@ -8,8 +8,8 @@
         <div class="card-header bgOrange d-flex">
           <h5 class="card-title text-white">Órdenes Médicas</h5>
           <div class="ml-auto blanco">
-            @can('orders.create')
-              <a href="{{ route('usersSearch') }}" title="Nueva">
+            @can('orders.crear')
+              <a href="{{ route('orders.crear') }}" title="Nueva">
                 Nueva Orden
               </a>
             @endcan
@@ -24,12 +24,8 @@
               <th>Socio</th>
               <th>Nombre</th>
               <th>Profesional</th>
-              <th>Soc</th>
-              <th>Amp</th>
-              <th>App</th>
-              <th>Estado</th>
+              <th>Lugar</th>
               <th>Obs</th>
-              <th>Acciones</th>
             </thead>
             <tbody>
               @foreach($orders as $order)
@@ -40,29 +36,8 @@
                   <td>{{ $order->user->group->nroSocio }}</td>
                   <td>{{ $order->user->name }}</td>
                   <td>{{ $order->doctor->apeynom }}</td>
-                  <td>{{ $order->monto_s }}</td>
-                  <td>{{ $order->monto_a }}</td>
                   <td>{{ $order->lugarEmision }}</td>
-                  <td>{{ $order->estado }}</td>
                   <td>{{ $order->obs }}</td>
-                  <td class="text-right d-flex">
-                    @can('orders.edit')
-                    <a href="{{ route('orders.edit', ['order' => $order ]) }}" title="Editar" class="">
-                      <div class="">
-                        <i class="material-icons">edit</i>
-                      </div>
-                    </a>&nbsp;
-                    @endcan
-                    @can('orders.destroy')
-                      <form action="{{ route('orders.destroy', ['order' => $order ]) }}" method="post" style="background-color: transparent;">
-                        @method('DELETE')
-                        @csrf
-                        <button class="btn btn-sm" onclick="return confirm('Está seguro de eliminar el registro?')">
-                          Borrar
-                        </button>
-                      </form>
-                    @endcan
-                  </td>
                 </tr>
               @endforeach
             </tbody>

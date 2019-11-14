@@ -12,6 +12,7 @@ $factory->define(App\Models\Product::class, function (Faker $faker) {
       'descripcion' => $faker->text($maxNbChars = 100),
       'montoCuota' => $faker->numberBetween(1200,2900),
       'cantidadCuotas' => 6,
+      'image_url' => 'images/motog6b.png',
       'vigente' => true
     ];
 });

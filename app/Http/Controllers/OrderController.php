@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Specialty;
 use App\Models\Doctor;
 use App\User;
 use Auth;
@@ -27,8 +28,18 @@ class OrderController extends Controller
      */
     public function index()
     {
-      $orders = Order::orderBy('fecha', 'desc')->take(60)->paginate(15);
+      $orders = Order::orderBy('id', 'desc')->take(60)->paginate();
       return view('admin.order.index',compact("orders"));
+    }
+
+    public function indice()
+    {
+      $group_id = Auth::user()->group_id;
+      //Tomar los Id de todos los usuarios del grupo
+      $usersId = User::where('group_id',$group_id)->pluck('id')->toArray();
+      //Para buscar las órdenes de todos
+      $orders = Order::whereIn('pacient_id',$usersId)->orderBy('id', 'desc')->paginate();
+      return view('admin.order.indice',compact("orders"));
     }
 
     /**
@@ -36,9 +47,16 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-      return view('admin.order.create');
+      $specialties = DB::table('specialties')
+                            ->where([
+                                        ['vigente', '=', 1],
+                                    ])
+                            ->orderBy('descripcion','asc')
+                            ->get();
+      $users = User::where('id',$request->input('id'))->get();
+      return view('admin.order.create',compact("users","specialties"));
     }
 
     /**
@@ -52,7 +70,6 @@ class OrderController extends Controller
       $order = new Order();
       $order->fecha = Carbon::now();
       $order->fechaImpresion = Carbon::now();
-      $doctor = Doctor::find($request->input('doctor_id'));
       $order->monto_s = $request->input('monto_s');
       $order->monto_a = $request->input('monto_a');
       $order->obs = $request->input('obs');;
@@ -63,9 +80,9 @@ class OrderController extends Controller
 
       $order->save();
 
-      // return redirect()
-      //   ->route('pdf',['id' => $order->id])
-      //   ->with('message','Orden Registrada');
+      return redirect()
+        ->route('pdf',['id' => $order->id])
+        ->with('message','Orden Registrada');
     }
 
     /**
@@ -135,9 +152,23 @@ class OrderController extends Controller
       //Tomar los Id de todos los usuarios del grupo
       $usersId = User::where('group_id',$group_id)->pluck('id')->toArray();
       //Para buscar las órdenes de todos
-      $orders = Order::whereIn('pacient_id',$usersId)->orderBy('fecha', 'desc')->paginate(4);
+      $orders = Order::whereIn('pacient_id',$usersId)->orderBy('id', 'desc')->paginate(4);
+      $users = User::where('group_id',$group_id)->get();
+      $specialties = DB::table('specialties')
+                            ->where([
+                                        ['vigenteOrden', '=', 1],
+                                        ['vigente', '=', 1],
+                                    ])
+                            ->orderBy('descripcion','asc')
+                            ->get();
 
-      return view('admin.order.crear',compact("orders"));
+      return view('admin.order.crear',compact("orders","users","specialties"));
+    }
+
+    public function search(Request $request)
+    {
+      $users = User::where('group_id',-1)->get();
+      return view('admin.order.search',compact("users"));
     }
 
     public function getOnlyOrders($id)
@@ -146,16 +177,6 @@ class OrderController extends Controller
           ->where('pacient_id', '=', $id)
           ->get();
       return $orders;
-    }
-
-    public function getOnlyUsers(Request $request)
-    {
-      $group_id = Auth::user()->group_id;
-      $users = User::where('group_id',$group_id)->get();
-      if($request->ajax()){
-        return $users->toJson();
-      }
-      return $users;
     }
 
     public function getOnlyUsersAdmin($name,$nroDoc = "")

@@ -130,24 +130,21 @@ class ProductController extends Controller
         ->route('products.index');
     }
 
-    public function shopping(Request $request)
+    public function shopping()
     {
-      $image_url = config('app.url');
-      $products = Product::where('vigente', 1)
-        ->orderBy('montoCuota','asc')
-        ->get();
-      if($request->ajax()){
-        return $products->toJson();
-      }
-      return view('admin.product.shopping', compact("products"));
+      $contados = Category::withCount('products')->get();
+      $categories = Category::orderBy('nombre','asc')->get();
+      return view('admin.product.shopping', compact("categories","contados"));
     }
 
-    public function getCategory($id)
+    public function getProductsXCategory($id)
     {
       if($id==0){
         $products = DB::table('products')->get();
       }else{
-        $products = DB::table('products')->where('category_id', '=', $id)->get();
+        $products = DB::table('products')
+              ->where('category_id', '=', $id)
+              ->get();
       }
       return $products;
     }

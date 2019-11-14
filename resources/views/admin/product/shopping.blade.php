@@ -4,7 +4,7 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-12">
-        <ecommerce-component></ecommerce-component>
+        <ecommerce-component :categories="{{$categories}}" :contados="{{$contados}}"></ecommerce-component>
       </div>
     </div>
   </div>

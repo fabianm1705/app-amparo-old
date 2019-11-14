@@ -78,14 +78,14 @@ class UserController extends Controller
       ->route('users.index');
   }
 
-    public function getOnlyUsers(Request $request)
-    {
-      $users = User::orderBy('name','desc')
-          ->name($request->input('name'))
-          ->nroDoc($request->input('nroDoc'))
-          ->get();
+  public function getUsers(Request $request)
+  {
+    $users = User::orderBy('name','desc')
+        ->name($request->input('name'))
+        ->nroDoc($request->input('nroDoc'))
+        ->get();
 
-      return $users;
-    }
+    return view('admin.order.search', compact("users"));
+  }
 
 }

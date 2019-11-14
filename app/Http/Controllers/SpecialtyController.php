@@ -123,26 +123,7 @@ class SpecialtyController extends Controller
         ->route('specialties.index');
     }
 
-    public function getOnlySpecialties(Request $request)
-    {
-      // $specialties = Cache::remember('specialties', now()->addMonths(1), function () {
-      //     return Specialty::orderBy('descripcion','asc')->get();
-      // });
-      $specialties = DB::table('specialties')
-                            ->where([
-                                        ['vigenteOrden', '=', 1],
-                                        ['vigente', '=', 1],
-                                    ])
-                            ->orderBy('descripcion','asc')
-                            ->get();
-
-      if($request->ajax()){
-        return $specialties->toJson();
-      }
-      return $specialties;
-    }
-
-    public function getOnlyAllActiveSpecialties(Request $request)
+    public function getAllActiveSpecialties(Request $request)
     {
       $specialties = DB::table('specialties')
                             ->where('vigente', 1)

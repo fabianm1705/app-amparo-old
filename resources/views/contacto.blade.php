@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <input type="submit" class="btn btn-dark btn-send text-white" value="Enviar tu mensaje">
+                                <input type="submit" class="btn btn-success btn-send text-white" value="Enviar tu mensaje">
                             </div>
                         </div>
                         <div class="row">

@@ -25,10 +25,12 @@
 <script>
     export default {
       props: {
-        id: Number
+        id:{
+          type: Number
+        }
       },
       mounted() {
-        axios.post('getOnlyOrders/'+id)
+        axios.post('/getOnlyOrders/'+id)
         .then((resp)=>{
           this.orders=resp.data;
           console.log(this.orders);

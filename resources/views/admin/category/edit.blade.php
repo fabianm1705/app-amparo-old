@@ -15,7 +15,7 @@
             <div class="row justify-content-server">
               <div class="col-sm-12">
                 <div class="form-group">
-                  <label for="title">Nombre</label>
+                  <label for="nombre">Nombre</label>
                   <input type="text" class="form-control" name="nombre" id="nombre" value="{{ $category->nombre }}">
                 </div>
                 <div class="col-lg-6">

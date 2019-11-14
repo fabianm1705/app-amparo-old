@@ -35,7 +35,7 @@
    </style>
    @yield('myLinks')
 </head>
-<body>
+<body style="background-image: url({{ asset('images/01.jpg' )}})">
     <div id="app">
         <nav class="navbar navbar-expand-md fixed-top navbar-light bg-white shadow-sm">
             <div class="container">
@@ -59,9 +59,9 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                       @auth
-                        @can('orders.crear')
+                        @can('orders.indice')
                           <li class="nav-item active">
-                            <a class="nav-link" href="{{ route('orders.crear') }}">Ordenes</a>
+                            <a class="nav-link" href="{{ route('orders.indice') }}">Ordenes</a>
                           </li>
                         @endcan
                         @can('doctors.mostrar')
@@ -114,9 +114,11 @@
                           <a class="nav-link" href="{{ route('roles.index') }}">Roles</a>
                         </li>
                         @endcan
+                        @can('users.index')
                         <li class="nav-item active">
                           <a class="nav-link" href="{{ route('users.index') }}">Users</a>
                         </li>
+                        @endcan
                       @endauth
                         <!-- Authentication Links -->
                         @guest

@@ -43,38 +43,29 @@ Route::group(['prefix' => 'admin'], function() {
 });
 
 //Buscar socios
-Route::get('getOnlyUsers', 'OrderController@getOnlyUsers')
-              ->middleware('auth')
-              ->name('getOnlyUsers');
-Route::post('getOnlyUsersAdmin/{name?}/{nroDoc?}/', 'OrderController@getOnlyUsersAdmin')
+Route::get('users/search', 'OrderController@search')
+                    ->middleware(['auth','can:orders.create'])
+                    ->name('usersSearch');
+Route::post('search/{name?}/{nroDoc?}/', 'UserController@getUsers')
               ->middleware('auth')
               ->where(['nroDoc' => '[0-9]+'])
-              ->name('getOnlyUsersAdmin');
+              ->name('users.search');
 Route::post('getOnlyUsersNroDocAdmin/{nroDoc?}/', 'OrderController@getOnlyUsersNroDocAdmin')
               ->middleware('auth')
               ->where(['nroDoc' => '[0-9]+'])
               ->name('getOnlyUsersNroDocAdmin');
 
-Route::get('pdf', 'PDFController@invoice')
+Route::get('pdf/{id}', 'PDFController@invoice')
               ->middleware('auth')
               ->name('pdf');
 
 //Especialidades y médicos
-Route::get('doctors/mostrar', function () {
-                        return view('admin.doctor.mostrar');
-                    })
+Route::get('doctors/mostrar', 'DoctorController@mostrar')
                     ->middleware(['auth','can:doctors.mostrar'])
                     ->name('doctors.mostrar');
 Route::post('getDoctors/{id}', 'DoctorController@getDoctors')
               ->middleware('auth')
               ->name('getDoctors');
-
-Route::get('getOnlySpecialties', 'SpecialtyController@getOnlySpecialties')
-              ->middleware('auth')
-              ->name('getOnlySpecialties');
-Route::get('getOnlyAllActiveSpecialties', 'SpecialtyController@getOnlyAllActiveSpecialties')
-              ->middleware('auth')
-              ->name('getOnlyAllActiveSpecialties');
 
 //Shopping y productos
 Route::get('products/shopping', 'ProductController@shopping')
@@ -83,14 +74,17 @@ Route::get('products/shopping', 'ProductController@shopping')
 Route::get('getCategories', 'CategoryController@getCategories')
               ->middleware('auth')
               ->name('getCategories');
-Route::post('getCategory/{id}', 'ProductController@getCategory')
+Route::post('getProductsXCategory/{id}', 'ProductController@getProductsXCategory')
               ->middleware('auth')
-              ->name('getCategory');
+              ->name('getProductsXCategory');
 
 //Ordenes
 Route::get('orders/crear', 'OrderController@crear')
               ->middleware(['auth','can:orders.crear'])
               ->name('orders.crear');
+Route::get('orders/indice', 'OrderController@indice')
+              ->middleware(['auth','can:orders.indice'])
+              ->name('orders.indice');
 Route::post('getOnlyOrders/{id}', 'OrderController@getOnlyOrders')
               ->middleware('auth')
               ->name('getOnlyOrders');

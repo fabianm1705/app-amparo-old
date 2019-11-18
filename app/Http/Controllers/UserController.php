@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Caffeinated\Shinobi\Models\Role;
+use App\Http\Requests\ChangePasswordRequest;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
+use Auth;
 
 class UserController extends Controller
 {
@@ -86,6 +91,27 @@ class UserController extends Controller
         ->get();
 
     return view('admin.order.search', compact("users"));
+  }
+
+  public function editPassword()
+  {
+    return view('auth.passwords.change');
+  }
+
+  public function change(ChangePasswordRequest $request)
+  {
+    $user = Auth::user();
+    $pass = $request->input('password');
+    $password = Hash::make('$pass');
+
+    $user->password = $password;
+    $user->password_changed_at = Carbon::now();
+    $user->save();
+
+    return redirect()
+      ->route('home')
+      ->with('message','Contraseña Modificada!');
+
   }
 
 }

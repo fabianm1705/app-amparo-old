@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->nullable();
             $table->timestamp('email_verified_at')->default(now());
             $table->string('password');
+            $table->timestamp('password_changed_at')->nullable();
             $table->string('nroAdh')->nullable();
             $table->bigInteger('tipoDoc')->nullable();
             $table->bigInteger('nroDoc');

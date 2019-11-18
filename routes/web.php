@@ -95,6 +95,11 @@ Route::post('orders/store', 'OrderController@store')
               ->middleware(['auth','can:orders.store'])
               ->name('orders.store');
 
+Route::get('password/edit', 'UserController@editPassword')
+              ->name('password.edit');
+Route::post('password/change', 'UserController@change')
+              ->name('password.change');
+
 //Planes de grupo e individuales del socio
 Route::post('getPlans/{idGroup}', 'PlanController@getPlans')
               ->middleware('auth')

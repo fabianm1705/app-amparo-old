@@ -14,6 +14,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
+    <link rel="manifest" href="/manifest.json" />
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -119,6 +120,12 @@
                           <a class="nav-link" href="{{ route('users.index') }}">Users</a>
                         </li>
                         @endcan
+                        <li>
+                            <a href="#" onclick="addToHomeScreen()">
+                               <span class="uk-margin-small-right" data-uk-icon="icon: plus"></span>
+                               Instalar app en mi dispositivo
+                            </a>
+                        </li>
                       @endauth
                         <!-- Authentication Links -->
                         @guest

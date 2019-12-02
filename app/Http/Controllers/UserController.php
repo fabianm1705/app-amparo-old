@@ -101,9 +101,7 @@ class UserController extends Controller
   public function change(ChangePasswordRequest $request)
   {
     $user = Auth::user();
-    $pass = $request->input('password');
-    $password = Hash::make('$pass');
-
+    $password = Hash::make($request->input('password'));
     $user->password = $password;
     $user->password_changed_at = Carbon::now();
     $user->save();

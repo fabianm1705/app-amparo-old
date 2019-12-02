@@ -120,12 +120,14 @@
                           <a class="nav-link" href="{{ route('users.index') }}">Users</a>
                         </li>
                         @endcan
-                        <li>
-                            <a href="#" onclick="addToHomeScreen()">
+                        @can('instalar.app')
+                        <li class="nav-item active">
+                            <a href="#" onclick="addToHomeScreen()" class="nav-link">
                                <span class="uk-margin-small-right" data-uk-icon="icon: plus"></span>
-                               Instalar app en mi dispositivo
+                               Instalar
                             </a>
                         </li>
+                        @endcan
                       @endauth
                         <!-- Authentication Links -->
                         @guest

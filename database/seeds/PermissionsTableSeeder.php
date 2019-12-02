@@ -14,6 +14,12 @@ class PermissionsTableSeeder extends Seeder
     public function run()
     {
 
+      Permission::create([
+        'name' => 'Instalar App',
+        'slug' => 'instalar.app',
+        'description' => 'Permite instalar la aplicación en el dispositivo'
+      ]);
+
     //Usuarios
       Permission::create([
         'name' => 'Navegar usuarios',

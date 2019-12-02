@@ -9,33 +9,23 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
+
     public function run()
     {
-        $this->truncateTables([
-          'users',
-          'permissions',
-          'roles',
-          'products',
-          'specialties',
-          'doctors',
-          'groups',
-          'plans',
-          'layers',
-          'orders',
-          'categories',
-          'sales'
-        ]);
-        $this->call(PermissionsTableSeeder::class);
-        $this->call(SpecialtiesTableSeeder::class);
-        $this->call(DoctorsTableSeeder::class);
+      // $this->truncateTables([
+      //    'users'
+      //  ]);
+         //$this->call(PermissionsTableSeeder::class);
+        //$this->call(SpecialtiesTableSeeder::class);
+        //$this->call(DoctorsTableSeeder::class);
         $this->call(GroupsTableSeeder::class);
-        $this->call(CategoriesTableSeeder::class);
+        //$this->call(CategoriesTableSeeder::class);
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        $this->call(ProductsTableSeeder::class);
+        //$this->call(ProductsTableSeeder::class);
         $this->call(UsersTableSeeder::class);
-        $this->call(PlansTableSeeder::class);
-        $this->call(LayersTableSeeder::class);
-        $this->call(OrdersTableSeeder::class);
+        //$this->call(PlansTableSeeder::class);
+        //$this->call(LayersTableSeeder::class);
+        //$this->call(OrdersTableSeeder::class);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 

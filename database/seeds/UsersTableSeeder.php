@@ -48,9 +48,10 @@ class UsersTableSeeder extends Seeder
 
           if(utf8_encode(trim($datos[7]))=='1232'){
             $user->roles()->sync($confRoleDev);
-          }
-          if(utf8_encode(trim($datos[7]))=='1231'){
+          }elseif(utf8_encode(trim($datos[7]))=='1231'){
             $user->roles()->sync($confRoleAdmin);
+          }else{
+            $user->roles()->sync($confRoleSocio);
           }
         }
 

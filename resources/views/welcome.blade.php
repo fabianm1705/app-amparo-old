@@ -172,45 +172,46 @@
             </div>
             <div class="col-md-5 ml-auto"><br><br>
               <div class="card card-contact">
-                <form id="contactForm" role="form">
+                <form method="POST" action="{{ route('contactus.storewelcome') }}">
+                  @csrf
                   <div class="card-header card-header-raised card-header-warning text-center">
                     <h4 class="card-title">Contacto</h4>
                   </div>
                   <div class="card-body">
                     <div class="form-group label-floating is-empty">
                       <label class="">Nombre</label>
-                      <input type="text" name="nombre" id="nombre" class="form-control">
+                      <input type="text" name="name" id="name" class="form-control">
                       <span class="material-input"></span>
                     </div>
                     <div class="row">
                       <div class="col-md-8">
                         <div class="form-group label-floating is-empty">
                           <label class="">Domicilio</label>
-                          <input type="text" name="domicilio" id="domicilio" class="form-control">
+                          <input type="text" name="address" id="address" class="form-control">
                           <span class="material-input"></span>
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="form-group label-floating is-empty">
                           <label class="">Teléfono</label>
-                          <input type="text" name="telefono" id="telefono" class="form-control">
+                          <input type="text" name="telephone" id="telephone" class="form-control">
                           <span class="material-input"></span>
                         </div>
                       </div>
                     </div>
                     <div class="form-group label-floating is-empty">
                       <label class="bmd-label-floating">Email</label>
-                      <input type="email" name="correo" id="correo" class="form-control">
+                      <input type="email" name="email" id="email" class="form-control">
                       <span class="material-input"></span>
                     </div>
                     <div class="form-group label-floating is-empty">
-                      <label for="exampleMessage1" class="bmd-label-floating">Mensaje...</label>
-                      <textarea name="mensaje" class="form-control" id="mensaje" rows="3"></textarea>
+                      <label for="message" class="bmd-label-floating">Mensaje...</label>
+                      <textarea name="message" class="form-control" id="message" rows="3"></textarea>
                       <span class="material-input"></span>
                     </div>
                   </div>
                   <div class="card-footer right-content">
-                    <button type="submit" class="btn btn-warning pull-right" id="form-submit">Enviar Mensaje</button>
+                    <button type="submit" class="btn btn-warning pull-right" id="form-submit" onclick="alert('Gracias por el mensaje! nos contactaremos a la brevedad.');">Enviar Mensaje</button>
                   </div>
                 </form>
               </div>

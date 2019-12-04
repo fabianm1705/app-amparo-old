@@ -133,7 +133,6 @@ class DoctorController extends Controller
     {
       $specialties = DB::table('specialties')
                             ->where([
-                                        ['vigenteOrden', '=', 1],
                                         ['vigente', '=', 1],
                                     ])
                             ->orderBy('descripcion','asc')

@@ -108,7 +108,6 @@ class ProductController extends Controller
       $product->montoCuota = $request->input('montoCuota');
       $product->cantidadCuotas = $request->input('cantidadCuotas');
       $product->vigente = $request->input('vigente');
-      $product->image_url = $request->input('image_url');
 
       $product->save();
 

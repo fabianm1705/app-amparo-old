@@ -52,7 +52,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-      $category->create($request->all());
+      $category = new Category();
+      $category->nombre = $request->input('nombre');
+      $category->activa = $request->input('activa');
+
+      $category->save();
 
       return redirect()
         ->route('categories.show',['category' => $category])
@@ -90,7 +94,10 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-      $category->update($request->all());
+      $category->nombre = $request->input('nombre');
+      $category->activa = $request->input('activa');
+
+      $category->save();
 
       return redirect()
         ->route('categories.show',['category' => $category])

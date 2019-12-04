@@ -59,6 +59,11 @@ Route::get('pdf/{id}', 'PDFController@invoice')
               ->middleware('auth')
               ->name('pdf');
 
+Route::get('asignar/roles', 'UserController@asignarRoles')
+                    ->name('asignar.roles');
+Route::get('restablecer/password', 'UserController@restablecerPassword')
+                    ->name('users.restablecerPassword');
+
 //Especialidades y médicos
 Route::get('doctors/mostrar', 'DoctorController@mostrar')
                     ->middleware(['auth','can:doctors.mostrar'])
@@ -112,9 +117,16 @@ Route::post('getLayers/{id}', 'LayerController@getLayers')
 Route::get('otros', function () {return view('otros');})
               ->middleware(['auth','can:otros'])
               ->name('otros');
-Route::get('contacto', 'ContactoController@index')
+
+Route::get('contact-us', 'ContactUsController@contactUs')
               ->middleware(['auth','can:contacto'])
               ->name('contacto');
-Route::post('/enviar', 'ContactoController@enviar')
-              ->middleware('auth')
-              ->name('enviar');
+Route::post('contact-us',[
+              'as'=>'contactus.store',
+              'uses'=>'ContactUsController@contactUsPost'
+              ])->middleware('auth');
+
+Route::post('/',[
+              'as'=>'contactus.storewelcome',
+              'uses'=>'ContactUsController@contactUsWelcome'
+              ]);

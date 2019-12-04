@@ -109,7 +109,20 @@ class UserController extends Controller
     return redirect()
       ->route('home')
       ->with('message','Contraseña Modificada!');
-
   }
 
+  public function restablecerPassword(User $user)
+  {
+    $year = 0;
+    $month = 0;
+    $day = 0;
+    $tz = 'Europe/Madrid';
+    $user->password = Hash::make('amparo');
+    $user->password_changed_at = Carbon::createFromDate($year, $month, $day, $tz);
+    $user->save();
+
+    return redirect()
+      ->route('users')
+      ->with('message','Contraseña Restablecida!');
+  }
 }

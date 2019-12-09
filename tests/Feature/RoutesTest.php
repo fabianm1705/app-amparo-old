@@ -2,16 +2,12 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\User;
-use App\Models\Specialty;
 
 class RoutesTest extends TestCase
 {
-     use RefreshDatabase;
-
      public function test_route_welcome()
      {
          $response = $this->get('/');
@@ -26,8 +22,7 @@ class RoutesTest extends TestCase
 
      public function test_route_home()
      {
-         $user = new User;
-         $response = $this->actingAs($user)->get(route('home'));
+         $response = $this->actingAs($this->defaultUser)->get(route('home'));
          $response->assertStatus(200);
      }
 
@@ -91,15 +86,6 @@ class RoutesTest extends TestCase
          $user = new User;
          $response = $this->actingAs($user)
                           ->get(route('users.index'))
-                          ->assertStatus(403);
-     }
-
-     public function test_specialties_edit_forbbiden()
-     {
-         $user = User::first();
-         $specialty = Specialty::first();
-         $response = $this->actingAs($user)
-                          ->get(route('specialties.edit',['specialty' => $specialty]))
                           ->assertStatus(403);
      }
 }

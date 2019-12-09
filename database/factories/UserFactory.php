@@ -30,7 +30,7 @@ $factory->define(User::class, function (Faker $faker) {
         'fechaNac' => $faker->date($format = 'Y-m-d', $max = 'now'),
         'activo' => 1,
         'vigenteOrden' => 1,
-        'group_id' => $faker->numberBetween(1,$count),
+        'group_id' => 1,
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         'remember_token' => Str::random(10),
     ];

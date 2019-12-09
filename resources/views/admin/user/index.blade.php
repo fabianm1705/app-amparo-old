@@ -29,11 +29,6 @@
                   <td>{{ $user->email }}</td>
                   <td>{{ $user->group->direccion }}</td>
                   <td class="text-right d-flex">
-                    <a href="{{ route('users.restablecerPassword', ['user' => $user ]) }}" title="Restablecer Contraseña" class="">
-                      <div class="">
-                        <i class="material-icons">autorenew</i>
-                      </div>
-                    </a>&nbsp;
                     @can('users.show')
                       <a href="{{ route('users.show', ['user' => $user ]) }}" title="Ver Socio" class="">
                         <div class="">

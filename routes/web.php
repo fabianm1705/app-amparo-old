@@ -61,8 +61,6 @@ Route::get('pdf/{id}', 'PDFController@invoice')
 
 Route::get('asignar/roles', 'UserController@asignarRoles')
                     ->name('asignar.roles');
-Route::get('restablecer/password', 'UserController@restablecerPassword')
-                    ->name('users.restablecerPassword');
 
 //Especialidades y médicos
 Route::get('doctors/mostrar', 'DoctorController@mostrar')

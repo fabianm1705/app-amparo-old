@@ -60,7 +60,15 @@ class UserController extends Controller
    */
   public function update(Request $request, User $user)
   {
-    $user->update($request->all());
+    $user->name = $request->input('name');
+    $user->nroDoc = $request->input('nroDoc');
+    $user->fechaNac = $request->input('fechaNac');
+    $user->email = $request->input('email');
+    if($request->input('restablecerPassword')){
+      $user->password = Hash::make('amparo');
+      $user->password_changed_at = null;
+    }
+    $user->save();
 
     $user->roles()->sync($request->input('roles'));
 
@@ -111,14 +119,14 @@ class UserController extends Controller
       ->with('message','Contraseña Modificada!');
   }
 
-  public function restablecerPassword(User $user)
+  public function restablecerPassword(Request $request, User $user)
   {
     $year = 0;
     $month = 0;
     $day = 0;
     $tz = 'Europe/Madrid';
     $user->password = Hash::make('amparo');
-    $user->password_changed_at = Carbon::createFromDate($year, $month, $day, $tz);
+    $user->password_changed_at = null;
     $user->save();
 
     return redirect()

@@ -23,7 +23,7 @@ class UserController extends Controller
 
   public function index()
   {
-    $users = User::paginate();
+    $users = User::orderBy('name')->paginate();
     return view('admin.user.index',compact("users"));
   }
 
@@ -96,9 +96,13 @@ class UserController extends Controller
     $users = User::orderBy('name','desc')
         ->name($request->input('name'))
         ->nroDoc($request->input('nroDoc'))
-        ->get();
+        ->paginate();
 
-    return view('admin.order.search', compact("users"));
+    if($request->input('desdeDonde')=="Usuarios"){
+      return view('admin.user.index', compact("users"));
+    }else{
+      return view('admin.order.search', compact("users"));
+    }
   }
 
   public function editPassword()

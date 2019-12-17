@@ -17,7 +17,11 @@ class GroupsTableSeeder extends Seeder
       foreach ($lineas as $linea)
       {
         $datos = explode("|", $linea);
-        $group = new Group();
+        $group = Group::where('nroSocio', '=', utf8_encode(trim($datos[0])))
+                                  ->get()->first();
+        if (is_null($group)) {
+          $group = new Group();
+        }
         $group->nroSocio = utf8_encode(trim($datos[0]));
         $group->fechaAlta = utf8_encode(trim($datos[1]));
         $group->email=utf8_encode(trim($datos[2]));
@@ -27,7 +31,7 @@ class GroupsTableSeeder extends Seeder
         $group->diaCobro = Str::lower(utf8_encode(trim($datos[6])));
         $group->horaCobro = Str::lower(utf8_encode(trim($datos[7])));
         $group->total = intval(trim($datos[8]));
-        $group->activo=1;
+        $group->activo=intval(trim($datos[9]));
         $group->save();
       }
     }

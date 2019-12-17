@@ -50,10 +50,7 @@ Route::post('search/{name?}/{nroDoc?}/', 'UserController@getUsers')
               ->middleware('auth')
               ->where(['nroDoc' => '[0-9]+'])
               ->name('users.search');
-Route::post('getOnlyUsersNroDocAdmin/{nroDoc?}/', 'OrderController@getOnlyUsersNroDocAdmin')
-              ->middleware('auth')
-              ->where(['nroDoc' => '[0-9]+'])
-              ->name('getOnlyUsersNroDocAdmin');
+
 
 Route::get('pdf/{id}', 'PDFController@invoice')
               ->middleware('auth')
@@ -94,9 +91,6 @@ Route::post('getOnlyOrders/{id}', 'OrderController@getOnlyOrders')
 Route::post('cantOrders/{id}', 'OrderController@cantOrders')
               ->middleware('auth')
               ->name('cantOrders');
-Route::post('orders/store', 'OrderController@store')
-              ->middleware(['auth','can:orders.store'])
-              ->name('orders.store');
 
 Route::get('password/edit', 'UserController@editPassword')
               ->name('password.edit');

@@ -7,6 +7,25 @@
       <div class="card shadow-sm">
         <div class="card-header bgOrange d-flex">
           <h5 class="card-title text-white">Socios</h5>
+          <div class="ml-auto">
+            <form action="{{ route('users.search') }}" method="post">
+                @csrf
+                <input type="hidden" class="form-control" id="desdeDonde" name="desdeDonde" value="Usuarios">
+                <div class="row">
+                  <div class="col-md-5">
+                    <input type="text" class="form-control mb-1" id="name" name="name" placeholder="Nombre" autocomplete="off">
+                  </div>
+                  <div class="col-md-5">
+                    <input type="text" class="form-control mb-2" id="nroDoc" name="nroDoc" placeholder="Documento" autocomplete="off">
+                  </div>
+                  <div class="col-md-2">
+                    <button class="btn btn-success" type="submit">
+                      <i class="material-icons">search</i>
+                    </button>
+                  </div>
+                </div>
+            </form>
+          </div>
         </div>
         <div class="card-body centrado">
           <table class="table table-hover table-sm table-responsive">

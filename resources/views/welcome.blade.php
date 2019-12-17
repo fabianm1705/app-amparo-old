@@ -164,7 +164,7 @@
                 <div class="description">
                   <h4 class="info-title">Llamanos</h4>
                   <p> Leonela o Fabián
-                    <br> Fijo: 4235108, Whatsapp: 154-057991,
+                    <br> Fijo: 4235108, Whatsapp: 155-508247,
                     <br> Lun - Vie, 8:30-18:00
                   </p>
                 </div>

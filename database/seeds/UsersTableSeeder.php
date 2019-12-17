@@ -26,10 +26,14 @@ class UsersTableSeeder extends Seeder
         foreach ($lineas as $linea)
         {
           $datos = explode("|", $linea);
-          $user = new User();
+          $user = User::where('name', '=', Str::title(utf8_encode(trim($datos[1]))))
+                                    ->get()->first();
+          if (is_null($user)) {
+            $user = new User();
+            $user->password = Hash::make('amparo');
+          }
           $user->nroAdh = utf8_encode(trim($datos[0]));
           $user->name = Str::title(utf8_encode(trim($datos[1])));
-          $user->password = Hash::make('amparo');
           $user->nroDoc = str_replace(".","",utf8_encode(trim($datos[2])));
           $user->tipoDoc=1;
           $time = strtotime($datos[3]);
@@ -40,19 +44,12 @@ class UsersTableSeeder extends Seeder
 
           $group = Group::where('nroSocio', '=', utf8_encode(trim($datos[7])))
                                     ->get()->first();
-          if ($group != null) {
+          if (isset($group)) {
             $user->group_id=$group->id;
           }
 
           $user->save();
-
-          if(utf8_encode(trim($datos[7]))=='1232'){
-            $user->roles()->sync($confRoleDev);
-          }elseif(utf8_encode(trim($datos[7]))=='1231'){
-            $user->roles()->sync($confRoleAdmin);
-          }else{
-            $user->roles()->sync($confRoleSocio);
-          }
+          $user->roles()->sync($confRoleSocio);
         }
 
     }

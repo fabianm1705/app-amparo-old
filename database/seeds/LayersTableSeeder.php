@@ -23,9 +23,11 @@ class LayersTableSeeder extends Seeder
         $layer->emiteOrden = intval(trim($datos[5]));
 
         $user = User::where('name', '=', utf8_encode(trim($datos[4])))
-                                  ->get()->first();
-        if ($user != null) {
-          $layer->user_id=$user->id;
+                      ->get()->first();
+        if (isset($user)) {
+          if($user->group->nroSocio==utf8_encode(trim($datos[0]))){
+            $layer->user_id=$user->id;
+          }
         }
 
         $layer->save();

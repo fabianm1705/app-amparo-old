@@ -57,11 +57,12 @@
     </div>
   </div>
 </div>
-<div class="container"><br>
+<div class="container">
     <div class="text-center">
       Oficina Cura Alvarez 615, Paraná, Entre Ríos<br>
       Horario: Lunes a Viernes 8:30 a 18:00hs<br>
       Teléfonos Útiles<br>
+      Whatsapp: 155-508247<br>
       Sepelio: 4235108 / 154-057991<br>
       SOS Emergencias: 4222322 / 4233333<br>
       www.amparosrl.com.ar

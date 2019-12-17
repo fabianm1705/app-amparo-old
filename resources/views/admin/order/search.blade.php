@@ -11,6 +11,7 @@
             </h4>
             <form action="{{ route('users.search') }}" method="post">
                 @csrf
+                <input type="hidden" class="form-control" id="desdeDonde" name="desdeDonde" value="Ordenes">
                 <input type="text" class="form-control mb-1" id="name" name="name" placeholder="Nombre" autocomplete="off">
                 <input type="text" class="form-control mb-2" id="nroDoc" name="nroDoc" placeholder="Documento" autocomplete="off">
                 <button class="btn btn-success btn-block" type="submit">
@@ -46,6 +47,7 @@
                 @endforeach
               </tbody>
             </table>
+            {{ $users->links() }}
           </div>
           <div class="col-md-6">
             <orders-old-component :id="5"></orders-old-component>

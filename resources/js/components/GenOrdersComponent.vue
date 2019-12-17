@@ -115,7 +115,6 @@
               }
             };
             if(this.habilitaBtnOrden==false){
-              console.log("volvio a false");
               axios.post('/getLayers/'+id)
                 .then((resp)=>{
                   this.layers=resp.data;

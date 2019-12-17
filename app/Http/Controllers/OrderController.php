@@ -19,7 +19,7 @@ class OrderController extends Controller
       $this->middleware('can:orders.show')->only('show');
       $this->middleware('can:orders.destroy')->only('destroy');
       $this->middleware('can:orders.edit')->only(['edit','update']);
-      $this->middleware('can:orders.create')->only(['create','store']);
+      $this->middleware('can:orders.create')->only(['create']);
     }
     /**
      * Display a listing of the resource.
@@ -167,35 +167,8 @@ class OrderController extends Controller
 
     public function search(Request $request)
     {
-      $users = User::where('group_id',-1)->get();
+      $users = User::where('group_id',-1)->paginate();
       return view('admin.order.search',compact("users"));
-    }
-
-    public function getOnlyOrders($id)
-    {
-      $orders = Order::with('doctor')
-          ->where('pacient_id', '=', $id)
-          ->get();
-      return $orders;
-    }
-
-    public function getOnlyUsersAdmin($name,$nroDoc = "")
-    {
-      $users = User::with('group')
-          ->orderBy('name','desc')
-          ->name($name)
-          ->nroDoc($nroDoc)
-          ->get();
-      return $users;
-    }
-
-    public function getOnlyUsersNroDocAdmin($nroDoc)
-    {
-      $users = User::with('group')
-          ->orderBy('name','desc')
-          ->nroDoc($nroDoc)
-          ->get();
-      return $users;
     }
 
     public function cantOrders($id)

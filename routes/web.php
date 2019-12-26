@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+Route::get('/admin/product/cart', function () {
+    return view('/admin/product/cart');
+})->name('cart');
+
 Route::get('about', function () {
     return view('about');
 })->name('about');
@@ -37,12 +41,18 @@ Route::group(['prefix' => 'admin'], function() {
               ->middleware('auth');
   Route::resource('roles', 'RoleController')
               ->middleware('auth');
+  Route::resource('payment_methods', 'PaymentMethodController')
+              ->except('show')
+              ->middleware('auth');
   Route::resource('users', 'UserController')
               ->except(['store','create'])
               ->middleware('auth');
 });
 
 //Buscar socios
+Route::get('odontologia', 'UserController@odontologia')
+                    ->middleware(['auth','can:odontologia'])
+                    ->name('odontologia');
 Route::get('users/search', 'OrderController@search')
                     ->middleware(['auth','can:orders.create'])
                     ->name('usersSearch');

@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
           'layers',
           'plans'
         ]);
-         //$this->call(PermissionsTableSeeder::class);
+        //$this->call(PermissionsTableSeeder::class);
         //$this->call(SpecialtiesTableSeeder::class);
         //$this->call(DoctorsTableSeeder::class);
         $this->call(GroupsTableSeeder::class);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\ShoppingCart;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\DB;
@@ -25,9 +26,14 @@ class ProductController extends Controller
      */
     public function index()
     {
+      $sessionName = 'shopping_cart_id';
+      $shopping_cart_id = $request->session()->get($sessionName);
+      $shopping_cart = ShoppingCart::findOrCreateById($shopping_cart_id);
+      $request->session()->put($sessionName, $shopping_cart->id);
+
       $categories = Category::orderBy('nombre','asc')->get();
       $products = Product::all();
-      return view('admin.product.index',compact("products","categories"));
+      return view('admin.product.index',compact("products","categories","shopping_cart"));
     }
 
     /**

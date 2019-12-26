@@ -14,14 +14,19 @@ class PermissionsTableSeeder extends Seeder
     public function run()
     {
         Permission::create([
-          'name' => 'Farmacia Nueva Farma',
-          'slug' => 'Farmacia',
-          'description' => 'Acceso Padrón Farmacia'
+          'name' => 'Navegar Métodos de Pago',
+          'slug' => 'payment_methods.index',
+          'description' => 'Navega todos los métodos de pago'
         ]);
         Permission::create([
-          'name' => 'Padrón SOS Emergencias',
-          'slug' => 'sos.emergencias',
-          'description' => 'Padrón SOS Emergencias'
+          'name' => 'Editar Métodos de Pago',
+          'slug' => 'payment_methods.edit',
+          'description' => 'Editar un método de pago'
+        ]);
+        Permission::create([
+          'name' => 'Eliminar Métodos de Pago',
+          'slug' => 'payment_methods.destroy',
+          'description' => 'Eliminar un método de pago'
         ]);
 
     }

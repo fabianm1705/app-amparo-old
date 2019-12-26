@@ -137,4 +137,10 @@ class UserController extends Controller
       ->route('users')
       ->with('message','Contraseña Restablecida!');
   }
+
+  public function odontologia()
+  {
+    $users = User::orderBy('name')->paginate();
+    return view('admin.user.odontologia',compact("users"));
+  }
 }

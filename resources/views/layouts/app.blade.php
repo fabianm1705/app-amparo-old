@@ -54,7 +54,36 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                      @auth
+                        @can('orders.index')
+                          <div class="dropdown">
+                            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Administración
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <a class="dropdown-item" href="{{ route('orders.index') }}">Orders</a>
+                              @can('doctors.index')
+                                <a class="dropdown-item" href="{{ route('doctors.index') }}">Doctors</a>
+                              @endcan
+                              @can('categories.index')
+                                <a class="dropdown-item" href="{{ route('categories.index') }}">Categoríes</a>
+                              @endcan
+                              @can('products.index')
+                                <a class="dropdown-item" href="{{ route('products.index') }}">Products</a>
+                              @endcan
+                              @can('roles.index')
+                                <a class="dropdown-item" href="{{ route('roles.index') }}">Roles</a>
+                              @endcan
+                              @can('users.index')
+                                <a class="dropdown-item" href="{{ route('users.index') }}">Users</a>
+                              @endcan
+                              @can('payment_methods.index')
+                                <a class="dropdown-item" href="{{ route('payment_methods.index') }}">Payment Methods</a>
+                              @endcan
+                            </div>
+                          </div>
+                        @endcan
+                      @endauth
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -85,39 +114,9 @@
                             <a class="nav-link" href="{{ route('contacto') }}">Contacto</a>
                           </li>
                         @endcan
-                        @can('orders.index')
-                          <li class="nav-item active">
-                            <a class="nav-link" href="{{ route('orders.index') }}">Orders</a>
-                          </li>
-                        @endcan
-                        @can('specialties.index')
-                          <li class="nav-item active">
-                            <a class="nav-link" href="{{ route('specialties.index') }}">Specialties</a>
-                          </li>
-                        @endcan
-                        @can('doctors.index')
-                          <li class="nav-item active">
-                            <a class="nav-link" href="{{ route('doctors.index') }}">Doctors</a>
-                          </li>
-                        @endcan
-                        @can('categories.index')
-                          <li class="nav-item active">
-                            <a class="nav-link" href="{{ route('categories.index') }}">Categoríes</a>
-                          </li>
-                        @endcan
-                        @can('products.index')
-                          <li class="nav-item active">
-                            <a class="nav-link" href="{{ route('products.index') }}">Products</a>
-                          </li>
-                        @endcan
-                        @can('roles.index')
+                        @can('odontologia')
                         <li class="nav-item active">
-                          <a class="nav-link" href="{{ route('roles.index') }}">Roles</a>
-                        </li>
-                        @endcan
-                        @can('users.index')
-                        <li class="nav-item active">
-                          <a class="nav-link" href="{{ route('users.index') }}">Users</a>
+                          <a class="nav-link" href="{{ route('odontologia') }}">Odontología</a>
                         </li>
                         @endcan
                         @can('instalar.app')

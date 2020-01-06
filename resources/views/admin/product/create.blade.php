@@ -36,6 +36,10 @@
                 </div>
               </div>
               <div class="form-group">
+                <label for="empresa">Empresa</label>
+                <input type="text" class="form-control" name="empresa" id="empresa" value="{{ old('empresa') }}">
+              </div>
+              <div class="form-group">
                 <label for="descripcion">Descripción</label>
                 <input type="text" class="form-control" name="descripcion" id="descripcion" value="{{ old('descripcion') }}">
               </div>

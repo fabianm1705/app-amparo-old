@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-md-3">
 
-    <ul class="list-group shadow-sm">
+    <ul class="list-group">
       <li class="list-group-item d-flex justify-content-between align-items-center">
         <div class="radio-inline">
             <label>
@@ -42,6 +42,18 @@
             <div class="card-description" style="height: 70px;overflow:auto;"><small>{{ product.descripcion }}</small></div>
           </div>
           <h5 class="card-title text-center"><small>{{ product.cantidadCuotas }} cuotas de $</small>{{ product.montoCuota }}</h5>
+          <div class="row">
+            <div class="col-sm-5">
+              <add-to-cart-component :product="product"></add-to-cart-component>
+            </div>
+            <div class="col-sm-7 justify-content-end">
+              <button @click="goToCart(product.id)"
+                    class="btn btn-sm btn-outline-success"
+                    type="submit"
+                    name="button"><a href="/carrito" style="text-decoration:none;color:black;">Comprar</a>
+              </button>
+            </div>
+          </div>
         </div><br>
       </div>
     </div>
@@ -54,12 +66,9 @@
 <script>
     export default {
       props: {
-        categories:{
-          type: Array
-        },
-        contados:{
-          type: Array
-        }
+        categories:{ type: Array },
+        product:{ type: Object },
+        contados:{ type: Array }
       },
       data: function(){
         return{
@@ -84,6 +93,13 @@
           }
         },
       methods:{
+        goToCart(product_id){
+          axios.post('/in_shopping_carts/'+product_id)
+            .then(()=>{
+              console.log('Producto agregado');
+              this.$store.commit('increment');
+            })
+        },
         getProductsXCategory(){
           var radios=document.getElementsByName('categorias');
           var i;

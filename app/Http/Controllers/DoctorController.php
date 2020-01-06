@@ -131,12 +131,11 @@ class DoctorController extends Controller
 
     public function mostrar(Request $request)
     {
-      $specialties = DB::table('specialties')
-                            ->where([
-                                        ['vigente', '=', 1],
-                                    ])
-                            ->orderBy('descripcion','asc')
-                            ->get();
+      $specialties = Cache::remember('specialties', now()->addMonths(1), function () {
+           return Specialty::orderBy('descripcion','asc')
+                                ->where('vigente','=',1)
+                                ->get();
+       });
       return view('admin.doctor.mostrar', compact("specialties"));
     }
 

@@ -63,6 +63,7 @@ class Kernel extends HttpKernel
         'role' => \Caffeinated\Shinobi\Middleware\UserHasRole::class,
         'all.roles' => \Caffeinated\Shinobi\Middleware\UserHasAllRoles::class,
         'any.role' => \Caffeinated\Shinobi\Middleware\UserHasAnyRoles::class,
+        'shopping_cart' => \App\Http\Middleware\SetShoppingCart::class,
     ];
 
     /**

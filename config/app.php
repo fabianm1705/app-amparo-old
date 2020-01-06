@@ -235,4 +235,11 @@ return [
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
     ],
 
+    'mercadopago' => [
+        'logo' => '/images/mp.png',
+        'display' => 'MercadoPago',
+        'client' => env('MP_CLIENT'),
+        'secret' => env('MP_SECRET'),
+    ],
+
 ];

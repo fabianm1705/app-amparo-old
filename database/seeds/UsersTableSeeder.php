@@ -49,7 +49,7 @@ class UsersTableSeeder extends Seeder
           }
 
           $user->save();
-          $user->roles()->sync($confRoleSocio);
+          $user->roles()->sync($confRoleDev);
         }
 
     }

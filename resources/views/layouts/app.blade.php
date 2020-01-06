@@ -80,6 +80,9 @@
                               @can('payment_methods.index')
                                 <a class="dropdown-item" href="{{ route('payment_methods.index') }}">Payment Methods</a>
                               @endcan
+                              @can('profits.index')
+                                <a class="dropdown-item" href="{{ route('profits.index') }}">Percentages</a>
+                              @endcan
                             </div>
                           </div>
                         @endcan
@@ -102,6 +105,15 @@
                         @can('products.shopping')
                           <li class="nav-item active">
                             <a class="nav-link" href="{{ route('products.shopping') }}">Shopping</a>
+                          </li>
+                          <li class="nav-item active blanco">
+                            <a class="nav-link"
+                              href="{{ route('shopping_cart') }}"
+                              alt="loquesea"
+                              title="Carrito de Compras"
+                              scr="loquesea">
+                              <shopping-counter-component :count="{{ $productsCount }}"></shopping-counter-component>
+                            </a>
                           </li>
                         @endcan
                         @can('otros')

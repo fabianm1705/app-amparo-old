@@ -15,10 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('/admin/product/cart', function () {
-    return view('/admin/product/cart');
-})->name('cart');
-
 Route::get('about', function () {
     return view('about');
 })->name('about');
@@ -41,6 +37,8 @@ Route::group(['prefix' => 'admin'], function() {
               ->middleware('auth');
   Route::resource('roles', 'RoleController')
               ->middleware('auth');
+  Route::resource('profits', 'ProfitController')
+              ->middleware('auth');
   Route::resource('payment_methods', 'PaymentMethodController')
               ->except('show')
               ->middleware('auth');
@@ -48,6 +46,23 @@ Route::group(['prefix' => 'admin'], function() {
               ->except(['store','create'])
               ->middleware('auth');
 });
+
+Route::get('/carrito', 'ShoppingCartController@show')
+              ->middleware('auth')
+              ->name('shopping_cart');
+Route::get('/carrito/productos', 'ShoppingCartController@products')
+              ->middleware('auth')
+              ->name('shopping_cart.products');
+Route::get('/pagar', 'ShoppingCartController@iniciarProcesoPago')->name('payment.pay');
+
+
+Route::post('in_shopping_carts/{product_id}', 'ProductInShoppingCartsController@store')
+              ->middleware('auth')
+              ->name('in_shopping_carts');
+Route::delete('in_shopping_carts', 'ProductInShoppingCartsController@destroy')
+              ->middleware('auth')
+              ->name('in_shopping_carts.destroy');
+
 
 //Buscar socios
 Route::get('odontologia', 'UserController@odontologia')

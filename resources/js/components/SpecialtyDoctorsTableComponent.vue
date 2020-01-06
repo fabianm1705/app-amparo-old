@@ -32,14 +32,10 @@
 
 <script>
     export default {
-      props: {
-        specialties:{
-          type: Array
-        }
-      },
+      props: { specialties:{ type: Array } },
       data: function(){
         return{
-          doctors: [{apeynom:'Seleccione especialidad...', direccion:'',telefono:''}],
+          doctors: [{apeynom:'...', direccion:'',telefono:''}],
         }
       },
       methods:{

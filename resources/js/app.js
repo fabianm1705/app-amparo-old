@@ -8,6 +8,22 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+const Vuex = require('vuex');
+
+const store = new Vuex.Store({
+    state:{
+      productsCount: 0
+    },
+    mutations:{
+      increment(state){
+        return state.productsCount++
+      },
+      set(state, value){
+        return state.productsCount = value
+      }
+    }
+})
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -18,11 +34,11 @@ window.Vue = require('vue');
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('specialty-doctors-table-component', require('./components/SpecialtyDoctorsTableComponent.vue').default);
+Vue.component('add-to-cart-component', require('./components/AddToCartComponent.vue').default);
+Vue.component('shopping-counter-component', require('./components/ShoppingCounterComponent.vue').default);
 Vue.component('ecommerce-component', require('./components/EcommerceComponent.vue').default);
-Vue.component('card-ecommerce-component', require('./components/CardEcommerceComponent.vue').default);
-Vue.component('card-big-ecommerce-component', require('./components/CardBigEcommerceComponent.vue').default);
+Vue.component('products-in-cart-component', require('./components/ProductsInCartComponent.vue').default);
 Vue.component('gen-orders-component', require('./components/GenOrdersComponent.vue').default);
 Vue.component('orders-old-component', require('./components/OrdersOldComponent.vue').default);
 
@@ -34,6 +50,7 @@ Vue.component('orders-old-component', require('./components/OrdersOldComponent.v
 
 const app = new Vue({
     el: '#app',
+    store
 });
 
 

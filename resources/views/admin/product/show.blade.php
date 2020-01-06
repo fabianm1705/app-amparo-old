@@ -28,6 +28,10 @@
                 <input type="text" class="form-control" name="modelo" id="modelo" value="{{ $product->modelo }}">
               </div>
               <div class="form-group">
+                <label for="empresa">Empresa</label>
+                <input type="text" class="form-control" name="empresa" id="empresa" value="{{ $product->empresa }}">
+              </div>
+              <div class="form-group">
                 <label for="descripcion">Descripción</label>
                 <input type="text" class="form-control" name="descripcion" id="descripcion" value="{{ $product->descripcion }}">
               </div>
@@ -51,6 +55,9 @@
                     <label class="form-check-label" for="vigente">Activo</label>
                   </div>
                 </div>
+              </div>
+              <div class="form-group">
+                <add-to-cart-component :product="{{$product}}"></add-to-cart-component>
               </div>
             </div>
           </div>

@@ -8,7 +8,6 @@
         <div class="card-header bgOrange d-flex">
           <h5 class="card-title text-white">Productos</h5>
           <div class="ml-auto blanco">
-            {{ $shopping_cart->id }}
             @can('products.create')
               <a href="{{ route('products.create') }}" title="Nuevo">
                 Agregar Nuevo

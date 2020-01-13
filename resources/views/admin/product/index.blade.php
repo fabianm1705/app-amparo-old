@@ -21,8 +21,7 @@
               <th>Categoría</th>
               <th>Modelo</th>
               <th>Descripcion</th>
-              <th class="text-center">Monto</th>
-              <th class="text-center">Cant.</th>
+              <th class="text-center">Costo</th>
               <th class="text-center">Activo</th>
               <th class="text-center">Acciones</th>
             </thead>
@@ -32,8 +31,7 @@
                   <td>{{ $product->category->nombre }}</td>
                   <td>{{ $product->modelo }}</td>
                   <td class="text-justify">{{ $product->descripcion }}</td>
-                  <td class="text-center">${{ $product->montoCuota }}</td>
-                  <td class="text-center">{{ $product->cantidadCuotas }}</td>
+                  <td class="text-center">${{ $product->costo }}</td>
                   <td class="text-center">
                     <input type="checkbox" class="form-check-input" id="vigente" name="vigente" disabled value="1" {{ $product->vigente ? 'checked="checked"' : '' }}>
                   </td>

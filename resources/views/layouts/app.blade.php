@@ -23,6 +23,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app-amparo.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" rel="stylesheet">
     <style media="screen">
         @font-face {
             font-family: 'iProton';
@@ -109,10 +110,8 @@
                           <li class="nav-item active blanco">
                             <a class="nav-link"
                               href="{{ route('shopping_cart') }}"
-                              alt="loquesea"
-                              title="Carrito de Compras"
-                              scr="loquesea">
-                              <shopping-counter-component :count="{{ $productsCount }}"></shopping-counter-component>
+                              title="Carrito de Compras">
+                              <cart-counter-component :count="{{ $productsCount }}"></cart-counter-component>
                             </a>
                           </li>
                         @endcan
@@ -181,13 +180,13 @@
             <div class="row justify-content-center">
               <div class="col-md-8">
                 @if(Session::has('message'))
-                  <div class="container alert alert-success">
+                  <div class="container alert alert-success animated fadeOut delay-3s">
                     {{ Session::get('message') }}
                   </div>
                 @endif
 
                 @if($errors->any())
-                  <div class="container alert alert-danger">
+                  <div class="container alert alert-danger animated fadeOut delay-3s">
                     <ul>
                       @foreach($errors->all() as $error)
                         <li>{{ $error }}</li>

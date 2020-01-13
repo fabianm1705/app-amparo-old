@@ -3,61 +3,76 @@
 @section('content')
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-10">
       <div class="card shadow-sm"><br>
-        <header class="centrado">
-          <h4>Ver Celular</h4>
-        </header>
         <div class="card-body">
-          <div class="row justify-content-server">
-            <div class="col-sm-12">
-              <div class="form-group">
-                <label for="content">Categoría</label>
-                <select class="custom-select" name="category_id" id="category_id">
-                  @foreach($categories as $category)
-                    @if($product->category_id == $category->id)
-                      <option selected value="{{ $category->id }}">{{ $category->nombre }}</option>
-                    @else
-                      <option value="{{ $category->id }}">{{ $category->nombre }}</option>
-                    @endif
-                  @endforeach
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="modelo">Modelo</label>
-                <input type="text" class="form-control" name="modelo" id="modelo" value="{{ $product->modelo }}">
-              </div>
-              <div class="form-group">
-                <label for="empresa">Empresa</label>
-                <input type="text" class="form-control" name="empresa" id="empresa" value="{{ $product->empresa }}">
-              </div>
-              <div class="form-group">
-                <label for="descripcion">Descripción</label>
-                <input type="text" class="form-control" name="descripcion" id="descripcion" value="{{ $product->descripcion }}">
-              </div>
-              <div class="row d-flex">
-                <div class="col-lg-4">
+          <div class="row">
+            <div class="col-md-7 col-sm-12">
+              <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                  <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="{{ asset('images/imagen.jpg') }}" class="d-block w-100" alt="...">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="{{ asset('images/imagen.jpg') }}" class="d-block w-100" alt="...">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="{{ asset('images/imagen.jpg') }}" class="d-block w-100" alt="...">
+                  </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Anterior</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Siguiente</span>
+                </a>
+              </div>            </div>
+            <div class="col-md-5 col-sm-12">
+              <header class="centrado">
+                <h4>{{ $product->modelo }}<small> - by {{ $product->empresa }}</small></h4>
+              </header>
+              <div class="row justify-content-server">
+                <div class="col-sm-12">
                   <div class="form-group">
-                    <label for="montoCuota">Monto Cuota</label>
-                    <input type="text" class="form-control" name="montoCuota" id="montoCuota" value="{{ $product->montoCuota }}">
+                    <label for="content">{{ $product->category->nombre }}</label>
                   </div>
-                </div>
-                <div class="col-lg-4">
                   <div class="form-group">
-                    <label for="cantidadCuotas">Cant. Cuotas</label>
-                    <input type="text" class="form-control" name="cantidadCuotas" id="cantidadCuotas" value="{{ $product->cantidadCuotas }}">
+                    <label for="descripcion">{{ $product->descripcion }}</label>
+                  </div>
+                  <h5>Medios de Pago</h5>
+                  <hr>
+                  <div class="">
+                    <div class="row align-items-center">
+                      <div class="col-2">
+                        <img class="w-100" src="{{ asset('images/favicon.png') }}" alt="">
+                      </div>
+                      <div class="col-10">
+                        <h5>Cuotas de la Casa</h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="justify-content-center">
+                    <hr><img class="card-img-top w-50" src="{{ asset('images/mp.jpg') }}" alt="Todos los medios de pago">
+                  </div>
+                  <hr>
+                  <div class="row d-flex">
+                    <div class="col-3">
+                      <add-to-cart-component :product="{{$product}}">
+                      </add-to-cart-component>
+                    </div>
+                    <div class="col-9 blanco">
+                      <add-and-buy-to-cart-component :product="{{$product}}">
+                      </add-and-buy-to-cart-component>
+                    </div>
                   </div>
                 </div>
-                <div class="col-lg-4">
-                  <div class="form-check">
-                    <input type="hidden" class="form-check-input" name="vigente" value="0">
-                    <input type="checkbox" class="form-check-input" id="vigente" name="vigente" value="1" {{ $product->vigente ? 'checked="checked"' : '' }}>
-                    <label class="form-check-label" for="vigente">Activo</label>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <add-to-cart-component :product="{{$product}}"></add-to-cart-component>
               </div>
             </div>
           </div>

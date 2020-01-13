@@ -27,17 +27,6 @@ class ProductInShoppingCartsController extends Controller
     return redirect()->back()->withErrors('Hubo un problema');
   }
 
-  public function destroy(Request $request, Product $product)
-  {
-    $productInShoppingCart = ProductInShoppingCart::where([
-                ['product_id', '=', $product->id],
-                ['shopping_cart_id', '=', $request->shopping_cart->id],
-            ])->get()->first();
-    $productInShoppingCart->delete();
-    return redirect()
-      ->route('shopping_cart');
-  }
-
   public function products(Request $request)
   {
     return new ProductsCollection($request->shopping_cart->products()->get());

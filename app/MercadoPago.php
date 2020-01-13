@@ -34,6 +34,11 @@ class MercadoPago
     $item->quantity = 1;
     $item->unit_price = 75.56;
     $preference->items = array($item);
+    $preference->back_urls = [
+      "success" => route('shopping_cart'),
+      "pending" => route('shopping_cart'),
+      "failure" => route('shopping_cart'),
+    ];
     $preference->save();
 
      # Create a preference object

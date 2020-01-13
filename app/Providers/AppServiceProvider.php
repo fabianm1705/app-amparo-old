@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use App\ShoppingCart;
+use App\Models\Profit;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,20 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if(Profit::find(1)){
+          $porcCuotasDeLaCasa = Profit::find(1);
+          $porccuotas = $porcCuotasDeLaCasa->percentage;
+        }else{
+          $porccuotas = 28;
+        }
+        View::share('porccuotas', $porccuotas);
+        if(Profit::find(2)){
+          $porcCreditoUnPago = Profit::find(2);
+          $porccredito = $porcCreditoUnPago->percentage;
+        }else{
+          $porccredito = 18;
+        }
+        View::share('porccredito', $porccredito);
         Schema::defaultStringLength(120);
         View::composer('*',function($view){
           $sessionName = 'shopping_cart_id';

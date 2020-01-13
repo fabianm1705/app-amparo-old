@@ -47,21 +47,22 @@ Route::group(['prefix' => 'admin'], function() {
               ->middleware('auth');
 });
 
+// ShoppingCartController maneja sólo el carrito actual
 Route::get('/carrito', 'ShoppingCartController@show')
               ->middleware('auth')
               ->name('shopping_cart');
 Route::get('/carrito/productos', 'ShoppingCartController@products')
               ->middleware('auth')
               ->name('shopping_cart.products');
-Route::get('/pagar', 'ShoppingCartController@iniciarProcesoPago')->name('payment.pay');
+Route::get('/pagar', 'ShoppingCartController@iniciarProcesoCobro')->name('payment.pay');
+Route::delete('carrito/destroy/{product_id}', 'ShoppingCartController@destroy')
+              ->middleware('auth')
+              ->name('shopping_cart.destroy');
 
 
 Route::post('in_shopping_carts/{product_id}', 'ProductInShoppingCartsController@store')
               ->middleware('auth')
               ->name('in_shopping_carts');
-Route::delete('in_shopping_carts', 'ProductInShoppingCartsController@destroy')
-              ->middleware('auth')
-              ->name('in_shopping_carts.destroy');
 
 
 //Buscar socios

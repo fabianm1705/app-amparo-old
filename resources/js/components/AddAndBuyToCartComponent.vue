@@ -1,12 +1,9 @@
 <template>
   <div class="d-flex">
-    <button @click="addToCart"
-          title="agregar al Carrito"
-          class="btn btn-sm"
+    <button @click="addToCart(product.id)"
+          class="btn btn-sm btn-outline-success"
           type="submit"
-          name="button"
-          style="background-color:transparent">
-      <small><i class="material-icons">shopping_cart</i></small>+
+          name="button"><a href="/carrito" style="text-decoration:none;color:black;">Comprar</a>
     </button>
   </div>
 </template>

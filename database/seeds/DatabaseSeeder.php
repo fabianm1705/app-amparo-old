@@ -21,9 +21,11 @@ class DatabaseSeeder extends Seeder
           'users',
           'groups',
           'specialties',
-          'doctors'
+          'doctors',
+          'profits'
         ]);
         $this->call(PermissionsTableSeeder::class);
+        $this->call(ProfitsTableSeeder::class);
         $this->call(SpecialtiesTableSeeder::class);
         $this->call(DoctorsTableSeeder::class);
         $this->call(GroupsTableSeeder::class);

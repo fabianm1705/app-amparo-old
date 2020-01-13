@@ -41,14 +41,8 @@
                 <div class="row d-flex">
                   <div class="col-lg-4">
                     <div class="form-group">
-                      <label for="montoCuota">Monto Cuota</label>
-                      <input type="text" class="form-control" name="montoCuota" id="montoCuota" value="{{ $product->montoCuota }}">
-                    </div>
-                  </div>
-                  <div class="col-lg-4">
-                    <div class="form-group">
-                      <label for="cantidadCuotas">Cant. Cuotas</label>
-                      <input type="text" class="form-control" name="cantidadCuotas" id="cantidadCuotas" value="{{ $product->cantidadCuotas }}">
+                      <label for="costo">Costo</label>
+                      <input type="text" class="form-control" name="costo" id="costo" value="{{ $product->costo }}">
                     </div>
                   </div>
                   <div class="col-lg-4">

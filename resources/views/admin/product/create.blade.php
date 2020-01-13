@@ -46,20 +46,22 @@
               <div class="row">
                 <div class="col-sm-8">
                   <div class="form-group">
-                    <label for="montoCuota">Monto Cuota</label>
-                    <input type="text" class="form-control" name="montoCuota" id="montoCuota" value="{{ old('montoCuota') }}">
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="form-group">
-                    <label for="cantidadCuotas">Cantidad Cuotas</label>
-                    <input type="text" class="form-control" name="cantidadCuotas" id="cantidadCuotas" value="{{ old('cantidadCuotas') }}">
+                    <label for="costo">Costo</label>
+                    <input type="text" class="form-control" name="costo" id="costo" value="{{ old('costo') }}">
                   </div>
                 </div>
               </div>
               <div class="form-group">
                 <label for="image_url">Seleccione una imagen</label>
                 <input type="file" class="form-control" name="image_url">
+              </div>
+              <div class="form-group">
+                <label for="image_url2">Seleccione una imagen</label>
+                <input type="file" class="form-control" name="image_url2">
+              </div>
+              <div class="form-group">
+                <label for="image_url2">Seleccione una imagen</label>
+                <input type="file" class="form-control" name="image_url3">
               </div>
               <div class="text-right">
                 <button class="btn btn-dark text-light" type="submit" name="button">Guardar</button>

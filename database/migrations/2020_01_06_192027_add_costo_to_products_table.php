@@ -15,6 +15,8 @@ class AddCostoToProductsTable extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             $table->bigInteger('costo')->default(0);
+            $table->string('image_url2')->nullable();
+            $table->string('image_url3')->nullable();
         });
     }
 

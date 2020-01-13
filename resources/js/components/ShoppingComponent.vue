@@ -26,55 +26,57 @@
     </ul>
     <br>
     <div class="text-right">
-      <button @click="getProductsXCategory" class="btn btn-success" type="submit" name="button">Actualizar Filtro</button>
+      <button @click="getProductsXCategory" class="btn btn-success btn-block" type="submit" name="button">Actualizar Filtro</button>
     </div>
     <br>
-  </div>
-  <div class="col-md-9">
-    <div class="row">
-      <div class="col-md-3 col-sm-6 col-xs-6" v-for="product in products" :key="product.id" :value="product.id">
-        <img class="card-img-top" :src="'../images/'+product.image_url" :alt="product.modelo">
-        <div class="card card-product card-plain shadow-sm">
-          <div class="card-header-image">
-          </div>
-          <div class="card-body text-center">
-            <h5 class="card-title">{{ product.modelo }}</h5>
-            <div class="card-description" style="height: 70px;overflow:auto;"><small>{{ product.descripcion }}</small></div>
-          </div>
-          <h5 class="card-title text-center"><small>{{ product.cantidadCuotas }} cuotas de $</small>{{ product.montoCuota }}</h5>
-          <div class="row">
-            <div class="col-sm-5">
-              <add-to-cart-component :product="product"></add-to-cart-component>
-            </div>
-            <div class="col-sm-7 justify-content-end">
-              <button @click="goToCart(product.id)"
-                    class="btn btn-sm btn-outline-success"
-                    type="submit"
-                    name="button"><a href="/carrito" style="text-decoration:none;color:black;">Comprar</a>
-              </button>
-            </div>
-          </div>
-        </div><br>
+    <h5>Medios de Pago</h5>
+    <hr>
+    <div class="">
+      <div class="row align-items-center">
+        <div class="col-3">
+          <img class="w-100" src="/images/favicon.png" alt="">
+        </div>
+        <div class="col-9">
+          <h5>Cuotas de la Casa</h5>
+        </div>
       </div>
     </div>
+    <div class="justify-content-center">
+      <hr><img class="card-img-top w-75" src="/images/mp.jpg" alt="Todos los medios de pago">
+    </div>
+  </div>
+  <div class="col-md-9">
+    <material-transition-group-component tag="div" class="row">
+        <product-in-shopping-component
+                v-for="(product,index) in products"
+                :data-index="index"
+                :key="product.id"
+                :value="product.id"
+                :porccuotas="porccuotas"
+                :porccredito="porccredito"
+                :product="product"
+                class="col-md-4 col-sm-6 col-xs-6">
+        </product-in-shopping-component>
+    </material-transition-group-component>
   </div>
 </div>
 </section>
 </template>
-
 
 <script>
     export default {
       props: {
         categories:{ type: Array },
         product:{ type: Object },
+        porccuotas:{ type: Number },
+        porccredito:{ type: Number },
         contados:{ type: Array }
       },
       data: function(){
         return{
           products: []
-          }
-        },
+        }
+      },
       mounted() {
         axios.post('/getProductsXCategory/'+0).then(response=>{
           this.products = response.data;
@@ -93,13 +95,6 @@
           }
         },
       methods:{
-        goToCart(product_id){
-          axios.post('/in_shopping_carts/'+product_id)
-            .then(()=>{
-              console.log('Producto agregado');
-              this.$store.commit('increment');
-            })
-        },
         getProductsXCategory(){
           var radios=document.getElementsByName('categorias');
           var i;

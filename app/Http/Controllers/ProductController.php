@@ -59,8 +59,9 @@ class ProductController extends Controller
       $product->modelo = $request->input('modelo');
       $product->empresa = $request->input('empresa');
       $product->descripcion = $request->input('descripcion');
-      $product->montoCuota = $request->input('montoCuota');
-      $product->cantidadCuotas = $request->input('cantidadCuotas');
+      $product->costo = $request->input('costo');
+      $product->montoCuota = 1;
+      $product->cantidadCuotas = 6;
       $product->vigente = $request->input('vigente');
       $product->category_id = $request->input('category_id');
       $product->image_url = $image_name;
@@ -108,8 +109,9 @@ class ProductController extends Controller
       $product->modelo = $request->input('modelo');
       $product->empresa = $request->input('empresa');
       $product->descripcion = $request->input('descripcion');
-      $product->montoCuota = $request->input('montoCuota');
-      $product->cantidadCuotas = $request->input('cantidadCuotas');
+      $product->costo = $request->input('costo');
+      $product->montoCuota = 1;
+      $product->cantidadCuotas = 6;
       $product->category_id = $request->input('category_id');
       $product->vigente = $request->input('vigente');
 

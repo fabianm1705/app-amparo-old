@@ -54,6 +54,16 @@ class ProductController extends Controller
         $image_name=time().$image_file->getClientOriginalName();
         $image_file->move(public_path().'/images',$image_name);
       }
+      if($request->hasFile('image_url2')){
+        $image_file=$request->file('image_url2');
+        $image_name2=time().$image_file->getClientOriginalName();
+        $image_file->move(public_path().'/images',$image_name2);
+      }
+      if($request->hasFile('image_url3')){
+        $image_file=$request->file('image_url3');
+        $image_name3=time().$image_file->getClientOriginalName();
+        $image_file->move(public_path().'/images',$image_name3);
+      }
 
       $product = new Product;
       $product->modelo = $request->input('modelo');
@@ -65,6 +75,8 @@ class ProductController extends Controller
       $product->vigente = $request->input('vigente');
       $product->category_id = $request->input('category_id');
       $product->image_url = $image_name;
+      $product->image_url2 = $image_name2;
+      $product->image_url3 = $image_name3;
 
       $product->save();
 

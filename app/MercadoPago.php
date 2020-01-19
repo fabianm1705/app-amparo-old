@@ -41,6 +41,7 @@ class MercadoPago
     ];
     $preference->save();
 
+    return $preference;
      # Create a preference object
      // $preference = new Preference();
      //
@@ -77,11 +78,11 @@ class MercadoPago
       // # Save and POST preference
       // $preference->save();
 
-      if (config('payment-methods.use_sandbox')) {
-        return $preference->sandbox_init_point;
-      }
-
-      return $preference->init_point;
+      // if (config('payment-methods.use_sandbox')) {
+      //   return $preference->sandbox_init_point;
+      // }
+      //
+      // return $preference->init_point;
   }
 
 }

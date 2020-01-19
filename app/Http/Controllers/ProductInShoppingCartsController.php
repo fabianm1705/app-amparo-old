@@ -19,7 +19,7 @@ class ProductInShoppingCartsController extends Controller
     $inShoppingCart = ProductInShoppingCart::create([
       'shopping_cart_id' => $request->shopping_cart->id,
       'product_id' => $request->product_id,
-      'montoCuota' => 10
+      'cantidadUnidades' => 1
     ]);
     if($inShoppingCart){
       return redirect()->back();
@@ -31,4 +31,16 @@ class ProductInShoppingCartsController extends Controller
   {
     return new ProductsCollection($request->shopping_cart->products()->get());
   }
+
+  public function destroy($product_id)
+  {
+    $shopping_cart_id = \Session::get('shopping_cart_id');
+    $productInShoppingCart = ProductInShoppingCart::where([
+                ['product_id', '=', $product_id],
+                ['shopping_cart_id', '=', $shopping_cart_id],
+            ])->get()->first();
+    $productInShoppingCart->delete();
+    return redirect()->to('/carrito');
+  }
+
 }

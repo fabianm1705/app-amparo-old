@@ -54,12 +54,12 @@ Route::get('/carrito', 'ShoppingCartController@show')
 Route::get('/carrito/productos', 'ShoppingCartController@products')
               ->middleware('auth')
               ->name('shopping_cart.products');
-Route::get('/pagar', 'ShoppingCartController@iniciarProcesoCobro')->name('payment.pay');
-Route::delete('carrito/destroy/{product_id}', 'ShoppingCartController@destroy')
+Route::post('/pagar', 'ShoppingCartController@iniciarProcesoCobro')->name('iniciar.pago');
+
+
+Route::post('/deleteOfCart/{product_id}', 'ProductInShoppingCartsController@destroy')
               ->middleware('auth')
-              ->name('shopping_cart.destroy');
-
-
+              ->name('deleteOfCart');
 Route::post('in_shopping_carts/{product_id}', 'ProductInShoppingCartsController@store')
               ->middleware('auth')
               ->name('in_shopping_carts');
@@ -89,7 +89,7 @@ Route::get('asignar/roles', 'UserController@asignarRoles')
 Route::get('doctors/mostrar', 'DoctorController@mostrar')
                     ->middleware(['auth','can:doctors.mostrar'])
                     ->name('doctors.mostrar');
-Route::post('getDoctors/{id}', 'DoctorController@getDoctors')
+Route::post('/getDoctors/{id}', 'DoctorController@getDoctors')
               ->middleware('auth')
               ->name('getDoctors');
 

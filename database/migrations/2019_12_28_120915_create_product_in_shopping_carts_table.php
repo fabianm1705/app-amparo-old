@@ -21,7 +21,6 @@ class CreateProductInShoppingCartsTable extends Migration
             $table->foreign('shopping_cart_id')->references('id')->on('shopping_carts');
             $table->bigInteger('cantidadUnidades')->default(1);
             $table->bigInteger('cantidadCuotas')->nullable();
-            $table->bigInteger('montoCuota')->nullable();
             $table->bigInteger('total')->nullable();
             $table->timestamps();
         });

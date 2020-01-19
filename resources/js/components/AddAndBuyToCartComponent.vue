@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex">
     <button @click="addToCart(product.id)"
-          class="btn btn-sm btn-outline-success"
+          class="btn btn-sm btn-outline-success btn-block"
           type="submit"
           name="button"><a href="/carrito" style="text-decoration:none;color:black;">Comprar</a>
     </button>

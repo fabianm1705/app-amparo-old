@@ -22,17 +22,8 @@ class ShoppingCartController extends Controller
   public function iniciarProcesoCobro()
   {
     $method = new \App\MercadoPago;
-    return $method->setupPaymentAndGetRedirectURL();
-  }
-  public function destroy($id, Request $request)
-  {
-    $productInShoppingCart = ProductInShoppingCart::where([
-                ['product_id', '=', $id],
-                ['shopping_cart_id', '=', $request->shopping_cart->id],
-            ])->get()->first();
-    $productInShoppingCart->delete();
-    return redirect()
-      ->route('shopping_cart');
+    $preference = $method->setupPaymentAndGetRedirectURL();
+    return view('admin.product.previaMercadoPago',['preference' => $preference]);
   }
 
   public function products(Request $request)

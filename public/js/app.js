@@ -1910,6 +1910,100 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BtnPayAmparoComponent.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/BtnPayAmparoComponent.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    cuota: {
+      type: Number
+    }
+  },
+  methods: {
+    formatPrice: function formatPrice(value) {
+      var val = (value / 1).toFixed(2).replace('.', ',');
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BtnPayMercadoPagoComponent.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/BtnPayMercadoPagoComponent.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    total: {
+      type: Number
+    }
+  },
+  methods: {
+    formatPrice: function formatPrice(value) {
+      var val = (value / 1).toFixed(2).replace('.', ',');
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CartComponent.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CartComponent.vue?vue&type=script&lang=js& ***!
@@ -1919,6 +2013,49 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1977,10 +2114,38 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     total: function total() {
+      var _this = this;
+
       var cents = this.products.reduce(function (acumulator, currentObj) {
-        return acumulator + currentObj.montoCuota;
+        return acumulator + currentObj.costo * (1 + _this.porccredito / 100);
       }, 0);
-      return "$".concat(cents);
+      return "".concat(cents);
+    },
+    cuota: function cuota() {
+      var _this2 = this;
+
+      var cents = this.products.reduce(function (acumulator, currentObj) {
+        return acumulator + currentObj.costo * (1 + _this2.porccuotas / 100) / currentObj.cantidadCuotas;
+      }, 0);
+      return "".concat(cents);
+    }
+  },
+  methods: {
+    formatPrice: function formatPrice(value) {
+      var val = (value / 1).toFixed(2).replace('.', ',');
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    },
+    deleteOfCarrito: function deleteOfCarrito(product_id) {
+      var i;
+
+      for (i = 0; i < Object.keys(this.products).length; i++) {
+        if (this.products[i].id == product_id) {
+          this.products.splice(i, 1);
+          this.$forceUpdate();
+        }
+      }
+
+      ;
     }
   }
 });
@@ -2357,8 +2522,12 @@ __webpack_require__.r(__webpack_exports__);
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     },
     deleteOfCart: function deleteOfCart(product_id) {
-      axios["delete"]('/in_shopping_carts/destroy/' + product_id).then(function () {
-        console.log(borrado);
+      var _this = this;
+
+      axios.post('/deleteOfCart/' + product_id).then(function () {
+        _this.$emit("update", product_id);
+
+        _this.$store.commit('decrement');
       });
     }
   }
@@ -2375,6 +2544,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -38077,7 +38247,7 @@ var render = function() {
     _c(
       "button",
       {
-        staticClass: "btn btn-sm btn-outline-success",
+        staticClass: "btn btn-sm btn-outline-success btn-block",
         attrs: { type: "submit", name: "button" },
         on: {
           click: function($event) {
@@ -38149,6 +38319,159 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BtnPayAmparoComponent.vue?vue&type=template&id=68d3ee48&":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/BtnPayAmparoComponent.vue?vue&type=template&id=68d3ee48& ***!
+  \************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("section", [
+    _c("div", { staticClass: "card shadow-sm" }, [
+      _c("div", { staticClass: "card-body" }, [
+        _c(
+          "div",
+          { staticClass: "row align-items-center justify-content-center" },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-9" }, [
+              _c("h6", [
+                _vm._v("6 cuotas de $" + _vm._s(_vm.formatPrice(_vm.cuota)))
+              ])
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _vm._m(1)
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-3" }, [
+      _c("img", {
+        staticClass: "w-100",
+        attrs: { src: "/images/favicon.png", alt: "" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mt-2" }, [
+      _c("div", { staticClass: "text-right" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-outline-success btn-block",
+            attrs: { type: "submit", name: "button" }
+          },
+          [_vm._v("Finalizar Compra")]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BtnPayMercadoPagoComponent.vue?vue&type=template&id=4aaa7850&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/BtnPayMercadoPagoComponent.vue?vue&type=template&id=4aaa7850& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("section", [
+    _c("div", { staticClass: "card shadow-sm mt-3" }, [
+      _c("div", { staticClass: "card-body" }, [
+        _c(
+          "div",
+          [
+            _c("center", [
+              _vm._v(
+                "\n        Crédito en 1 pago de $" +
+                  _vm._s(_vm.formatPrice(_vm.total))
+              ),
+              _c("br")
+            ])
+          ],
+          1
+        ),
+        _c("hr"),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "justify-content-center" },
+          [
+            _c("center", [
+              _c("img", {
+                staticClass: "card-img-top w-100",
+                attrs: {
+                  src: "/images/mercadopago.png",
+                  alt: "Todos los medios de pago"
+                }
+              })
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _vm._m(0)
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mt-2" }, [
+      _c("div", { staticClass: "text-right" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-outline-success btn-block",
+            attrs: { type: "submit", name: "button" }
+          },
+          [_vm._v("Finalizar Compra")]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CartComponent.vue?vue&type=template&id=e7ab8a3c&":
 /*!****************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CartComponent.vue?vue&type=template&id=e7ab8a3c& ***!
@@ -38164,44 +38487,119 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card shadow-sm" }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c("div", { staticClass: "table-responsive" }, [
-      _c("table", { staticClass: "table table-shopping" }, [
-        _vm._m(1),
+  return _c("div", { staticClass: "row justify-content-center" }, [
+    _c("div", { staticClass: "col-12 col-md-9" }, [
+      _c("div", { staticClass: "card shadow-sm" }, [
+        _vm._m(0),
         _vm._v(" "),
-        _c(
-          "tbody",
-          [
-            _vm._l(_vm.products, function(product, index) {
-              return _c("product-in-cart-component", {
-                key: product.id,
-                staticClass: "col-md-4 col-sm-6 col-xs-6",
-                attrs: {
-                  "data-index": index,
-                  value: product.id,
-                  porccuotas: _vm.porccuotas,
-                  porccredito: _vm.porccredito,
-                  product: product
-                }
-              })
-            }),
+        _c("div", { staticClass: "table-responsive" }, [
+          _c("table", { staticClass: "table table-shopping" }, [
+            _vm._m(1),
             _vm._v(" "),
-            _c("tr", [
-              _c("td", { attrs: { colspan: "3" } }),
+            _c(
+              "tbody",
+              [
+                _vm._l(_vm.products, function(product, index) {
+                  return _c("product-in-cart-component", {
+                    key: product.id,
+                    staticClass: "col-md-4 col-sm-6 col-xs-6",
+                    attrs: {
+                      "data-index": index,
+                      value: product.id,
+                      porccuotas: _vm.porccuotas,
+                      porccredito: _vm.porccredito,
+                      product: product
+                    },
+                    on: { update: _vm.deleteOfCarrito }
+                  })
+                }),
+                _vm._v(" "),
+                _c("tr", [
+                  _c("td", { attrs: { colspan: "3" } }),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "td-total" }, [
+                    _vm._v("\n                Total\n              ")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "td-price", attrs: { colspan: "1" } },
+                    [
+                      _vm._v(
+                        "\n                $" +
+                          _vm._s(_vm.formatPrice(_vm.total)) +
+                          "\n              "
+                      )
+                    ]
+                  )
+                ])
+              ],
+              2
+            )
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-12 col-md-3" }, [
+      _c("h5", [_vm._v("Seleccione su medio de pago:")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card shadow-sm" }, [
+        _c("div", { staticClass: "card-body" }, [
+          _c(
+            "div",
+            { staticClass: "row align-items-center justify-content-center" },
+            [
+              _vm._m(2),
               _vm._v(" "),
-              _c("td", { staticClass: "td-total" }, [
-                _vm._v("\n            Total\n          ")
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "td-price", attrs: { colspan: "1" } }, [
-                _vm._v("\n            " + _vm._s(_vm.total) + "\n          ")
+              _c("div", { staticClass: "col-9" }, [
+                _c("h6", [
+                  _vm._v("6 cuotas de $" + _vm._s(_vm.formatPrice(_vm.cuota)))
+                ])
               ])
-            ])
-          ],
-          2
-        )
+            ]
+          ),
+          _vm._v(" "),
+          _vm._m(3)
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card shadow-sm mt-2" }, [
+        _c("div", { staticClass: "card-body" }, [
+          _c(
+            "div",
+            [
+              _c("center", [
+                _vm._v(
+                  "\n          Crédito en 1 pago de $" +
+                    _vm._s(_vm.formatPrice(_vm.total))
+                ),
+                _c("br")
+              ])
+            ],
+            1
+          ),
+          _c("hr"),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "justify-content-center" },
+            [
+              _c("center", [
+                _c("img", {
+                  staticClass: "card-img-top w-100",
+                  attrs: {
+                    src: "/images/mercadopago.png",
+                    alt: "Todos los medios de pago"
+                  }
+                })
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _vm._m(4)
+        ])
       ])
     ])
   ])
@@ -38236,6 +38634,51 @@ var staticRenderFns = [
         _c("th", { staticClass: "text-left" }, [_vm._v("Total")]),
         _vm._v(" "),
         _c("th", [_vm._v("Quitar")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-3" }, [
+      _c("img", {
+        staticClass: "w-100",
+        attrs: { src: "/images/favicon.png", alt: "" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mt-2" }, [
+      _c("div", { staticClass: "text-right" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-outline-success btn-block",
+            attrs: { type: "submit", name: "button" }
+          },
+          [_vm._v("Finalizar Compra")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mt-2" }, [
+      _c("div", { staticClass: "text-right" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-outline-success btn-block",
+            attrs: { type: "submit", name: "button" }
+          },
+          [_vm._v("Finalizar Compra")]
+        )
       ])
     ])
   }
@@ -38634,14 +39077,22 @@ var render = function() {
     _vm._v(" "),
     _c("td", { staticClass: "text-right align-middle" }, [
       _c("small", [_vm._v("$")]),
-      _vm._v(_vm._s(_vm.product.montoCuota) + "\n  ")
+      _vm._v(
+        _vm._s(
+          _vm.formatPrice(_vm.product.costo * (1 + _vm.porccredito / 100))
+        ) + "\n  "
+      )
     ]),
     _vm._v(" "),
     _vm._m(0),
     _vm._v(" "),
     _c("td", { staticClass: "align-middle" }, [
       _c("small", [_vm._v("$")]),
-      _vm._v(_vm._s(_vm.product.montoCuota) + "\n  ")
+      _vm._v(
+        _vm._s(
+          _vm.formatPrice(_vm.product.costo * (1 + _vm.porccredito / 100))
+        ) + "\n  "
+      )
     ]),
     _vm._v(" "),
     _c("td", { staticClass: "td-actions align-middle" }, [
@@ -52331,6 +52782,9 @@ var store = new Vuex.Store({
     increment: function increment(state) {
       return state.productsCount++;
     },
+    decrement: function decrement(state) {
+      return state.productsCount--;
+    },
     set: function set(state, value) {
       return state.productsCount = value;
     }
@@ -52352,6 +52806,8 @@ Vue.component('cart-component', __webpack_require__(/*! ./components/CartCompone
 Vue.component('add-to-cart-component', __webpack_require__(/*! ./components/AddToCartComponent.vue */ "./resources/js/components/AddToCartComponent.vue")["default"]);
 Vue.component('add-and-buy-to-cart-component', __webpack_require__(/*! ./components/AddAndBuyToCartComponent.vue */ "./resources/js/components/AddAndBuyToCartComponent.vue")["default"]);
 Vue.component('cart-counter-component', __webpack_require__(/*! ./components/CartCounterComponent.vue */ "./resources/js/components/CartCounterComponent.vue")["default"]);
+Vue.component('btn-pay-amparo-component', __webpack_require__(/*! ./components/BtnPayAmparoComponent.vue */ "./resources/js/components/BtnPayAmparoComponent.vue")["default"]);
+Vue.component('btn-pay-mercadopago-component', __webpack_require__(/*! ./components/BtnPayMercadoPagoComponent.vue */ "./resources/js/components/BtnPayMercadoPagoComponent.vue")["default"]);
 Vue.component('shopping-component', __webpack_require__(/*! ./components/ShoppingComponent.vue */ "./resources/js/components/ShoppingComponent.vue")["default"]);
 Vue.component('product-in-shopping-component', __webpack_require__(/*! ./components/ProductInShoppingComponent.vue */ "./resources/js/components/ProductInShoppingComponent.vue")["default"]);
 Vue.component('specialty-doctors-table-component', __webpack_require__(/*! ./components/SpecialtyDoctorsTableComponent.vue */ "./resources/js/components/SpecialtyDoctorsTableComponent.vue")["default"]);
@@ -52591,6 +53047,144 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddToCartComponent_vue_vue_type_template_id_2c2cc14c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddToCartComponent_vue_vue_type_template_id_2c2cc14c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/BtnPayAmparoComponent.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/BtnPayAmparoComponent.vue ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _BtnPayAmparoComponent_vue_vue_type_template_id_68d3ee48___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BtnPayAmparoComponent.vue?vue&type=template&id=68d3ee48& */ "./resources/js/components/BtnPayAmparoComponent.vue?vue&type=template&id=68d3ee48&");
+/* harmony import */ var _BtnPayAmparoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BtnPayAmparoComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/BtnPayAmparoComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _BtnPayAmparoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _BtnPayAmparoComponent_vue_vue_type_template_id_68d3ee48___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _BtnPayAmparoComponent_vue_vue_type_template_id_68d3ee48___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/BtnPayAmparoComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/BtnPayAmparoComponent.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/BtnPayAmparoComponent.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BtnPayAmparoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./BtnPayAmparoComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BtnPayAmparoComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BtnPayAmparoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/BtnPayAmparoComponent.vue?vue&type=template&id=68d3ee48&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/BtnPayAmparoComponent.vue?vue&type=template&id=68d3ee48& ***!
+  \******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BtnPayAmparoComponent_vue_vue_type_template_id_68d3ee48___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./BtnPayAmparoComponent.vue?vue&type=template&id=68d3ee48& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BtnPayAmparoComponent.vue?vue&type=template&id=68d3ee48&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BtnPayAmparoComponent_vue_vue_type_template_id_68d3ee48___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BtnPayAmparoComponent_vue_vue_type_template_id_68d3ee48___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/BtnPayMercadoPagoComponent.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/components/BtnPayMercadoPagoComponent.vue ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _BtnPayMercadoPagoComponent_vue_vue_type_template_id_4aaa7850___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BtnPayMercadoPagoComponent.vue?vue&type=template&id=4aaa7850& */ "./resources/js/components/BtnPayMercadoPagoComponent.vue?vue&type=template&id=4aaa7850&");
+/* harmony import */ var _BtnPayMercadoPagoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BtnPayMercadoPagoComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/BtnPayMercadoPagoComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _BtnPayMercadoPagoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _BtnPayMercadoPagoComponent_vue_vue_type_template_id_4aaa7850___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _BtnPayMercadoPagoComponent_vue_vue_type_template_id_4aaa7850___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/BtnPayMercadoPagoComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/BtnPayMercadoPagoComponent.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/BtnPayMercadoPagoComponent.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BtnPayMercadoPagoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./BtnPayMercadoPagoComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BtnPayMercadoPagoComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BtnPayMercadoPagoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/BtnPayMercadoPagoComponent.vue?vue&type=template&id=4aaa7850&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/BtnPayMercadoPagoComponent.vue?vue&type=template&id=4aaa7850& ***!
+  \***********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BtnPayMercadoPagoComponent_vue_vue_type_template_id_4aaa7850___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./BtnPayMercadoPagoComponent.vue?vue&type=template&id=4aaa7850& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BtnPayMercadoPagoComponent.vue?vue&type=template&id=4aaa7850&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BtnPayMercadoPagoComponent_vue_vue_type_template_id_4aaa7850___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BtnPayMercadoPagoComponent_vue_vue_type_template_id_4aaa7850___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

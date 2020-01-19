@@ -11,7 +11,7 @@
         <small>by {{ product.empresa }}</small>
       </td>
       <td class="text-right align-middle">
-        <small>$</small>{{ product.montoCuota }}
+        <small>$</small>{{ formatPrice(product.costo * (1+(porccredito/100))) }}
       </td>
       <td class="align-middle">
         1
@@ -25,7 +25,7 @@
         </div>
       </td>
       <td class="align-middle">
-        <small>$</small>{{ product.montoCuota }}
+        <small>$</small>{{ formatPrice(product.costo * (1+(porccredito/100))) }}
       </td>
       <td class="td-actions align-middle">
           <button @click="deleteOfCart(product.id)" class="btn btn-sm" onclick="return confirm('Quiere quitar el producto del carrito?')" title="Quitar producto">
@@ -48,9 +48,10 @@
                     return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
             },
             deleteOfCart(product_id){
-              axios.delete('/in_shopping_carts/destroy/'+product_id)
+              axios.post('/deleteOfCart/'+product_id)
                 .then(()=>{
-                  console.log(borrado);
+                  this.$emit("update", product_id);
+                  this.$store.commit('decrement');
                 })
             }
         }

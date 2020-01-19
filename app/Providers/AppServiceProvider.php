@@ -26,20 +26,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if(Profit::find(1)){
+        if(Schema::hasTable('profits')){
           $porcCuotasDeLaCasa = Profit::find(1);
           $porccuotas = $porcCuotasDeLaCasa->percentage;
-        }else{
-          $porccuotas = 28;
-        }
-        View::share('porccuotas', $porccuotas);
-        if(Profit::find(2)){
+          View::share('porccuotas', $porccuotas);
           $porcCreditoUnPago = Profit::find(2);
           $porccredito = $porcCreditoUnPago->percentage;
-        }else{
-          $porccredito = 18;
+          View::share('porccredito', $porccredito);
         }
-        View::share('porccredito', $porccredito);
         Schema::defaultStringLength(120);
         View::composer('*',function($view){
           $sessionName = 'shopping_cart_id';

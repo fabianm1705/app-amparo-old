@@ -4,6 +4,9 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-12 col-md-9">
+        <div class="container alert alert-success">
+          Gracias por tu compra! En breve nos pondremos en contacto para coordinar envío...
+        </div>
         <div class="card shadow-sm">
           <div class="card-header bgOrange d-flex blanco">
             <h5 class="card-title text-white">Carrito de Compras</h5>
@@ -18,7 +21,7 @@
                   <th class="text-right">P. Unit.</th>
                   <th class="text-center">Cant.</th>
                   <th class="text-left">Total</th>
-                  <th>Quitar</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -37,20 +40,13 @@
                     <td class="text-right align-middle">
                       <small>$</small>{{ $product->costo * (1+($porccredito/100)) }}
                     </td>
-                    <td class="align-middle">
+                    <td class="align-middle text-center">
                       1
                     </td>
                     <td class="align-middle">
                       <small>$</small>{{ $product->costo * (1+($porccredito/100)) }}
                     </td>
                     <td class="td-actions align-middle">
-                      <form action="{{ route('deleteOfCart', ['id' => $product->id ]) }}" method="post" style="background-color: transparent;">
-                        @method('DELETE')
-                        @csrf
-                        <button class="btn btn-sm" onclick="return confirm('Está seguro de eliminar el registro?')">
-                          <i class="material-icons">close</i>
-                        </button>
-                      </form>
                     </td>
                   </tr>
                 @endforeach
@@ -68,33 +64,6 @@
                 </tr>
               </tbody>
             </table>
-          </div>
-        </div>
-      </div>
-      <div class="col-12 col-md-3">
-        <h5>Seleccione su medio de pago:</h5>
-
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <div class="row align-items-center justify-content-center">
-              <div class="col-3">
-                <img class="w-100" src="/images/favicon.png" alt="">
-              </div>
-              <div class="col-9 row align-items-center">
-                <cuotas-value-component
-                        :products="{{ $shopping_cart->products }}"
-                        :porccuotas="{{ $porccuotas }}">
-                </cuotas-value-component>
-              </div>
-            </div>
-            <div class="mt-2">
-              <form action="{{ route('shopping_cart.store') }}" method="post" enctype="multipart/form-data">
-                @csrf
-                <div class="text-right">
-                  <button class="btn btn-outline-success btn-block" type="submit" name="button">Finalizar Compra</button>
-                </div>
-              </form>
-            </div>
           </div>
         </div>
       </div>

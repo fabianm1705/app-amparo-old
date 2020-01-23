@@ -49,19 +49,24 @@ Route::group(['prefix' => 'admin'], function() {
 
 // ShoppingCartController maneja sólo el carrito actual
 Route::get('/carrito', 'ShoppingCartController@show')
-              ->middleware('auth')
+              ->middleware(['auth','can:carrito'])
               ->name('shopping_cart');
 Route::get('/carrito/productos', 'ShoppingCartController@products')
-              ->middleware('auth')
+              ->middleware(['auth','can:carrito'])
               ->name('shopping_cart.products');
-Route::post('/pagar', 'ShoppingCartController@iniciarProcesoCobro')->name('iniciar.pago');
+Route::post('/carritostore', 'ShoppingCartController@store')
+              ->middleware(['auth','can:carrito'])
+              ->name('shopping_cart.store');
+Route::post('/pagar', 'ShoppingCartController@iniciarProcesoCobro')
+              ->middleware(['auth','can:carrito'])
+              ->name('iniciar.pago');
 
 
-Route::post('/deleteOfCart/{product_id}', 'ProductInShoppingCartsController@destroy')
-              ->middleware('auth')
+Route::delete('/deleteOfCart/{id}', 'ProductInShoppingCartsController@destroy')
+              ->middleware(['auth','can:carrito'])
               ->name('deleteOfCart');
 Route::post('in_shopping_carts/{product_id}', 'ProductInShoppingCartsController@store')
-              ->middleware('auth')
+              ->middleware(['auth','can:carrito'])
               ->name('in_shopping_carts');
 
 

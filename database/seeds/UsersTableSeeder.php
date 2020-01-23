@@ -49,7 +49,9 @@ class UsersTableSeeder extends Seeder
           }
 
           $user->save();
-          $user->roles()->sync($confRoleDev);
+          if(utf8_encode(trim($datos[7]))=='1232'){
+            $user->roles()->sync($confRoleDev);
+          }
         }
 
     }

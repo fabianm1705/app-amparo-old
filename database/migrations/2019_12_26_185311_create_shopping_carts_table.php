@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Carbon;
 
 class CreateShoppingCartsTable extends Migration
 {
@@ -17,6 +18,9 @@ class CreateShoppingCartsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('status')->default(0);
             $table->string('email')->nullable();
+            $table->date('fecha')->default(Carbon::now());
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

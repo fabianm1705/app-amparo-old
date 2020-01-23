@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Resources\ProductsCollection;
 use Config;
 use MercadoPago\SDK;
+use Auth;
+use Illuminate\Support\Carbon;
 
 class ShoppingCartController extends Controller
 {
@@ -17,6 +19,17 @@ class ShoppingCartController extends Controller
   public function show(Request $request)
   {
     return view('admin.product.cart',['shopping_cart' => $request->shopping_cart]);
+  }
+
+  public function store(Request $request)
+  {
+    $request->shopping_cart->status = 1;
+    $request->shopping_cart->user_id = Auth::user()->id;
+    $request->shopping_cart->fecha = Carbon::now();
+    $request->shopping_cart->save();
+
+    return view('admin.product.cartfin',['shopping_cart' => $request->shopping_cart])
+          ->with('message','Compra finalizada!');
   }
 
   public function iniciarProcesoCobro()

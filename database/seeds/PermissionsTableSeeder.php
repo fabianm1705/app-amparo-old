@@ -196,11 +196,6 @@ class PermissionsTableSeeder extends Seeder
           'description' => 'Editar el detalle de cada profesional del sistema'
         ]);
         Permission::create([
-          'name' => 'Farmacia Nueva Farma',
-          'slug' => 'Farmacia',
-          'description' => 'Acceso Padrón Farmacia'
-        ]);
-        Permission::create([
           'name' => 'Eliminar Profesionales',
           'slug' => 'doctors.destroy',
           'description' => 'Eliminar un profesional del sistema'
@@ -267,9 +262,24 @@ class PermissionsTableSeeder extends Seeder
           'description' => 'Eliminar un método de pago'
         ]);
         Permission::create([
+          'name' => 'Acceso Shopping Cart',
+          'slug' => 'carrito',
+          'description' => 'Acceso Shopping Cart'
+        ]);
+        Permission::create([
           'name' => 'Padrón SOS Emergencias',
           'slug' => 'sos.emergencias',
           'description' => 'Padrón SOS Emergencias'
+        ]);
+        Permission::create([
+          'name' => 'Padrón Asociación Odontológica',
+          'slug' => 'aop',
+          'description' => 'Padrón Asociación Odontológica'
+        ]);
+        Permission::create([
+          'name' => 'Padrón Farmacia',
+          'slug' => 'farmacia',
+          'description' => 'Padrón Farmacia'
         ]);
         Role::create([
           'name' => 'Admin',
@@ -291,6 +301,21 @@ class PermissionsTableSeeder extends Seeder
           'name' => 'Socio inactivo',
           'slug' => 'nosocio',
           'description' => 'Socio dado de baja'
+        ]);
+        Role::create([
+          'name' => 'Asociación Odontológica Parana',
+          'slug' => 'aop.aop',
+          'description' => 'Acceso padrón odontológico'
+        ]);
+        Role::create([
+          'name' => 'SOS Emergencias',
+          'slug' => 'SOS.sos',
+          'description' => 'Acceso padrón sos emergencias'
+        ]);
+        Role::create([
+          'name' => 'Farmacia Nueva Farma',
+          'slug' => 'farmacia.farmacia',
+          'description' => 'Acceso padrón farmacia'
         ]);
     }
 }

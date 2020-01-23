@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class ShoppingCart extends Model
 {
+    protected $fillable = [
+        'status', 'fecha', 'user_id',
+    ];
+
     public static function findOrCreateById($shopping_cart_id)
     {
       if($shopping_cart_id){
@@ -24,6 +28,6 @@ class ShoppingCart extends Model
     }
 
     public function amount(){
-      return $this->products()->sum('product_in_shopping_carts.montoCuota');
+      return $this->products()->sum('product_in_shopping_carts.costo');
     }
 }

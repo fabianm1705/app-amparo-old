@@ -48,8 +48,9 @@ Vue.component('cart-component', require('./components/CartComponent.vue').defaul
 Vue.component('add-to-cart-component', require('./components/AddToCartComponent.vue').default);
 Vue.component('add-and-buy-to-cart-component', require('./components/AddAndBuyToCartComponent.vue').default);
 Vue.component('cart-counter-component', require('./components/CartCounterComponent.vue').default);
-Vue.component('btn-pay-amparo-component', require('./components/BtnPayAmparoComponent.vue').default);
-Vue.component('btn-pay-mercadopago-component', require('./components/BtnPayMercadoPagoComponent.vue').default);
+Vue.component('cuotas-value-component', require('./components/CuotasValueComponent.vue').default);
+Vue.component('total-value-component', require('./components/TotalValueComponent.vue').default);
+Vue.component('total-value-only-component', require('./components/TotalValueOnlyComponent.vue').default);
 
 Vue.component('shopping-component', require('./components/ShoppingComponent.vue').default);
 Vue.component('product-in-shopping-component', require('./components/ProductInShoppingComponent.vue').default);

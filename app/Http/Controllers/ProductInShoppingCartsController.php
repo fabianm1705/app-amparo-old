@@ -16,10 +16,12 @@ class ProductInShoppingCartsController extends Controller
 
   public function store(Request $request)
   {
+    $product = Product::find($request->product_id);
     $inShoppingCart = ProductInShoppingCart::create([
       'shopping_cart_id' => $request->shopping_cart->id,
       'product_id' => $request->product_id,
-      'cantidadUnidades' => 1
+      'cantidadUnidades' => 1,
+      'costo' => $product->costo
     ]);
     if($inShoppingCart){
       return redirect()->back();
@@ -32,11 +34,11 @@ class ProductInShoppingCartsController extends Controller
     return new ProductsCollection($request->shopping_cart->products()->get());
   }
 
-  public function destroy($product_id)
+  public function destroy($id)
   {
     $shopping_cart_id = \Session::get('shopping_cart_id');
     $productInShoppingCart = ProductInShoppingCart::where([
-                ['product_id', '=', $product_id],
+                ['product_id', '=', $id],
                 ['shopping_cart_id', '=', $shopping_cart_id],
             ])->get()->first();
     $productInShoppingCart->delete();

@@ -107,6 +107,8 @@
                           <li class="nav-item active">
                             <a class="nav-link" href="{{ route('products.shopping') }}">Shopping</a>
                           </li>
+                        @endcan
+                        @can('carrito')
                           <li class="nav-item active blanco">
                             <a class="nav-link"
                               href="{{ route('shopping_cart') }}"

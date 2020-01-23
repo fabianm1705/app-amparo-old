@@ -54,6 +54,11 @@ class User extends Authenticatable
       return $this->hasMany('App\Models\Layer','user_id');
     }
 
+    public function shopping_carts()
+    {
+      return $this->hasMany('App\Models\ShoppingCart','user_id');
+    }
+
     public function scopeName($query, $name)
     {
       if($name)

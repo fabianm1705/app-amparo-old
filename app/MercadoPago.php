@@ -16,9 +16,9 @@ class MercadoPago
 {
   public function __construct()
   {
-     $clientId = SDK::setClientId(
+     $clientId = MercadoPago\SDK::setClientId(
           Config::get("payment-methods.mercadopago.client"));
-     $clientSecret = SDK::setClientSecret(
+     $clientSecret = MercadoPago\SDK::setClientSecret(
           Config::get("payment-methods.mercadopago.secret"));
   }
 

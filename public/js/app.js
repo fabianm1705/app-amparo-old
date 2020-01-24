@@ -1860,7 +1860,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var product_id = this.product.id;
-      axios.post('/in_shopping_carts/' + product_id).then(function () {
+      axios.post('/in_shopping_cart/' + product_id).then(function () {
         _this.$store.commit('increment');
       });
     }
@@ -1902,7 +1902,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var product_id = this.product.id;
-      axios.post('/in_shopping_carts/' + product_id).then(function () {
+      axios.post('/in_shopping_cart/' + product_id).then(function () {
         _this.$store.commit('increment');
       });
     }

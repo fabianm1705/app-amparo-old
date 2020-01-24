@@ -60,14 +60,17 @@ Route::post('/carritostore', 'ShoppingCartController@store')
 Route::post('/pagar', 'ShoppingCartController@iniciarProcesoCobro')
               ->middleware(['auth','can:carrito'])
               ->name('iniciar.pago');
+Route::get('/shoppingcart', 'ShoppingCartController@index')
+              ->middleware(['auth','can:shopping_cart.index'])
+              ->name('shopping_cart.index');
 
 
-Route::delete('/deleteOfCart/{id}', 'ProductInShoppingCartsController@destroy')
+Route::delete('/out_shopping_cart/{id}', 'ProductInShoppingCartsController@destroy')
               ->middleware(['auth','can:carrito'])
-              ->name('deleteOfCart');
-Route::post('in_shopping_carts/{product_id}', 'ProductInShoppingCartsController@store')
+              ->name('out_shopping_cart.destroy');
+Route::post('/in_shopping_cart/{product_id}', 'ProductInShoppingCartsController@store')
               ->middleware(['auth','can:carrito'])
-              ->name('in_shopping_carts');
+              ->name('in_shopping_cart.store');
 
 
 //Buscar socios

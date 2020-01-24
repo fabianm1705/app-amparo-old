@@ -17,7 +17,7 @@
       methods:{
         addToCart(){
           var product_id = this.product.id;
-          axios.post('/in_shopping_carts/'+product_id)
+          axios.post('/in_shopping_cart/'+product_id)
             .then(()=>{
               this.$store.commit('increment');
             })

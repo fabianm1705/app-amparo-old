@@ -19,36 +19,19 @@
             <tbody>
               @foreach($shopping_carts as $shopping_cart)
                 <tr>
-                  <td>{{ $shopping_cart->category->nombre }}</td>
-                  <td>{{ $product->modelo }}</td>
-                  <td class="text-justify">{{ $product->descripcion }}</td>
-                  <td class="text-center">${{ $product->costo }}</td>
+                  <td>{{ $shopping_cart->user->group->nroSocio }}</td>
+                  <td>{{ $shopping_cart->user->name }}</td>
+                  <td class="text-justify">{{ $shopping_cart->fecha }}</td>
                   <td class="text-center">
                     <input type="checkbox" class="form-check-input" id="vigente" name="vigente" disabled value="1" {{ $product->vigente ? 'checked="checked"' : '' }}>
                   </td>
                   <td class="text-right d-flex">
-                    @can('products.show')
-                      <a href="{{ route('products.show', ['product' => $product ]) }}" title="Ver" class="">
+                    @can('carrito')
+                      <a href="{{ route('shopping_cart.show', ['shopping_cart' => $shopping_cart ]) }}" title="Ver" class="">
                         <div class="">
                           <i class="material-icons">search</i>
                         </div>
                       </a>&nbsp;
-                    @endcan
-                    @can('products.edit')
-                      <a href="{{ route('products.edit', ['product' => $product ]) }}" title="Editar" class="">
-                        <div class="">
-                          <i class="material-icons">edit</i>
-                        </div>
-                      </a>&nbsp;
-                    @endcan
-                    @can('products.destroy')
-                      <form action="{{ route('products.destroy', ['product' => $product ]) }}" method="post" style="background-color: transparent;">
-                        @method('DELETE')
-                        @csrf
-                        <button class="btn btn-sm" onclick="return confirm('Está seguro de eliminar el registro?')">
-                          Borrar
-                        </button>
-                      </form>
                     @endcan
                   </td>
                 </tr>

@@ -281,6 +281,16 @@ class PermissionsTableSeeder extends Seeder
           'slug' => 'farmacia',
           'description' => 'Padrón Farmacia'
         ]);
+        Permission::create([
+          'name' => 'Navegar Shopping Carts',
+          'slug' => 'shopping_cart.index',
+          'description' => 'Navega todos los carritos del sistema'
+        ]);
+        Permission::create([
+          'name' => 'Ver Shopping Cart',
+          'slug' => 'shopping_cart.show',
+          'description' => 'Ver en detalle un carrito finalizado'
+        ]);
         Role::create([
           'name' => 'Admin',
           'slug' => 'admin',

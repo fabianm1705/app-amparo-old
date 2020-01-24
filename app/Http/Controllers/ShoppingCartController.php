@@ -8,6 +8,7 @@ use Config;
 use MercadoPago\SDK;
 use Auth;
 use Illuminate\Support\Carbon;
+use App\ShoppingCart;
 
 class ShoppingCartController extends Controller
 {
@@ -16,9 +17,15 @@ class ShoppingCartController extends Controller
     $this->middleware('shopping_cart');
   }
 
+  public function index()
+  {
+    $shopping_carts = ShoppingCart::orderBy('id','asc')->where('status','=',1)->get();
+    return view('admin.shopping_cart.index',['shopping_carts' => $shopping_carts]);
+  }
+
   public function show(Request $request)
   {
-    return view('admin.product.cart',['shopping_cart' => $request->shopping_cart]);
+    return view('admin.shopping_cart.cart',['shopping_cart' => $request->shopping_cart]);
   }
 
   public function store(Request $request)
@@ -28,7 +35,7 @@ class ShoppingCartController extends Controller
     $request->shopping_cart->fecha = Carbon::now();
     $request->shopping_cart->save();
 
-    return view('admin.product.cartfin',['shopping_cart' => $request->shopping_cart])
+    return view('admin.shopping_cart.cartfin',['shopping_cart' => $request->shopping_cart])
           ->with('message','Compra finalizada!');
   }
 
@@ -36,7 +43,7 @@ class ShoppingCartController extends Controller
   {
     $method = new \App\MercadoPago;
     $preference = $method->setupPaymentAndGetRedirectURL();
-    return view('admin.product.previaMercadoPago',['preference' => $preference]);
+    return view('admin.shopping_cart.previaMercadoPago',['preference' => $preference]);
   }
 
   public function products(Request $request)

@@ -84,6 +84,9 @@
                               @can('profits.index')
                                 <a class="dropdown-item" href="{{ route('profits.index') }}">Percentages</a>
                               @endcan
+                              @can('shopping_cart.index')
+                                <a class="dropdown-item" href="{{ route('shopping_cart.index') }}">Shopping Carts</a>
+                              @endcan
                             </div>
                           </div>
                         @endcan

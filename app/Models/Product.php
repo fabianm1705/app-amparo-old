@@ -13,7 +13,7 @@ class Product extends Model
    */
   protected $fillable = [
       'modelo', 'descripcion', 'montoCuota', 'cantidadCuotas', 'vigente',
-      'image_url', 'category_id', 'costo',
+      'image_url', 'category_id', 'costo','image_url2','image_url3',
   ];
 
   public function category()

@@ -38284,24 +38284,24 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "d-flex" }, [
     _c(
-      "button",
+      "a",
       {
-        staticClass: "btn btn-sm btn-outline-success btn-block",
-        attrs: { type: "submit", name: "button" },
-        on: {
-          click: function($event) {
-            return _vm.addToCart(_vm.product.id)
-          }
-        }
+        staticStyle: { "text-decoration": "none", color: "black" },
+        attrs: { href: "/carrito" }
       },
       [
         _c(
-          "a",
+          "button",
           {
-            staticStyle: { "text-decoration": "none", color: "black" },
-            attrs: { href: "/carrito" }
+            staticClass: "btn btn-sm btn-outline-success btn-block",
+            attrs: { type: "submit", name: "button" },
+            on: {
+              click: function($event) {
+                return _vm.addToCart(_vm.product.id)
+              }
+            }
           },
-          [_vm._v("Comprar")]
+          [_vm._v("Comprar\n  ")]
         )
       ]
     )
@@ -52796,29 +52796,6 @@ if ('serviceWorker' in navigator) {
   window.addEventListener('load', function () {
     navigator.serviceWorker.register('/service-worker.js');
   });
-}
-
-var deferredPrompt;
-window.addEventListener('beforeinstallprompt', function (event) {
-  event.preventDefault();
-  deferredPrompt = event;
-  return false;
-});
-
-function addToHomeScreen() {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then(function (choiceResult) {
-      console.log(choiceResult.outcome);
-
-      if (choiceResult.outcome === 'dismissed') {
-        console.log('User cancelled installation');
-      } else {
-        console.log('User added to home screen');
-      }
-    });
-    deferredPrompt = null;
-  }
 }
 
 /***/ }),

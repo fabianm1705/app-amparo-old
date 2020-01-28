@@ -13,6 +13,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/addToHomeScreen.js') }}" defer></script>
 
     <link rel="manifest" href="/manifest.json" />
     <!-- Fonts -->

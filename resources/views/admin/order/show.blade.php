@@ -12,7 +12,7 @@
     <table class="Estilo1">
       <tr>
         <td><img src="{{ asset('images/logo.png') }}"></td>
-        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
         <td>
           <span>Lugar de Emisión: Sede Amparo</span><br>
           <span>Emisión: {{ \Carbon\Carbon::parse($order->fecha)->format('d/m/Y') }}</span><br>

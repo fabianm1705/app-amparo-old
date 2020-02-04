@@ -57,12 +57,18 @@ Route::get('/carrito/productos', 'ShoppingCartController@products')
 Route::post('/carritostore', 'ShoppingCartController@store')
               ->middleware(['auth','can:carrito'])
               ->name('shopping_cart.store');
+Route::get('/carritofin', 'ShoppingCartController@show2')
+              ->middleware(['auth','can:carrito'])
+              ->name('shopping_cart.show');
 Route::post('/pagar', 'ShoppingCartController@iniciarProcesoCobro')
               ->middleware(['auth','can:carrito'])
               ->name('iniciar.pago');
 Route::get('/shoppingcart', 'ShoppingCartController@index')
               ->middleware(['auth','can:shopping_cart.index'])
               ->name('shopping_cart.index');
+Route::post('/getProducts/{id}', 'ProductInShoppingCartsController@getProducts')
+              ->middleware('auth')
+              ->name('getProducts');
 
 
 Route::delete('/out_shopping_cart/{id}', 'ProductInShoppingCartsController@destroy')

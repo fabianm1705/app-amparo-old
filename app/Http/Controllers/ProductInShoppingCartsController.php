@@ -45,4 +45,13 @@ class ProductInShoppingCartsController extends Controller
     return redirect()->to('/carrito');
   }
 
+  public function getProducts($id)
+  {
+    //Tomar los Id de todos los usuarios del grupo
+    $productsId = ProductInShoppingCart::where('shopping_cart_id',$id)->pluck('product_id')->toArray();
+    //Para buscar las órdenes de todos
+    $products = Product::whereIn('id',$productsId)->orderBy('id', 'desc')->get();
+    return $products;
+  }
+
 }

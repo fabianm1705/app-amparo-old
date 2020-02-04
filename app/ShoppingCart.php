@@ -19,6 +19,11 @@ class ShoppingCart extends Model
       }
     }
 
+    public static function createById($shopping_cart_id)
+    {
+      return ShoppingCart::create();
+    }
+
     public function products(){
       return $this->belongsToMany('App\Models\Product','product_in_shopping_carts');
     }
@@ -29,5 +34,10 @@ class ShoppingCart extends Model
 
     public function amount(){
       return $this->products()->sum('product_in_shopping_carts.costo');
+    }
+
+    public function user()
+    {
+      return $this->belongsTo('App\User');
     }
 }

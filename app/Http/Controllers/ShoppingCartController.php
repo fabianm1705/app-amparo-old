@@ -28,14 +28,22 @@ class ShoppingCartController extends Controller
     return view('admin.shopping_cart.cart',['shopping_cart' => $request->shopping_cart]);
   }
 
+  public function show2(ShoppingCart $shopping_cart)
+  {
+    //$shopping_cart = ShoppingCart::find($shopping_cart_id)->get();
+    return view('admin.shopping_cart.cartfin', compact("shopping_cart"));
+  }
+
   public function store(Request $request)
   {
     $request->shopping_cart->status = 1;
     $request->shopping_cart->user_id = Auth::user()->id;
     $request->shopping_cart->fecha = Carbon::now();
     $request->shopping_cart->save();
+    $shopping_cart_vendido = $request->shopping_cart;
+    \Session::pull($sessionName, $request->$shopping_cart->id);
 
-    return view('admin.shopping_cart.cartfin',['shopping_cart' => $request->shopping_cart])
+    return view('admin.shopping_cart.cartfin',['shopping_cart' => $shopping_cart_vendido])
           ->with('message','Compra finalizada!');
   }
 

@@ -12,18 +12,25 @@
           <form action="{{ route('payment_methods.update', ['payment_method' => $payment_method]) }}" method="post">
             @method('PUT')
             @csrf
-            <div class="row justify-content-server">
               <div class="col-sm-12">
                 <div class="form-group">
                   <label for="name">Nombre</label>
                   <input type="text" class="form-control" name="name" id="name" value="{{ $payment_method->name }}">
                 </div>
-                <div class="form-group">
+                <div class="row form-group">
+                  <div class="col-lg-4">
+                    <label for="cant_cuotas">Cant. Cuotas</label>
+                    <input type="text" class="form-control" name="cant_cuotas" id="cant_cuotas" value="{{ $payment_method->cant_cuotas }}">
+                  </div>
+                  <div class="col-lg-4">
+                    <label for="percentage">%</label>
+                    <input type="text" class="form-control" name="percentage" id="percentage" value="{{ $payment_method->percentage }}">
+                  </div>
                   <div class="col-lg-4">
                     <div class="form-check">
                       <input type="hidden" class="form-check-input" name="activo" value="0">
                       <input type="checkbox" class="form-check-input" id="activo" name="activo" value="1" {{ $payment_method->activo ? 'checked="checked"' : '' }}>
-                      <label class="form-check-label" for="vigente">Activo</label>
+                      <label class="form-check-label align-bottom" for="vigente">Activo</label>
                     </div>
                   </div>
                 </div>

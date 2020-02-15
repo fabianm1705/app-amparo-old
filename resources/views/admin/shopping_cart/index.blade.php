@@ -3,15 +3,25 @@
 @section('myLinks')
   <script>
     function cargarCarrito(id){
+      const formatter = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+            minimumFractionDigits: 0
+          })
       axios.post('/getProducts/'+id)
         .then((resp)=>{
             var cont = document.getElementById("tablaproductos").rows.length;
             for (i = 0; i < (cont); i++) {
                 document.getElementById("borrar").remove();
             }
+            var monto = 0;
+            var total = 0;
             for (i = 0; i < Object.keys(resp.data).length; i++) {
-                $('<tr id="borrar"><td>' + resp.data[i].modelo + '</td><td>1</td></tr>').appendTo('#tablaproductos');
+                monto = resp.data[i].costo/6*(1+({{ $porccuotas/100 }}));
+                total = total + monto;
+                $('<tr id="borrar"><td>' + resp.data[i].modelo + '</td><td class="text-center">1</td><td class="text-right">' + formatter.format(monto) + '</td></tr>').appendTo('#tablaproductos');
             }
+            $('<tr id="borrar"><td></td><td class="text-center"></td><td>6 cuotas de ' + formatter.format(total) + '</td></tr>').appendTo('#tablaproductos');
         })
         .catch(function (error) {console.log(error);})
     }
@@ -21,7 +31,7 @@
 @section('content')
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-7">
+    <div class="col-md-6">
       <div class="card shadow-sm">
         <div class="card-body centrado">
           <table class="table table-hover table-sm table-responsive">
@@ -29,7 +39,7 @@
               <th>Nro. Socio</th>
               <th>Nombre</th>
               <th>Fecha</th>
-              <th class="text-center">Acciones</th>
+              <th class="text-center">Mostrar</th>
             </thead>
             <tbody>
               @foreach($shopping_carts as $shopping_cart)
@@ -37,12 +47,19 @@
                   <td class="align-middle">{{ $shopping_cart->user->group->nroSocio }}</td>
                   <td class="align-middle">{{ $shopping_cart->user->name }}</td>
                   <td class="align-middle">{{ $shopping_cart->fecha }}</td>
-                  <td>
+                  <td class="d-flex">
                     <button class="btn btn-sm" onclick="cargarCarrito({{ $shopping_cart->id }})" style="background-color: transparent;">
                       <div class="">
                         <i class="material-icons">double_arrow</i>
                       </div>
                     </button>
+                    <form action="{{ route('shopping_cart.destroy', ['shopping_cart' => $shopping_cart ]) }}" method="post" style="background-color: transparent;">
+                      @method('DELETE')
+                      @csrf
+                      <button class="btn btn-sm" onclick="return confirm('Está seguro de eliminar el registro?')">
+                        Borrar
+                      </button>
+                    </form>
                   </td>
                 </tr>
               @endforeach
@@ -51,13 +68,14 @@
         </div>
       </div>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-6">
       <div class="card shadow-sm">
         <div class="card-body centrado">
           <table class="table table-hover table-sm table-responsive">
             <thead>
               <th>Producto</th>
               <th>Cantidad</th>
+              <th class="text-center">Costo</th>
             </thead>
             <tbody id="tablaproductos">
             </tbody>

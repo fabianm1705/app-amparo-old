@@ -19,6 +19,8 @@
           <table class="table table-hover table-sm table-responsive">
             <thead>
               <th>Nombre</th>
+              <th>Cant. Cuotas</th>
+              <th>%</th>
               <th class="text-center">Activo</th>
               <th class="text-center">Acciones</th>
             </thead>
@@ -26,6 +28,8 @@
               @foreach($payment_methods as $payment_method)
                 <tr>
                   <td>{{ $payment_method->name }}</td>
+                  <td class="text-center">${{ $payment_method->cant_cuotas }}</td>
+                  <td class="text-center">${{ $payment_method->percentage }}</td>
                   <td class="text-center">
                     <input type="checkbox" class="form-check-input" id="activo" name="activo" disabled value="1" {{ $payment_method->activo ? 'checked="checked"' : '' }}>
                   </td>

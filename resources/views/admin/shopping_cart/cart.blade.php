@@ -1,5 +1,17 @@
 @extends('layouts.app')
 
+@section('myLinks')
+  <script>
+    function mostrarPrecio(cost,cant){
+      if(cant==1){
+        $('#precio').attr('text', '1 cuota');
+      }else{
+        $('#precio').attr('text', '6 cuotas');
+      }
+    }
+  </script>
+@endsection
+
 @section('content')
   <div class="container">
     <div class="row justify-content-center">
@@ -74,29 +86,40 @@
       <div class="col-12 col-md-3">
         <h5>Seleccione su medio de pago:</h5>
 
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <div class="row align-items-center justify-content-center">
-              <div class="col-3">
-                <img class="w-100" src="/images/favicon.png" alt="">
-              </div>
-              <div class="col-9 row align-items-center">
-                <cuotas-value-component
-                        :products="{{ $shopping_cart->products }}"
-                        :porccuotas="{{ $porccuotas }}">
-                </cuotas-value-component>
-              </div>
-            </div>
-            <div class="mt-2">
-              <form action="{{ route('shopping_cart.store') }}" method="post" enctype="multipart/form-data">
-                @csrf
-                <div class="text-right">
-                  <button class="btn btn-outline-success btn-block" type="submit" name="button">Finalizar Compra</button>
+        @foreach($payment_methods as $payment_method)
+          <div class="card shadow-sm mb-2">
+            <div class="card-body">
+              <div class="row justify-content-center">
+                <div class="col-2">
+                  <div class="radio-inline">
+                      <label>
+                          <input type="radio" key="{{ $payment_method->id }}" value="{{ $payment_method->id }}" name="payment_methods" />
+                      </label>
+                  </div>
                 </div>
-              </form>
+                <div class="col-10" id="precio">
+                  <price-component
+                          :productscost="{{ $productsCost }}"
+                          :percentage="{{ $payment_method->percentage }}"
+                          :cantcuotas="{{ $payment_method->cant_cuotas }}">
+                  </price-component>
+                </div>
+              </div>
+              <div>
+                <img class="w-100" src="{{ asset('images/'.$payment_method->image_url) }}" alt="{{ $payment_method->name }}">
+              </div>
             </div>
           </div>
+        @endforeach
+        <div class="">
+          <form action="{{ route('shopping_cart.store') }}" method="post" enctype="multipart/form-data">
+            @csrf
+            <div class="text-right">
+              <button class="btn btn-success btn-block" type="submit" name="button">Finalizar Compra</button>
+            </div>
+          </form>
         </div>
+
       </div>
     </div>
   </div>

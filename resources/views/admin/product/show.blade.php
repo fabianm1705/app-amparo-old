@@ -46,30 +46,35 @@
                   <div class="form-group">
                     <label for="descripcion">{{ $product->descripcion }}</label>
                   </div>
-                  <h5>Medios de Pago</h5>
-                  <hr>
-                  <div class="">
-                    <div class="row align-items-center">
-                      <div class="col-2">
-                        <img class="w-100" src="{{ asset('images/favicon.png') }}" alt="">
+                  @foreach($payment_methods as $payment_method)
+                    <center><div class="card shadow-sm mb-3 w-75">
+                      <div class="card-body">
+                        <div class="row justify-content-center">
+                          <div class="col-10" id="precio">
+                            <price-component
+                                    :productscost="{{ $product->costo }}"
+                                    :percentage="{{ $payment_method->percentage }}"
+                                    :cantcuotas="{{ $payment_method->cant_cuotas }}">
+                            </price-component>
+                          </div>
+                        </div>
+                        <div>
+                          <img class="w-100" src="{{ asset('images/'.$payment_method->image_url) }}" alt="{{ $payment_method->name }}">
+                        </div>
                       </div>
-                      <div class="col-10">
-                        <h5>Cuotas de la Casa</h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="justify-content-center">
-                    <hr><img class="card-img-top w-50" src="{{ asset('images/mp.jpg') }}" alt="Todos los medios de pago">
-                  </div>
-                  <hr>
+                    </div></center>
+                  @endforeach
                   <div class="row d-flex">
                     <div class="col-3">
                       <add-to-cart-component :product="{{$product}}">
                       </add-to-cart-component>
                     </div>
                     <div class="col-9 blanco">
-                      <add-and-buy-to-cart-component :product="{{$product}}">
-                      </add-and-buy-to-cart-component>
+                      <form action="{{ route('shopping_cart') }}" method="get" enctype="multipart/form-data">
+                        @csrf
+                        <add-and-buy-to-cart-component :product="{{$product}}">
+                        </add-and-buy-to-cart-component>
+                      </form>
                     </div>
                   </div>
                 </div>

@@ -1,17 +1,18 @@
 <template>
   <div class="d-flex">
-    <a href="/carrito" style="text-decoration:none;color:black;">
-    <button @click="addToCart(product.id)"
+    <button @click="addToCart"
           class="btn btn-sm btn-outline-success btn-block"
           type="submit"
           name="button">Comprar
-    </button></a>
+    </button>
   </div>
 </template>
 
 <script>
     export default {
-      props: { product:{ type: Object } },
+      props: {
+          product:{ type: Object }
+      },
       methods:{
         addToCart(){
           var product_id = this.product.id;
@@ -19,6 +20,7 @@
             .then(()=>{
               this.$store.commit('increment');
             })
+          this.cartroute;
         }
       }
     }

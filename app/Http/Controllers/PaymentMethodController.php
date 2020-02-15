@@ -43,16 +43,18 @@ class PaymentMethodController extends Controller
    */
   public function store(Request $request)
   {
-    if($request->hasFile('icon')){
-      $image_file=$request->file('icon');
+    if($request->hasFile('image_url')){
+      $image_file=$request->file('image_url');
       $image_name=time().$image_file->getClientOriginalName();
       $image_file->move(public_path().'/images',$image_name);
     }
 
     $payment_method = new PaymentMethod;
     $payment_method->name = $request->input('name');
+    $payment_method->percentage = $request->input('percentage');
+    $payment_method->cant_cuotas = $request->input('cant_cuotas');
     $payment_method->activo = $request->input('activo');
-    $payment_method->icon = $image_name;
+    $payment_method->image_url = $image_name;
 
     $payment_method->save();
 
@@ -79,11 +81,12 @@ class PaymentMethodController extends Controller
    * @param  \App\Models\Product  $product
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, Product $product)
+  public function update(Request $request, PaymentMethod $payment_method)
   {
     $payment_method->name = $request->input('name');
+    $payment_method->percentage = $request->input('percentage');
+    $payment_method->cant_cuotas = $request->input('cant_cuotas');
     $payment_method->activo = $request->input('activo');
-    $payment_method->icon = $image_name;
 
     $payment_method->save();
 

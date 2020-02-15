@@ -12,6 +12,6 @@ class PaymentMethod extends Model
    * @var array
    */
   protected $fillable = [
-      'name', 'activo', 'icon',
+      'name', 'activo', 'image_url', 'percentage', 'cant_cuotas',
   ];
 }

@@ -6,6 +6,7 @@
       <div class="col-12">
         <shopping-component
                 :categories="{{$categories}}"
+                :payment_methods="{{$payment_methods}}"
                 :porccuotas="{{$porccuotas}}"
                 :porccredito="{{$porccredito}}"
                 :contados="{{$contados}}">

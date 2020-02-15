@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ShoppingCart extends Model
 {
     protected $fillable = [
-        'status', 'fecha', 'user_id',
+        'status', 'fecha', 'user_id', 'payment_method_id',
     ];
 
     public static function findOrCreateById($shopping_cart_id)
@@ -39,5 +39,10 @@ class ShoppingCart extends Model
     public function user()
     {
       return $this->belongsTo('App\User');
+    }
+
+    public function paymentMethod()
+    {
+      return $this->belongsTo('App\Models\PaymentMethod');
     }
 }

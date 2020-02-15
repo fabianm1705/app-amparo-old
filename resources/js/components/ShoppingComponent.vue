@@ -1,7 +1,7 @@
 <template>
 <section>
 <div class="row">
-  <div class="col-md-3">
+  <div class="col-md-3 mt-2">
 
     <ul class="list-group">
       <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -30,22 +30,16 @@
     </div>
     <br>
     <h5>Medios de Pago</h5>
-    <hr>
-    <div class="">
-      <div class="row align-items-center">
-        <div class="col-3">
-          <img class="w-100" src="/images/favicon.png" alt="">
-        </div>
-        <div class="col-9">
-          <h5>Cuotas de la Casa</h5>
+    <div v-for="payment_method in payment_methods" class="card shadow-sm mb-2">
+      <div class="card-body">
+        <div>
+          <img class="w-100" :src="'../images/'+payment_method.image_url" :alt="payment_method.name">
         </div>
       </div>
     </div>
-    <div class="justify-content-center">
-      <hr><img class="card-img-top w-75" src="/images/mp.jpg" alt="Todos los medios de pago">
-    </div>
+
   </div>
-  <div class="col-md-9">
+  <div class="col-md-9 mt-2">
     <material-transition-group-component tag="div" class="row">
         <product-in-shopping-component
                 v-for="(product,index) in products"
@@ -66,6 +60,7 @@
 <script>
     export default {
       props: {
+        payment_methods:{ type: Array },
         categories:{ type: Array },
         product:{ type: Object },
         porccuotas:{ type: Number },

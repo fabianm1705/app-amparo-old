@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\PaymentMethod;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\DB;
@@ -93,8 +94,9 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+      $payment_methods = PaymentMethod::where('activo',1)->get();
       $categories = Category::orderBy('nombre','asc')->get();
-      return view('admin.product.show', compact("product","categories"));
+      return view('admin.product.show', compact("product","categories","payment_methods"));
     }
 
     /**
@@ -149,9 +151,10 @@ class ProductController extends Controller
 
     public function shopping()
     {
+      $payment_methods = PaymentMethod::where('activo',1)->get();
       $contados = Category::withCount('products')->get();
       $categories = Category::orderBy('nombre','asc')->get();
-      return view('admin.product.shopping', compact("categories","contados"));
+      return view('admin.product.shopping', compact("categories","contados","payment_methods"));
     }
 
     public function getProductsXCategory($id)

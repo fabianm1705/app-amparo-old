@@ -43,6 +43,7 @@ const store = new Vuex.Store({
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 Vue.component('material-transition-group-component', require('./components/animations/MaterialCollectionComponent.vue').default);
 
+Vue.component('price-component', require('./components/PriceComponent.vue').default);
 Vue.component('product-in-cart-component', require('./components/ProductInCartComponent.vue').default);
 Vue.component('cart-component', require('./components/CartComponent.vue').default);
 Vue.component('add-to-cart-component', require('./components/AddToCartComponent.vue').default);

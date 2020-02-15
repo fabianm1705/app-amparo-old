@@ -9,6 +9,7 @@ use MercadoPago\SDK;
 use Auth;
 use Illuminate\Support\Carbon;
 use App\ShoppingCart;
+use App\Models\PaymentMethod;
 
 class ShoppingCartController extends Controller
 {
@@ -19,13 +20,19 @@ class ShoppingCartController extends Controller
 
   public function index()
   {
-    $shopping_carts = ShoppingCart::orderBy('id','asc')->where('status','=',1)->get();
+    $shopping_carts = ShoppingCart::orderBy('id','desc')->where('status','=',1)->get();
     return view('admin.shopping_cart.index',['shopping_carts' => $shopping_carts]);
   }
 
   public function show(Request $request)
   {
-    return view('admin.shopping_cart.cart',['shopping_cart' => $request->shopping_cart]);
+    $payment_methods = PaymentMethod::where('activo',1)->get();
+    $productsCost = $request->shopping_cart->amount();
+
+    return view('admin.shopping_cart.cart',
+    ['shopping_cart' => $request->shopping_cart,
+    'payment_methods' => $payment_methods,
+    'productsCost' => $productsCost]);
   }
 
   public function show2(ShoppingCart $shopping_cart)
@@ -39,9 +46,10 @@ class ShoppingCartController extends Controller
     $request->shopping_cart->status = 1;
     $request->shopping_cart->user_id = Auth::user()->id;
     $request->shopping_cart->fecha = Carbon::now();
+    $request->shopping_cart->payment_method_id = 1;
     $request->shopping_cart->save();
     $shopping_cart_vendido = $request->shopping_cart;
-    \Session::pull($sessionName, $request->$shopping_cart->id);
+    \Session::pull('shopping_cart_id', $shopping_cart_vendido->id);
 
     return view('admin.shopping_cart.cartfin',['shopping_cart' => $shopping_cart_vendido])
           ->with('message','Compra finalizada!');
@@ -87,6 +95,13 @@ class ShoppingCartController extends Controller
       # $this->notify($order);
       $url = $this->generatePaymentGateway($request);
       return redirect()->to($url);
+  }
+
+  public function destroy(ShoppingCart $shopping_cart)
+  {
+    $shopping_cart->delete();
+    return redirect()
+      ->route('shopping_cart.index');
   }
 
 }

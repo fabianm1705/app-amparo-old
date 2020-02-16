@@ -44,8 +44,9 @@
         },
         methods:{
             formatPrice(value) {
-                    let val = (value/1).toFixed(2).replace('.', ',')
-                    return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+                    let val = (value/10).toFixed(0).replace('.', ',')
+                    val = val * 10
+                  return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
             },
             deleteOfCart(product_id){
               axios.post('/deleteOfCart/'+product_id)

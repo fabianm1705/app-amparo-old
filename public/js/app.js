@@ -2039,7 +2039,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     formatPrice: function formatPrice(value) {
-      var val = (value / 1).toFixed(2).replace('.', ',');
+      var val = (value / 1).toFixed(0).replace('.', ',');
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     },
     deleteOfCarrito: function deleteOfCarrito(product_id) {
@@ -2122,7 +2122,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     formatPrice: function formatPrice(value) {
-      var val = (value / 1).toFixed(2).replace('.', ',');
+      var val = (value / 10).toFixed(0).replace('.', ',');
+      val = val * 10;
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
   }
@@ -2442,7 +2443,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     formatPrice: function formatPrice(value) {
-      var val = (value / 1).toFixed(2).replace('.', ',');
+      var val = (value / 10).toFixed(0).replace('.', ',');
+      val = val * 10;
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
   }
@@ -2510,7 +2512,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     formatPrice: function formatPrice(value) {
-      var val = (value / 1).toFixed(2).replace('.', ',');
+      var val = (value / 10).toFixed(0).replace('.', ',');
+      val = val * 10;
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     },
     deleteOfCart: function deleteOfCart(product_id) {
@@ -2571,7 +2574,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     formatPrice: function formatPrice(value) {
-      var val = (value / 1).toFixed(2).replace('.', ',');
+      var val = (value / 10).toFixed(0).replace('.', ',');
+      val = val * 10;
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
   }
@@ -2827,7 +2831,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     formatPrice: function formatPrice(value) {
-      var val = (value / 1).toFixed(2).replace('.', ',');
+      var val = (value / 10).toFixed(0).replace('.', ',');
+      val = val * 10;
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
   }
@@ -2871,7 +2876,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     formatPrice: function formatPrice(value) {
-      var val = (value / 1).toFixed(2).replace('.', ',');
+      var val = (value / 10).toFixed(0).replace('.', ',');
+      val = val * 10;
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
   }
@@ -52808,6 +52814,7 @@ var store = new Vuex.Store({
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('material-transition-group-component', __webpack_require__(/*! ./components/animations/MaterialCollectionComponent.vue */ "./resources/js/components/animations/MaterialCollectionComponent.vue")["default"]);
+Vue.component('price-component', __webpack_require__(/*! ./components/PriceComponent.vue */ "./resources/js/components/PriceComponent.vue")["default"]);
 Vue.component('product-in-cart-component', __webpack_require__(/*! ./components/ProductInCartComponent.vue */ "./resources/js/components/ProductInCartComponent.vue")["default"]);
 Vue.component('cart-component', __webpack_require__(/*! ./components/CartComponent.vue */ "./resources/js/components/CartComponent.vue")["default"]);
 Vue.component('add-to-cart-component', __webpack_require__(/*! ./components/AddToCartComponent.vue */ "./resources/js/components/AddToCartComponent.vue")["default"]);
@@ -52816,7 +52823,6 @@ Vue.component('cart-counter-component', __webpack_require__(/*! ./components/Car
 Vue.component('cuotas-value-component', __webpack_require__(/*! ./components/CuotasValueComponent.vue */ "./resources/js/components/CuotasValueComponent.vue")["default"]);
 Vue.component('total-value-component', __webpack_require__(/*! ./components/TotalValueComponent.vue */ "./resources/js/components/TotalValueComponent.vue")["default"]);
 Vue.component('total-value-only-component', __webpack_require__(/*! ./components/TotalValueOnlyComponent.vue */ "./resources/js/components/TotalValueOnlyComponent.vue")["default"]);
-Vue.component('price-component', __webpack_require__(/*! ./components/PriceComponent.vue */ "./resources/js/components/PriceComponent.vue")["default"]);
 Vue.component('shopping-component', __webpack_require__(/*! ./components/ShoppingComponent.vue */ "./resources/js/components/ShoppingComponent.vue")["default"]);
 Vue.component('product-in-shopping-component', __webpack_require__(/*! ./components/ProductInShoppingComponent.vue */ "./resources/js/components/ProductInShoppingComponent.vue")["default"]);
 Vue.component('specialty-doctors-table-component', __webpack_require__(/*! ./components/SpecialtyDoctorsTableComponent.vue */ "./resources/js/components/SpecialtyDoctorsTableComponent.vue")["default"]);

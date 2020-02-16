@@ -37,8 +37,12 @@ class ShoppingCartController extends Controller
 
   public function show2(ShoppingCart $shopping_cart)
   {
-    //$shopping_cart = ShoppingCart::find($shopping_cart_id)->get();
-    return view('admin.shopping_cart.cartfin', compact("shopping_cart"));
+    $payment_method = PaymentMethod::where('id',$shopping_cart->payment_method_id)->get();
+    $productsCost = $request->shopping_cart->amount();
+    return view('admin.shopping_cart.cartfin',
+    ['shopping_cart' => $shopping_cart,
+    'payment_method' => $payment_method,
+    'productsCost' => $productsCost]);
   }
 
   public function store(Request $request)
@@ -46,13 +50,17 @@ class ShoppingCartController extends Controller
     $request->shopping_cart->status = 1;
     $request->shopping_cart->user_id = Auth::user()->id;
     $request->shopping_cart->fecha = Carbon::now();
-    $request->shopping_cart->payment_method_id = 1;
+    $request->shopping_cart->payment_method_id = $request->input('payment_method_id');
+    $productsCost = $request->shopping_cart->amount();
     $request->shopping_cart->save();
+    $payment_methods = PaymentMethod::where('id',$request->shopping_cart->payment_method_id)->get();
     $shopping_cart_vendido = $request->shopping_cart;
     \Session::pull('shopping_cart_id', $shopping_cart_vendido->id);
 
-    return view('admin.shopping_cart.cartfin',['shopping_cart' => $shopping_cart_vendido])
-          ->with('message','Compra finalizada!');
+    return view('admin.shopping_cart.cartfin',
+    ['shopping_cart' => $shopping_cart_vendido,
+    'payment_methods' => $payment_methods,
+    'productsCost' => $productsCost])->with('message','Compra finalizada!');
   }
 
   public function iniciarProcesoCobro()

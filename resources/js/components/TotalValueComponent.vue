@@ -20,7 +20,8 @@
       },
       methods:{
           formatPrice(value) {
-                  let val = (value/1).toFixed(2).replace('.', ',')
+                  let val = (value/10).toFixed(0).replace('.', ',')
+                  val = val * 10
                   return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
           }
       }

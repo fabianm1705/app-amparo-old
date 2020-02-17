@@ -1,5 +1,19 @@
 @extends('layouts.app')
 
+@section('myLinks')
+  <script>
+    function cargarPrecio(cuotas,percentage,costo){
+      var precio;
+      precio = Math.round(costo / 10 * (1+(percentage/100)) / cuotas) * 10;
+      if (cuotas=="1") {
+        $('#monto').html(cuotas+' pago de $'+precio);
+      } else {
+        $('#monto').html(cuotas+' cuotas de $'+precio);
+      }
+    }
+  </script>
+@endsection
+
 @section('content')
 <div class="container">
   <div class="row justify-content-center">
@@ -47,19 +61,17 @@
                     <label for="descripcion">{{ $product->descripcion }}</label>
                   </div>
                   @foreach($payment_methods as $payment_method)
-                    <center><div class="card shadow-sm mb-3 w-75">
+                    <center><div class="card shadow-sm mb-3 w-100">
                       <div class="card-body">
                         <div class="row justify-content-center">
-                          <div class="col-10" id="precio">
-                            <price-component
-                                    :productscost="{{ $product->costo }}"
-                                    :percentage="{{ $payment_method->percentage }}"
-                                    :cantcuotas="{{ $payment_method->cant_cuotas }}">
-                            </price-component>
+                          <div class="col-10" id="monto">
                           </div>
                         </div>
                         <div>
-                          <img class="w-100" src="{{ asset('images/'.$payment_method->image_url) }}" alt="{{ $payment_method->name }}">
+                          <img onload="cargarPrecio({{ $payment_method->cant_cuotas }},{{ $payment_method->percentage }},{{ $product->costo }})"
+                               class="w-100"
+                               src="{{ asset('images/'.$payment_method->image_url) }}"
+                               alt="{{ $payment_method->name }}">
                         </div>
                       </div>
                     </div></center>

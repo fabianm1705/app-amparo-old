@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\Specialty;
 use App\Models\Doctor;
 use App\User;
+use App\UserInterest;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -34,6 +35,8 @@ class OrderController extends Controller
 
     public function indice()
     {
+      UserInterest::create(['user_id' => Auth::user()->id,'interest_id' => 2]);
+
       $group_id = Auth::user()->group_id;
       //Tomar los Id de todos los usuarios del grupo
       $usersId = User::where('group_id',$group_id)->pluck('id')->toArray();
@@ -148,6 +151,8 @@ class OrderController extends Controller
 
     public function crear(Request $request)
     {
+      UserInterest::create(['user_id' => Auth::user()->id,'interest_id' => 3]);
+
       $group_id = Auth::user()->group_id;
       //Tomar los Id de todos los usuarios del grupo
       $usersId = User::where('group_id',$group_id)->pluck('id')->toArray();

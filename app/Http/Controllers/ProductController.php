@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\PaymentMethod;
+use App\UserInterest;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\DB;
@@ -94,6 +95,9 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+      UserInterest::create(['user_id' => Auth::user()->id,
+                            'interest_id' => 7,
+                            'obs'=>$product->modelo]);
       $payment_methods = PaymentMethod::where('activo',1)->get();
       $categories = Category::orderBy('nombre','asc')->get();
       return view('admin.product.show', compact("product","categories","payment_methods"));
@@ -151,6 +155,8 @@ class ProductController extends Controller
 
     public function shopping()
     {
+      UserInterest::create(['user_id' => Auth::user()->id,'interest_id' => 5]);
+
       $payment_methods = PaymentMethod::where('activo',1)->get();
       $contados = Category::withCount('products')->get();
       $categories = Category::orderBy('nombre','asc')->get();
@@ -162,6 +168,10 @@ class ProductController extends Controller
       if($id==0){
         $products = DB::table('products')->get();
       }else{
+        $category = Category::find($id);
+        UserInterest::create(['user_id' => Auth::user()->id,
+                              'interest_id' => 6,
+                              'obs' => $category->nombre]);
         $products = DB::table('products')
               ->where('category_id', '=', $id)
               ->get();

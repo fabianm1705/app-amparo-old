@@ -22,10 +22,10 @@ class DatabaseSeeder extends Seeder
           'groups',
           'specialties',
           'doctors',
-          'profits'
+          'interests'
         ]);
         $this->call(PermissionsTableSeeder::class);
-        $this->call(ProfitsTableSeeder::class);
+        $this->call(InterestsSeeder::class);
         $this->call(SpecialtiesTableSeeder::class);
         $this->call(DoctorsTableSeeder::class);
         $this->call(GroupsTableSeeder::class);

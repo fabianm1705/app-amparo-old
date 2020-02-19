@@ -39,6 +39,8 @@ Route::group(['prefix' => 'admin'], function() {
               ->middleware('auth');
   Route::resource('profits', 'ProfitController')
               ->middleware('auth');
+  Route::resource('interests', 'InterestController')
+              ->middleware('auth');
   Route::resource('payment_methods', 'PaymentMethodController')
               ->except('show')
               ->middleware('auth');

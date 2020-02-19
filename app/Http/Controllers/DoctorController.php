@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Doctor;
 use App\Models\Specialty;
+use App\UserInterest;
 use Illuminate\Http\Request;
 use App\Http\Requests\DoctorFormRequest;
 use Auth;
@@ -131,6 +132,8 @@ class DoctorController extends Controller
 
     public function mostrar(Request $request)
     {
+      UserInterest::create(['user_id' => Auth::user()->id,'interest_id' => 3]);
+
       $specialties = Cache::remember('specialties', now()->addMonths(1), function () {
            return Specialty::orderBy('descripcion','asc')
                                 ->where('vigente','=',1)

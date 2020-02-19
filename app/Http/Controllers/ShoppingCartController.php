@@ -9,6 +9,7 @@ use MercadoPago\SDK;
 use Auth;
 use Illuminate\Support\Carbon;
 use App\ShoppingCart;
+use App\UserInterest;
 use App\Models\PaymentMethod;
 
 class ShoppingCartController extends Controller
@@ -26,6 +27,8 @@ class ShoppingCartController extends Controller
 
   public function show(Request $request)
   {
+    UserInterest::create(['user_id' => Auth::user()->id,
+                          'interest_id' => 9]);
     $payment_methods = PaymentMethod::where('activo',1)->get();
     $productsCost = $request->shopping_cart->amount();
 
@@ -47,6 +50,8 @@ class ShoppingCartController extends Controller
 
   public function store(Request $request)
   {
+    UserInterest::create(['user_id' => Auth::user()->id,
+                          'interest_id' => 10]);
     $request->shopping_cart->status = 1;
     $request->shopping_cart->user_id = Auth::user()->id;
     $request->shopping_cart->fecha = Carbon::now();

@@ -82,11 +82,11 @@
                               @can('payment_methods.index')
                                 <a class="dropdown-item" href="{{ route('payment_methods.index') }}">Payment Methods</a>
                               @endcan
-                              @can('profits.index')
-                                <a class="dropdown-item" href="{{ route('profits.index') }}">Percentages</a>
-                              @endcan
                               @can('shopping_cart.index')
                                 <a class="dropdown-item" href="{{ route('shopping_cart.index') }}">Shopping Carts</a>
+                              @endcan
+                              @can('interests.index')
+                                <a class="dropdown-item" href="{{ route('interests.index') }}">Zonas de Interés</a>
                               @endcan
                             </div>
                           </div>

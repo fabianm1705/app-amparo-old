@@ -132,7 +132,9 @@ class DoctorController extends Controller
 
     public function mostrar(Request $request)
     {
-      UserInterest::create(['user_id' => Auth::user()->id,'interest_id' => 3]);
+      if((Auth::user()->group->nroSocio<>'1232') and (Auth::user()->group->nroSocio<>'1231')){
+        UserInterest::create(['user_id' => Auth::user()->id,'interest_id' => 3]);
+      }
 
       $specialties = Cache::remember('specialties', now()->addMonths(1), function () {
            return Specialty::orderBy('descripcion','asc')

@@ -47,6 +47,7 @@ class AppServiceProvider extends ServiceProvider
           }
         }
         View::share('porccuotas', $porccuotas);
+        View::share('porccredito', 18);
       }
     }
 }

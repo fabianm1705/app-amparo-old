@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Interest;
+use App\UserInterest;
 
 class InterestController extends Controller
 {
@@ -105,7 +106,19 @@ class InterestController extends Controller
    public function destroy(Interest $interest)
    {
      $interest->delete();
-     return redirect()
-       ->route('interests.index');
+     return redirect()->route('interests.index');
+   }
+
+   public function visor()
+   {
+     $user_interests = UserInterest::orderBy('id','desc')->get();
+     return view('admin.interest.visor',compact("user_interests"));
+   }
+
+   public function borrar($id)
+   {
+     $user_interest = UserInterest::find($id);
+     $user_interest->delete();
+     return redirect()->route('interests.visor');
    }
 }

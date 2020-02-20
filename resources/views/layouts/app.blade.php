@@ -88,6 +88,9 @@
                               @can('interests.index')
                                 <a class="dropdown-item" href="{{ route('interests.index') }}">Zonas de Interés</a>
                               @endcan
+                              @can('interests.index')
+                                <a class="dropdown-item" href="{{ route('interests.visor') }}">Visor: Zonas de Interés</a>
+                              @endcan
                             </div>
                           </div>
                         @endcan

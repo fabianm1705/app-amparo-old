@@ -27,8 +27,10 @@ class ShoppingCartController extends Controller
 
   public function show(Request $request)
   {
-    UserInterest::create(['user_id' => Auth::user()->id,
-                          'interest_id' => 9]);
+    if(Auth::user()->group->nroSocio<>'1232'){
+      UserInterest::create(['user_id' => Auth::user()->id,
+                            'interest_id' => 9]);
+    }
     $payment_methods = PaymentMethod::where('activo',1)->get();
     $productsCost = $request->shopping_cart->amount();
 
@@ -50,8 +52,10 @@ class ShoppingCartController extends Controller
 
   public function store(Request $request)
   {
-    UserInterest::create(['user_id' => Auth::user()->id,
-                          'interest_id' => 10]);
+    if((Auth::user()->group->nroSocio<>'1232') and (Auth::user()->group->nroSocio<>'1231')){
+      UserInterest::create(['user_id' => Auth::user()->id,
+                            'interest_id' => 10]);
+    }
     $request->shopping_cart->status = 1;
     $request->shopping_cart->user_id = Auth::user()->id;
     $request->shopping_cart->fecha = Carbon::now();

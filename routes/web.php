@@ -83,6 +83,13 @@ Route::post('/in_shopping_cart/{product_id}', 'ProductInShoppingCartsController@
               ->middleware(['auth','can:carrito'])
               ->name('in_shopping_cart.store');
 
+Route::get('/user_interest', 'InterestController@visor')
+              ->middleware(['auth','can:interests.index'])
+              ->name('interests.visor');
+Route::delete('/out_user_interest/{id}', 'InterestController@borrar')
+              ->middleware(['auth','can:interests.destroy'])
+              ->name('user_interest.borrar');
+
 
 //Buscar socios
 Route::get('odontologia', 'UserController@odontologia')

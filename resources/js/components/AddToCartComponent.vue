@@ -6,7 +6,7 @@
           type="submit"
           name="button"
           style="background-color:transparent">
-      <small><i class="material-icons">shopping_cart</i></small>+
+          <i class="material-icons">add_shopping_cart</i>
     </button>
   </div>
 </template>

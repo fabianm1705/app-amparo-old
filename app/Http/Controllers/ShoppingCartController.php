@@ -11,6 +11,7 @@ use Illuminate\Support\Carbon;
 use App\ShoppingCart;
 use App\UserInterest;
 use App\Models\PaymentMethod;
+use Illuminate\Support\Facades\DB;
 
 class ShoppingCartController extends Controller
 {
@@ -27,13 +28,12 @@ class ShoppingCartController extends Controller
 
   public function show(Request $request)
   {
-    if(Auth::user()->group->nroSocio<>'1232'){
+    $payment_methods = PaymentMethod::where('activo',1)->get();
+    $productsCost = $request->shopping_cart->amount();
+    if((Auth::user()->group->nroSocio<>'1232') and (Auth::user()->group->nroSocio<>'1231')){
       UserInterest::create(['user_id' => Auth::user()->id,
                             'interest_id' => 9]);
     }
-    $payment_methods = PaymentMethod::where('activo',1)->get();
-    $productsCost = $request->shopping_cart->amount();
-
     return view('admin.shopping_cart.cart',
     ['shopping_cart' => $request->shopping_cart,
     'payment_methods' => $payment_methods,
@@ -114,11 +114,12 @@ class ShoppingCartController extends Controller
       return redirect()->to($url);
   }
 
-  public function destroy(ShoppingCart $shopping_cart)
+  public function destroy($id)
   {
+    DB::table('product_in_shopping_carts')->where('shopping_cart_id', '=', $id)->delete();
+    $shopping_cart = ShoppingCart::find($id);
     $shopping_cart->delete();
-    return redirect()
-      ->route('shopping_cart.index');
+    return redirect()->route('shopping_cart.index');
   }
 
 }

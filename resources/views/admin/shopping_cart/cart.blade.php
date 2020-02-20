@@ -98,7 +98,7 @@
                     <div class="col-2">
                       <div class="radio-inline">
                           <label>
-                              <input type="radio" key="{{ $payment_method->id }}" value="{{ $payment_method->id }}" name="payment_method_id" />
+                              <input type="radio" key="{{ $payment_method->id }}" value="{{ $payment_method->id }}" {{ $payment_method->id==1 ? 'checked="checked"' : '' }} name="payment_method_id" />
                           </label>
                       </div>
                     </div>

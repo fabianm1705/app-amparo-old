@@ -68,7 +68,7 @@ Route::post('/pagar', 'ShoppingCartController@iniciarProcesoCobro')
 Route::get('/shoppingcart', 'ShoppingCartController@index')
               ->middleware(['auth','can:shopping_cart.index'])
               ->name('shopping_cart.index');
-Route::delete('/shopping_cart_destroy', 'ShoppingCartController@destroy')
+Route::delete('/shopping_cart_destroy/{id}', 'ShoppingCartController@destroy')
               ->middleware(['auth','can:carrito'])
               ->name('shopping_cart.destroy');
 Route::post('/getProducts/{id}', 'ProductInShoppingCartsController@getProducts')

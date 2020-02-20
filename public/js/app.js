@@ -1848,6 +1848,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     product: {
@@ -1862,7 +1865,6 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/in_shopping_cart/' + product_id).then(function () {
         _this.$store.commit('increment');
       });
-      this.cartroute;
     }
   }
 });
@@ -38326,19 +38328,29 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "d-flex" }, [
+  return _c("div", {}, [
     _c(
       "button",
       {
-        staticClass: "btn btn-sm btn-outline-success btn-block",
+        staticClass: "btn btn-success btn-block",
         attrs: { type: "submit", name: "button" },
         on: { click: _vm.addToCart }
       },
-      [_vm._v("Comprar\n  ")]
+      [_vm._m(0)]
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-flex justify-content-center" }, [
+      _c("i", { staticClass: "material-icons" }, [_vm._v("shopping_cart")]),
+      _vm._v("Comprar\n        ")
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -38369,20 +38381,15 @@ var render = function() {
         attrs: { title: "agregar al Carrito", type: "submit", name: "button" },
         on: { click: _vm.addToCart }
       },
-      [_vm._m(0), _vm._v("+\n  ")]
+      [
+        _c("i", { staticClass: "material-icons" }, [
+          _vm._v("add_shopping_cart")
+        ])
+      ]
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("small", [
-      _c("i", { staticClass: "material-icons" }, [_vm._v("shopping_cart")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

@@ -1,9 +1,12 @@
 <template>
-  <div class="d-flex">
+  <div class="">
     <button @click="addToCart"
-          class="btn btn-sm btn-outline-success btn-block"
+          class="btn btn-success btn-block"
           type="submit"
-          name="button">Comprar
+          name="button">
+          <div class="d-flex justify-content-center">
+            <i class="material-icons">shopping_cart</i>Comprar
+          </div>
     </button>
   </div>
 </template>
@@ -20,7 +23,6 @@
             .then(()=>{
               this.$store.commit('increment');
             })
-          this.cartroute;
         }
       }
     }

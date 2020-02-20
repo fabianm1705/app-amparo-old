@@ -55,7 +55,7 @@
                         <i class="material-icons">double_arrow</i>
                       </div>
                     </button>
-                    <form action="{{ route('shopping_cart.destroy', ['shopping_cart' => $shopping_cart ]) }}" method="post" style="background-color: transparent;">
+                    <form action="{{ route('shopping_cart.destroy', ['id' => $shopping_cart->id ]) }}" method="post" style="background-color: transparent;">
                       @method('DELETE')
                       @csrf
                       <button class="btn btn-sm" onclick="return confirm('Está seguro de eliminar el registro?')">

@@ -55,13 +55,10 @@
               <div class="row justify-content-server">
                 <div class="col-sm-12">
                   <div class="form-group">
-                    <label for="content">{{ $product->category->nombre }}</label>
-                  </div>
-                  <div class="form-group">
                     <label for="descripcion">{{ $product->descripcion }}</label>
                   </div>
                   @foreach($payment_methods as $payment_method)
-                    <center><div class="card shadow-sm mb-3 w-100">
+                    <center><div class="card shadow-sm mb-3 w-75">
                       <div class="card-body">
                         <div class="row justify-content-center">
                           <div class="col-10" id="monto">

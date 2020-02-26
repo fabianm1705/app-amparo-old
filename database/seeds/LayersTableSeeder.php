@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Models\Layer;
 use App\User;
+use App\Subscription;
 
 class LayersTableSeeder extends Seeder
 {
@@ -28,6 +29,12 @@ class LayersTableSeeder extends Seeder
           if($user->group->nroSocio==utf8_encode(trim($datos[0]))){
             $layer->user_id=$user->id;
           }
+        }
+
+        $subscription = Subscription::where('description', '=', utf8_encode(trim($datos[2])))
+                      ->get()->first();
+        if (isset($subscription)) {
+          $layer->subscription_id=$subscription->id;
         }
 
         $layer->save();

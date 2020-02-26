@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Subscription;
 use Caffeinated\Shinobi\Models\Role;
 use App\Http\Requests\ChangePasswordRequest;
 use Illuminate\Support\Facades\DB;
@@ -15,6 +16,7 @@ class UserController extends Controller
 {
   public function __construct()
   {
+    $this->middleware('can:aop')->only('odontologia');
     $this->middleware('can:users.index')->only('index');
     $this->middleware('can:users.show')->only('show');
     $this->middleware('can:users.destroy')->only('destroy');
@@ -140,7 +142,12 @@ class UserController extends Controller
 
   public function odontologia()
   {
-    $users = User::orderBy('name')->paginate();
-    return view('admin.user.odontologia',compact("users"));
+    $subscriptions = Subscription::where('odontologia',1)->get();
+    $users = $subscriptions->flatMap->users->sortBy('name');
+    $usersCount = $subscriptions->flatMap->users->count();
+    return view('admin.user.odontologia',[
+      'users' => $users,
+      'usersCount' => $usersCount
+    ]);
   }
 }

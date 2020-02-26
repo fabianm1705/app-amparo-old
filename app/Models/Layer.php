@@ -12,11 +12,17 @@ class Layer extends Model
    * @var array
    */
   protected $fillable = [
-      'nombre', 'monto', 'user_id',
+      'nombre', 'monto', 'user_id', 'subscription_id',
   ];
 
   public function user()
   {
     return $this->belongsTo('App\User');
   }
+
+  public function subscription()
+  {
+    return $this->belongsTo('App\Subscription');
+  }
+
 }

@@ -49,9 +49,9 @@ class User extends Authenticatable
       return $this->hasMany('App\Models\Order','pacient_id');
     }
 
-    public function layers()
+    public function subscriptions()
     {
-      return $this->hasMany('App\Models\Layer','user_id');
+      return $this->belongsToMany('App\Subscription','layers');
     }
 
     public function shopping_carts()

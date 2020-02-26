@@ -40,14 +40,14 @@ class AppServiceProvider extends ServiceProvider
       if(Schema::hasTable('payment_methods')){
         $cuotas = DB::table('payment_methods')->where('id',1)->get();
         if($cuotas->isEmpty()){
-          $porccuotas = 28;
+          $porccuotas = 23;
         }else{
           foreach($cuotas as $cuota){
             $porccuotas = $cuota->percentage;
           }
         }
         View::share('porccuotas', $porccuotas);
-        View::share('porccredito', 18);
+        View::share('porccredito', 15);
       }
     }
 }

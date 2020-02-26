@@ -317,6 +317,31 @@ class PermissionsTableSeeder extends Seeder
           'slug' => 'interests.destroy',
           'description' => 'Eliminar una zona de interés'
         ]);
+        Permission::create([
+          'name' => 'Ver Plans/Subscriptions',
+          'slug' => 'subscriptions.show',
+          'description' => 'Ver en detalle cada plan/subscription'
+        ]);
+        Permission::create([
+          'name' => 'Navegar Plans/Subscriptions',
+          'slug' => 'subscriptions.index',
+          'description' => 'Navega todos los plans/subscriptions'
+        ]);
+        Permission::create([
+          'name' => 'Crear Plans/Subscriptions',
+          'slug' => 'subscriptions.create',
+          'description' => 'Crear un plan/subscription'
+        ]);
+        Permission::create([
+          'name' => 'Editar Plans/Subscriptions',
+          'slug' => 'subscriptions.edit',
+          'description' => 'Editar el detalle de cada plan/subscription'
+        ]);
+        Permission::create([
+          'name' => 'Eliminar Plans/Subscriptions',
+          'slug' => 'subscriptions.destroy',
+          'description' => 'Eliminar un plan/subscription'
+        ]);
         Role::create([
           'name' => 'Admin',
           'slug' => 'admin',
@@ -356,13 +381,13 @@ class PermissionsTableSeeder extends Seeder
         PaymentMethod::create([
           'name' => 'Cuotas de la Casa',
           'activo' => 1,
-          'percentage' => 28,
+          'percentage' => 23,
           'cant_cuotas' => 6
         ]);
         PaymentMethod::create([
           'name' => 'Mercado Pago',
           'activo' => 1,
-          'percentage' => 18,
+          'percentage' => 15,
           'cant_cuotas' => 1
         ]);
     }

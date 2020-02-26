@@ -12,12 +12,17 @@ class Plan extends Model
    * @var array
    */
   protected $fillable = [
-      'nombre', 'monto', 'group_id',
+      'nombre', 'monto', 'group_id', 'subscription_id',
   ];
 
   public function group()
   {
     return $this->belongsTo('App\Models\Group');
+  }
+
+  public function subscription()
+  {
+    return $this->belongsTo('App\Subscription');
   }
 
 }

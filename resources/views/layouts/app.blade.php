@@ -91,6 +91,9 @@
                               @can('interests.index')
                                 <a class="dropdown-item" href="{{ route('interests.visor') }}">Visor: Zonas de Interés</a>
                               @endcan
+                              @can('subscriptions.index')
+                                <a class="dropdown-item" href="{{ route('subscriptions.index') }}">Plans/Subscriptions</a>
+                              @endcan
                             </div>
                           </div>
                         @endcan
@@ -134,7 +137,7 @@
                             <a class="nav-link" href="{{ route('contacto') }}">Contacto</a>
                           </li>
                         @endcan
-                        @can('odontologia')
+                        @can('aop')
                         <li class="nav-item active">
                           <a class="nav-link" href="{{ route('odontologia') }}">Odontología</a>
                         </li>

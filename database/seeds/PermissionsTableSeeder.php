@@ -15,29 +15,29 @@ class PermissionsTableSeeder extends Seeder
     public function run()
     {
         Permission::create([
-          'name' => 'Ver Zonas de Interés',
-          'slug' => 'interests.show',
-          'description' => 'Ver en detalle cada zona de interés'
+          'name' => 'Ver Plans/Subscriptions',
+          'slug' => 'subscriptions.show',
+          'description' => 'Ver en detalle cada plan/subscription'
         ]);
         Permission::create([
-          'name' => 'Navegar Zonas de Interés',
-          'slug' => 'interests.index',
-          'description' => 'Navega todas las zonas de interés'
+          'name' => 'Navegar Plans/Subscriptions',
+          'slug' => 'subscriptions.index',
+          'description' => 'Navega todos los plans/subscriptions'
         ]);
         Permission::create([
-          'name' => 'Crear Zona de Interés',
-          'slug' => 'interests.create',
-          'description' => 'Crear una zona de interés'
+          'name' => 'Crear Plans/Subscriptions',
+          'slug' => 'subscriptions.create',
+          'description' => 'Crear un plan/subscription'
         ]);
         Permission::create([
-          'name' => 'Editar Zonas de Interés',
-          'slug' => 'interests.edit',
-          'description' => 'Editar el detalle de cada zona de interés'
+          'name' => 'Editar Plans/Subscriptions',
+          'slug' => 'subscriptions.edit',
+          'description' => 'Editar el detalle de cada plan/subscription'
         ]);
         Permission::create([
-          'name' => 'Eliminar Zonas de Interés',
-          'slug' => 'interests.destroy',
-          'description' => 'Eliminar una zona de interés'
+          'name' => 'Eliminar Plans/Subscriptions',
+          'slug' => 'subscriptions.destroy',
+          'description' => 'Eliminar un plan/subscription'
         ]);
     }
 }

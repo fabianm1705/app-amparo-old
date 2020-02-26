@@ -27,6 +27,8 @@ Route::get('/home', 'HomeController@index')
 Route::group(['prefix' => 'admin'], function() {
   Route::resource('specialties', 'SpecialtyController')
               ->middleware('auth');
+  Route::resource('subscriptions', 'SubscriptionController')
+              ->middleware('auth');
   Route::resource('doctors', 'DoctorController')
               ->middleware('auth');
   Route::resource('categories', 'CategoryController')
@@ -93,7 +95,6 @@ Route::delete('/out_user_interest/{id}', 'InterestController@borrar')
 
 //Buscar socios
 Route::get('odontologia', 'UserController@odontologia')
-                    ->middleware(['auth','can:odontologia'])
                     ->name('odontologia');
 Route::get('users/search', 'OrderController@search')
                     ->middleware(['auth','can:orders.create'])

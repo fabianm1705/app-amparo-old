@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Models\Plan;
 use App\Models\Group;
+use App\Subscription;
 
 class PlansTableSeeder extends Seeder
 {
@@ -25,6 +26,13 @@ class PlansTableSeeder extends Seeder
           $plan->nombre = utf8_encode(trim($datos[1]));
           $plan->monto = intval(trim($datos[2]));
           $plan->emiteOrden = intval(trim($datos[3]));
+
+          $subscription = Subscription::where('description', '=', utf8_encode(trim($datos[1])))
+                        ->get()->first();
+          if (isset($subscription)) {
+            $plan->subscription_id=$subscription->id;
+          }
+
           $plan->save();
         }
       }

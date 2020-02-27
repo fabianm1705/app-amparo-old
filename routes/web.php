@@ -54,7 +54,10 @@ Route::group(['prefix' => 'admin'], function() {
 // ShoppingCartController maneja sólo el carrito actual
 Route::get('/carrito', 'ShoppingCartController@show')
               ->middleware(['auth','can:carrito'])
-              ->name('shopping_cart');
+              ->name('shopping_cart.cart');
+Route::get('/carrito/{product}', 'ShoppingCartController@show3')
+              ->middleware(['auth','can:carrito'])
+              ->name('shopping_cart.buy');
 Route::get('/carrito/productos', 'ShoppingCartController@products')
               ->middleware(['auth','can:carrito'])
               ->name('shopping_cart.products');
@@ -94,6 +97,8 @@ Route::delete('/out_user_interest/{id}', 'InterestController@borrar')
 
 
 //Buscar socios
+Route::get('emergencia', 'UserController@emergencia')
+                    ->name('emergencia');
 Route::get('odontologia', 'UserController@odontologia')
                     ->name('odontologia');
 Route::get('users/search', 'OrderController@search')
@@ -121,6 +126,9 @@ Route::post('/getDoctors/{id}', 'DoctorController@getDoctors')
               ->name('getDoctors');
 
 //Shopping y productos
+Route::get('/admin/products/{productId}', 'ProductController@show')
+              ->middleware(['auth'])
+              ->name('products.show');
 Route::get('products/shopping', 'ProductController@shopping')
               ->middleware(['auth','can:products.shopping'])
               ->name('products.shopping');

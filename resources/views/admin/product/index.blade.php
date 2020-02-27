@@ -36,13 +36,6 @@
                     <input type="checkbox" class="form-check-input" id="vigente" name="vigente" disabled value="1" {{ $product->vigente ? 'checked="checked"' : '' }}>
                   </td>
                   <td class="text-right d-flex">
-                    @can('products.show')
-                      <a href="{{ route('products.show', ['product' => $product ]) }}" title="Ver" class="">
-                        <div class="">
-                          <i class="material-icons">search</i>
-                        </div>
-                      </a>&nbsp;
-                    @endcan
                     @can('products.edit')
                       <a href="{{ route('products.edit', ['product' => $product ]) }}" title="Editar" class="">
                         <div class="">

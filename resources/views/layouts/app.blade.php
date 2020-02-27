@@ -121,7 +121,7 @@
                         @can('carrito')
                           <li class="nav-item active blanco">
                             <a class="nav-link"
-                              href="{{ route('shopping_cart') }}"
+                              href="{{ route('shopping_cart.cart') }}"
                               title="Carrito de Compras">
                               <cart-counter-component :count="{{ $productsCount }}"></cart-counter-component>
                             </a>
@@ -132,24 +132,29 @@
                             <a class="nav-link" href="{{ route('otros') }}">+Servicios</a>
                           </li>
                         @endcan
+                        @can('aop')
+                        <li class="nav-item active">
+                          <a class="nav-link" href="{{ route('odontologia') }}">Odontológico</a>
+                        </li>
+                        @endcan
+                        @can('sos.emergencias')
+                        <li class="nav-item active">
+                          <a class="nav-link" href="{{ route('emergencia') }}">SOS</a>
+                        </li>
+                        @endcan
                         @can('contacto')
                           <li class="nav-item active">
                             <a class="nav-link" href="{{ route('contacto') }}">Contacto</a>
                           </li>
                         @endcan
-                        @can('aop')
-                        <li class="nav-item active">
-                          <a class="nav-link" href="{{ route('odontologia') }}">Odontología</a>
-                        </li>
-                        @endcan
-                        @can('instalar.app')
+                        {{-- @can('instalar.app')
                         <li class="nav-item active">
                             <a href="#" onclick="addToHomeScreen()" class="nav-link">
                                <span class="uk-margin-small-right" data-uk-icon="icon: plus"></span>
                                Instalar
                             </a>
                         </li>
-                        @endcan
+                        @endcan --}}
                       @endauth
                         <!-- Authentication Links -->
                         @guest

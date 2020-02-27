@@ -12,6 +12,7 @@ use App\ShoppingCart;
 use App\UserInterest;
 use App\Models\PaymentMethod;
 use Illuminate\Support\Facades\DB;
+use App\Models\Product;
 
 class ShoppingCartController extends Controller
 {
@@ -32,7 +33,25 @@ class ShoppingCartController extends Controller
     $productsCost = $request->shopping_cart->amount();
     if((Auth::user()->group->nroSocio<>'1232') and (Auth::user()->group->nroSocio<>'1231')){
       UserInterest::create(['user_id' => Auth::user()->id,
-                            'interest_id' => 9]);
+                            'interest_id' => 9,
+                            'obs' => 'Directo al Carrito'
+                          ]);
+    }
+    return view('admin.shopping_cart.cart',
+    ['shopping_cart' => $request->shopping_cart,
+    'payment_methods' => $payment_methods,
+    'productsCost' => $productsCost]);
+  }
+
+  public function show3(Request $request,Product $product)
+  {
+    $payment_methods = PaymentMethod::where('activo',1)->get();
+    $productsCost = $request->shopping_cart->amount();
+    if((Auth::user()->group->nroSocio<>'1232') and (Auth::user()->group->nroSocio<>'1231')){
+      UserInterest::create(['user_id' => Auth::user()->id,
+                            'interest_id' => 9,
+                            'obs' => $product->modelo
+                          ]);
     }
     return view('admin.shopping_cart.cart',
     ['shopping_cart' => $request->shopping_cart,

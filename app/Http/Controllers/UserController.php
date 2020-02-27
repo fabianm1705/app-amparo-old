@@ -16,6 +16,7 @@ class UserController extends Controller
 {
   public function __construct()
   {
+    $this->middleware('can:sos.emergencias')->only('emergencia');
     $this->middleware('can:aop')->only('odontologia');
     $this->middleware('can:users.index')->only('index');
     $this->middleware('can:users.show')->only('show');
@@ -146,6 +147,17 @@ class UserController extends Controller
     $users = $subscriptions->flatMap->users->sortBy('name');
     $usersCount = $subscriptions->flatMap->users->count();
     return view('admin.user.odontologia',[
+      'users' => $users,
+      'usersCount' => $usersCount
+    ]);
+  }
+
+  public function emergencia()
+  {
+    $subscriptions = Subscription::where('salud',1)->get();
+    $users = $subscriptions->flatMap->users->sortBy('name');
+    $usersCount = $subscriptions->flatMap->users->count();
+    return view('admin.user.emergencia',[
       'users' => $users,
       'usersCount' => $usersCount
     ]);

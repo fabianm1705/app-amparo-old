@@ -79,7 +79,7 @@
                       </add-to-cart-component>
                     </div>
                     <div class="col-9 blanco">
-                      <form action="{{ route('shopping_cart') }}" method="get" enctype="multipart/form-data">
+                      <form action="{{ route('shopping_cart.buy',['product' => $product]) }}" method="get" enctype="multipart/form-data">
                         @csrf
                         <add-and-buy-to-cart-component :product="{{$product}}">
                         </add-and-buy-to-cart-component>

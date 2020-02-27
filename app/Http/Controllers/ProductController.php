@@ -9,13 +9,14 @@ use App\UserInterest;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
 
 class ProductController extends Controller
 {
     public function __construct()
     {
       $this->middleware('can:products.index')->only('index');
-      $this->middleware('can:products.show')->only('show');
+      //$this->middleware('can:products.show')->only('show');
       $this->middleware('can:products.destroy')->only('destroy');
       $this->middleware('can:products.edit')->only(['edit','update']);
       $this->middleware('can:products.create')->only(['create','store']);
@@ -93,8 +94,9 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($productId)
     {
+      $product = Product::find($productId);
       if((Auth::user()->group->nroSocio<>'1232') and (Auth::user()->group->nroSocio<>'1231')){
         UserInterest::create(['user_id' => Auth::user()->id,
                               'interest_id' => 7,
@@ -162,7 +164,9 @@ class ProductController extends Controller
       }
 
       $payment_methods = PaymentMethod::where('activo',1)->get();
-      $contados = Category::withCount('products')->get();
+      $contados = Category::withCount(['products' => function (Builder $query) {
+                                          $query->where('vigente', '=', 1);
+                                      }])->get();
       $categories = Category::orderBy('nombre','asc')->get();
       return view('admin.product.shopping', compact("categories","contados","payment_methods"));
     }
@@ -170,7 +174,7 @@ class ProductController extends Controller
     public function getProductsXCategory($id)
     {
       if($id==0){
-        $products = DB::table('products')->get();
+        $products = DB::table('products')->where('vigente', '=', 1)->get();
       }else{
         $category = Category::find($id);
         if(Auth::user()->group->nroSocio<>'1232'){
@@ -179,8 +183,10 @@ class ProductController extends Controller
                                 'obs' => $category->nombre]);
         }
         $products = DB::table('products')
-              ->where('category_id', '=', $id)
-              ->get();
+              ->where([
+                        ['category_id', '=', $id],
+                        ['vigente', '=', 1],
+                      ])->get();
       }
       return $products;
     }

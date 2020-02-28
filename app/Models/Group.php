@@ -21,6 +21,11 @@ class Group extends Model
     return $this->hasMany('App\User','group_id');
   }
 
+  public function subscriptions()
+  {
+    return $this->belongsToMany('App\Subscription','plans');
+  }
+
   public function plans()
   {
     return $this->hasMany('App\Models\Plan','group_id');

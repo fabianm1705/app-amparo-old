@@ -155,10 +155,13 @@ class UserController extends Controller
   public function emergencia()
   {
     $subscriptions = Subscription::where('salud',1)->get();
-    $users = $subscriptions->flatMap->users->sortBy('name');
-    $usersCount = $subscriptions->flatMap->users->count();
+    $groups = $subscriptions->flatMap->groups->sortBy('nroSocio');
+    $usersCount = 0;
+    foreach ($subscriptions->flatMap->groups as $group) {
+      $usersCount = $usersCount + $group->users->count();
+    }
     return view('admin.user.emergencia',[
-      'users' => $users,
+      'groups' => $groups,
       'usersCount' => $usersCount
     ]);
   }

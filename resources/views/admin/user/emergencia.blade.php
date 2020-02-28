@@ -17,13 +17,15 @@
               <th>Fecha Nac.</th>
             </thead>
             <tbody>
-              @foreach($users as $user)
-                <tr>
-                  <td>{{ $user->group->nroSocio }}/{{ $user->nroAdh }}</td>
-                  <td>{{ $user->name }}</td>
-                  <td>{{ $user->nroDoc }}</td>
-                  <td>{{ \Carbon\Carbon::parse($user->fechaNac)->format('d/m/Y') }}</td>
-                </tr>
+              @foreach($groups as $group)
+                @foreach($group->users as $user)
+                  <tr>
+                    <td>{{ $user->group->nroSocio }}/{{ $user->nroAdh }}</td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->nroDoc }}</td>
+                    <td>{{ \Carbon\Carbon::parse($user->fechaNac)->format('d/m/Y') }}</td>
+                  </tr>
+                @endforeach
               @endforeach
             </tbody>
           </table>

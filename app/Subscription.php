@@ -16,8 +16,8 @@ class Subscription extends Model
     return $this->belongsToMany('App\User','layers');
   }
 
-  public function plans()
+  public function groups()
   {
-    return $this->hasMany('App\Models\Plan','subscription_id');
+    return $this->belongsToMany('App\Models\Group','plans');
   }
 }

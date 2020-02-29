@@ -84,7 +84,7 @@ class ProductController extends Controller
       $product->save();
 
       return redirect()
-        ->route('products.show',['product' => $product])
+        ->route('products.index')
         ->with('message','Producto Registrado');
     }
 
@@ -174,7 +174,7 @@ class ProductController extends Controller
     public function getProductsXCategory($id)
     {
       if($id==0){
-        $products = DB::table('products')->where('vigente', '=', 1)->get();
+        $products = DB::table('products')->where('vigente', '=', 1)->orderBy('costo')->get();
       }else{
         $category = Category::find($id);
         if(Auth::user()->group->nroSocio<>'1232'){
@@ -186,7 +186,7 @@ class ProductController extends Controller
               ->where([
                         ['category_id', '=', $id],
                         ['vigente', '=', 1],
-                      ])->get();
+                      ])->orderBy('costo')->get();
       }
       return $products;
     }

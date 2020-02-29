@@ -139,7 +139,7 @@
                         @endcan
                         @can('sos.emergencias')
                         <li class="nav-item active">
-                          <a class="nav-link" href="{{ route('emergencia') }}">SOS</a>
+                          <a class="nav-link" href="{{ route('emergencia') }}">Padrón</a>
                         </li>
                         @endcan
                         @can('contacto')

@@ -26,7 +26,7 @@ class UserController extends Controller
 
   public function index()
   {
-    $users = User::orderBy('name')->paginate();
+    $users = User::orderBy('name')->where('activo','=',1)->paginate();
     return view('admin.user.index',compact("users"));
   }
 
@@ -156,12 +156,21 @@ class UserController extends Controller
   {
     $subscriptions = Subscription::where('salud',1)->get();
     $groups = $subscriptions->flatMap->groups->sortBy('nroSocio');
+    $uusers = $subscriptions->flatMap->users->sortBy('name');
+    $users = collect([]);
     $usersCount = 0;
     foreach ($subscriptions->flatMap->groups as $group) {
       $usersCount = $usersCount + $group->users->count();
+      foreach ($group->users as $user) {
+        $users->push($user);
+      }
+    }
+    foreach ($subscriptions->flatMap->users as $user) {
+      $usersCount = $usersCount + 1;
+      $users->push($user);
     }
     return view('admin.user.emergencia',[
-      'groups' => $groups,
+      'users' => $users->sortBy('name'),
       'usersCount' => $usersCount
     ]);
   }

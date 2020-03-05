@@ -4,9 +4,9 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-8">
-      <h3 class="title text-center">
+      <h4 class="title text-center">
           Emisión de Órdenes
-      </h3>
+      </h4>
       <form action="{{ route('orders.store') }}" method="post">
           @csrf
           <gen-orders-component

@@ -5,8 +5,8 @@
   <div class="row justify-content-center">
     <div class="col-md-11">
       <div class="card shadow-sm">
-        <div class="card-header bgOrange d-flex">
-          <h5 class="card-title text-white">Planes/Subscripciones</h5>
+        <div class="card-header card-header-raised card-header-warning d-flex">
+          <h5 class="card-title text-white fontAmparo">Plans/Subscriptions</h5>
           <div class="ml-auto blanco">
             @can('subscriptions.create')
             <a href="{{ route('subscriptions.create') }}" title="Nueva">

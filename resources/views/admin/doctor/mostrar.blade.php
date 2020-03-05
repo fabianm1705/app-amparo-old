@@ -20,36 +20,42 @@
 @endsection
 
 @section('content')
+
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-md-8">
-        <div class="card shadow-sm">
-          <div class="card-header bgOrange d-flex">
-            <h5 class="card-title text-white">Profesionales</h5>
+      <div class="col-md-6">
+        <div class="fresh-table full-color-orange shadow-sm">
+          <!--
+            Available colors for the full background: full-color-blue, full-color-azure, full-color-green, full-color-red, full-color-orange
+            Available colors only for the toolbar: toolbar-color-blue, toolbar-color-azure, toolbar-color-green, toolbar-color-red, toolbar-color-orange
+          -->
+          <div class="row">
+            <h5 class="card-title text-white fontAmparo mt-4 mb-4 ml-4">&nbsp;&nbsp;Profesionales</h5><br>
           </div>
-          <div class="card-body justify-content-center">
-            <div>
-              <select class="custom-select" name="specialty" id="specialty" onchange="cargarProfesionales()">
-                <option selected>Seleccione especialidad</option>
-                @foreach($specialties as $specialty)
-                  <option value="{{ $specialty->id }}">
-                      {{ $specialty->descripcion }}
-                  </option>
-                @endforeach
-              </select>
-            </div><br>
-            <div>
-              <table class="table table-hover table-sm table-responsive">
-                <thead>
-                  <th>Nombre</th>
-                  <th>Consultorio</th>
-                  <th>Teléfono</th>
-                </thead>
-                <tbody id="tablaprofesionales">
-                </tbody>
-              </table>
-            </div>
+          <div class="col-md-12">
+            <select class="custom-select mb-4" name="specialty" id="specialty" onchange="cargarProfesionales()">
+              <option selected>Seleccione especialidad</option>
+              @foreach($specialties as $specialty)
+                <option value="{{ $specialty->id }}">
+                    {{ $specialty->descripcion }}
+                </option>
+              @endforeach
+            </select>
           </div>
+        </div>
+        <div class="card mt-1">
+          <div class="card-body">
+            <table class="table table-hover table-sm table-responsive">
+              <thead>
+                <th>Nombre</th>
+                <th>Consultorio</th>
+                <th>Teléfono</th>
+              </thead>
+              <tbody id="tablaprofesionales">
+              </tbody>
+            </table>
+          </div>
+        </div>
         </div>
       </div>
     </div>

@@ -3,12 +3,12 @@
 @section('content')
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-8">
-      <div class="card shadow-sm">
-        <div class="card-header bgOrange d-flex">
-          <h5 class="card-title text-white">Padrón Odontológico - {{ $usersCount }} cápitas</h5>
-        </div>
-        <div class="card-body centrado">
+    <div class="col-md-7">
+      <div class="fresh-table full-color-orange d-flex shadow-sm">
+        <h5 class="card-title text-white mt-4 mb-4 ml-4 fontAmparo">Padrón Odontológico - {{ $usersCount }} cápitas</h5>
+      </div>
+      <div class="card shadow-sm mt-1">
+        <div class="card-body">
           <table class="table table-hover table-sm table-responsive">
             <thead>
               <th>Nro. Socio</th>
@@ -32,5 +32,4 @@
     </div>
   </div>
 </div>
-
 @endsection

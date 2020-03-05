@@ -4,17 +4,17 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-12">
-      <div class="card shadow-sm">
-        <div class="card-header bgOrange d-flex">
-          <h5 class="card-title text-white">Órdenes Médicas</h5>
-          <div class="ml-auto blanco">
-            @can('orders.create')
-              <a href="{{ route('usersSearch') }}" title="Nueva">
-                Nueva Orden
-              </a>
-            @endcan
-           </div>
-        </div>
+      <div class="fresh-table full-color-orange d-flex shadow-sm">
+        <h5 class="card-title text-white mt-4 mb-4 ml-4 fontAmparo">Órdenes Médicas</h5>
+        <div class="ml-auto blanco mr-2 mt-2">
+          @can('orders.create')
+            <a href="{{ route('usersSearch') }}" title="Nueva">
+              Nueva Orden
+            </a>
+          @endcan
+         </div>
+      </div>
+      <div class="card shadow-sm mt-1">
         <div class="card-body">
           <table class="table table-hover table-sm table-responsive">
             <thead>

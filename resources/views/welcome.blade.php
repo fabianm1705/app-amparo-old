@@ -98,44 +98,62 @@
     <div class="container">
       <div class="section text-center">
           <div class="features">
-              <div class="row">
-                  <div class="col-md-4">
-                      <div class="info">
-                          <div class="icon icon-info">
-                              <i class="material-icons">control_point</i>
-                          </div>
-                          <h4 class="info-title">Odontología</h4>
-                          <p>
-                               Cobertura odontológica integral a muy bajo costo, con turnos inmediatos y excelentes profesionales,
-                               además de la cobertura básica está incluído todo lo que es implantes, ortodoncias y prótesis.
-                          </p>
-                      </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="card card-pricing card-plain">
+                  <div class="card-body">
+                    <h5 class=""><strong>PLAN SALUD</strong></h5>
+                    <h1 class="card-title">
+                      <small>$</small>600
+                      <small>/mes</small>
+                    </h1>
+                    $900 por Grupo Familiar<hr>
+                    Cobertura Ambulatoria Integral<hr>
+                    Consultorios Externos<hr>
+                    Estudios Médicos, Farmacia, Ambulancia<br><br>
+                    <a href="#descarga" onclick="scrollToDownload()" class="btn btn-warning btn-raised btn-round">
+                      Solicitar
+                    </a>
                   </div>
-                  <div class="col-md-4">
-                      <div class="info">
-                          <div class="icon icon-success">
-                              <i class="material-icons">local_pharmacy</i>
-                          </div>
-                          <h4 class="info-title">Plan Salud</h4>
-                          <p>
-                              Este plan incluye todo lo que es consultorios externos, prácticas médicas, farmacia, ambulancia,
-                              emergencias médicas, estudios de laboratorio, radiografías, ecografías, etc.
-                          </p>
-                      </div>
-                  </div>
-                  <div class="col-md-4">
-                      <div class="info">
-                          <div class="icon icon-danger">
-                              <i class="material-icons">local_hospital</i>
-                          </div>
-                          <h4 class="info-title">Plan Joven</h4>
-                          <p>
-                            Se trata de un plan individual que integra la cobertura completa de Amparo, esto es los planes de
-                            Salud, Odontología y Sepelio, y está destinado a jóvenes de hasta 35 años. ​
-                          </p>
-                      </div>
-                  </div>
+                </div>
               </div>
+              <div class="col-md-4">
+                <div class="card card-pricing card-raised bg-warning">
+                  <div class="card-body">
+                    <h5 class="" style="color:#FFFFFF"><strong>ODONTOLOGIA</strong></h5>
+                    <h1 class="card-title">
+                      <small>$</small>200
+                      <small>/mes</small>
+                    </h1>
+                    + $150 por Adherente<hr>
+                    Cobertura Odontológica Integral<hr>
+                    Odontólogos distribuidos por la ciudad<hr>
+                    Turnos rápidos, coseguros muy económicos<br><br>
+                    <a href="#descarga" onclick="scrollToDownload()" class="btn btn-white btn-raised btn-round">
+                      Solicitar
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card card-pricing card-plain">
+                  <div class="card-body">
+                    <h5 class=""><strong>PLAN JOVEN</strong></h5>
+                    <h1 class="card-title">
+                      <small>$</small>850
+                      <small>/mes</small>
+                    </h1>
+                    Plan Individual hasta 35 años<hr>
+                    Incluye Plan Salud<hr>
+                    Plan Odontológico<hr>
+                    Sepelio Completo<br><br>
+                    <a href="#descarga" onclick="scrollToDownload()" class="btn btn-warning btn-raised btn-round">
+                      Solicitar
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
       </div>
       <div class="cd-section">

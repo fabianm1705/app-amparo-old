@@ -17,13 +17,12 @@
 @section('content')
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-12 col-md-9">
-        <div class="card shadow-sm">
-          <div class="card-header bgOrange d-flex blanco">
-            <h5 class="card-title text-white">Carrito de Compras</h5>
-            <br/>
-          </div>
-          <div class="table-responsive">
+      <div class="col-md-9">
+        <div class="fresh-table full-color-orange d-flex shadow-sm">
+          <h5 class="card-title text-white mt-4 mb-4 ml-4 fontAmparo">Carrito de Compras</h5>
+        </div>
+        <div class="card mt-1">
+          <div class="card-body table-responsive">
             <table class="table table-shopping">
               <thead>
                 <tr>

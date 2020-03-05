@@ -3,29 +3,31 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-      <div class="col-md-4 card shadow-sm margenTotal">
-        <div class="card-body card-header-raised text-center">
-          <div class="title"><font style="font-family: 'Nunito';">
-            Oficina Cura Alvarez 615, Paraná<br>
-            Horario: Lun. a Vie. 8:30 a 18:00hs<br></font>
+      <div class="col-md-4 card shadow-sm fresh-table full-color-orange margenTotal">
+        <div class="title text-center text-white"><br>
+          <div class="fontAmparo">
+            ADMINISTRACION<hr>
           </div>
+          Oficina Cura Alvarez 615, Paraná<br>
+          Horario: Lun. a Vie. 8:30 a 18:00hs<br>
           Sepelio: 4235108 / 154-057991<br>
-          SOS Emergencias: 4222322 / 4233333<br>
+          SOS Emergencias: 4222322 / 4233333<br><br>
         </div>
       </div>
-      <div class="col-md-4 card shadow-sm margenTotal">
-        <div class="card-body card-header-raised text-center">
-          <div class="title"><font style="font-family: 'Nunito';">
-            Farmacia Nueva Farma<br>
-            30% de descuento sobre vademecum<br></font>
+      <div class="col-md-4 card shadow-sm fresh-table full-color-orange margenTotal">
+        <div class="title text-center text-white"><br>
+          <div class="fontAmparo">
+            FARMACIA<hr>
           </div>
+          Farmacia Nueva Farma<br>
+          30% de descuento sobre vademecum<br>
           Provincias Unidas 589<br>
-          Tel.: 4344451<br>
+          Tel.: 4344451<br><br>
         </div>
       </div>
     </div><br>
-    <div class="card text-center shadow-sm">
-      <div class="card-header bgOrange text-white">
+    <div class="fresh-table full-color-orange d-flex shadow-sm" style="height: 45px;">
+      <div class=" mt-2 ml-4">
         <ul class="nav nav-tabs card-header-tabs">
           <li class="nav-item blanco">
             <a class="nav-link active" href="#sos" data-toggle="tab">Ambulancia</a>
@@ -38,6 +40,8 @@
           </li>
         </ul>
       </div>
+    </div>
+    <div class="card text-center shadow-sm">
       <div class="card-body">
         <div class="tab-content text-justify">
             <div class="tab-pane active" id="sos">

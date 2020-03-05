@@ -18,11 +18,8 @@
     <link rel="manifest" href="/manifest.json" />
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="{{ asset('css/fresh-bootstrap-table.css') }}" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Spartan&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -39,6 +36,17 @@
             font-family: 'iProton';
         }
    </style>
+
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
+   <link href="{{ asset('css/fresh-bootstrap-table.css') }}" rel="stylesheet" />
+
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+   <link href="http://fonts.googleapis.com/css?family=Roboto:400,700,300" rel="stylesheet" type="text/css">
+
+   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   <script src="https://unpkg.com/bootstrap-table/dist/bootstrap-table.min.js"></script>
+
    @yield('myLinks')
 </head>
 <body style="background-image: url({{ asset('images/01.jpg' )}})">
@@ -226,11 +234,43 @@
 
 <script type="text/javascript">
   var $table = $('#fresh-table')
+  var $alertBtn = $('#alertBtn')
+
+  window.operateEvents = {
+    'click .like': function (e, value, row, index) {
+      alert('You click like icon, row: ' + JSON.stringify(row))
+      console.log(value, row, index)
+    },
+    'click .edit': function (e, value, row, index) {
+      alert('You click edit icon, row: ' + JSON.stringify(row))
+      console.log(value, row, index)
+    },
+    'click .remove': function (e, value, row, index) {
+      $table.bootstrapTable('remove', {
+        field: 'id',
+        values: [row.id]
+      })
+    }
+  }
+
+  function operateFormatter(value, row, index) {
+    return [
+      '<a rel="tooltip" title="Like" class="table-action like" href="javascript:void(0)" title="Like">',
+        '<i class="fa fa-heart"></i>',
+      '</a>',
+      '<a rel="tooltip" title="Edit" class="table-action edit" href="javascript:void(0)" title="Edit">',
+        '<i class="fa fa-edit"></i>',
+      '</a>',
+      '<a rel="tooltip" title="Remove" class="table-action remove" href="javascript:void(0)" title="Remove">',
+        '<i class="fa fa-remove"></i>',
+      '</a>'
+    ].join('')
+  }
 
   $(function () {
     $table.bootstrapTable({
       classes: 'table table-hover table-striped',
-      // toolbar: '.toolbar',
+      toolbar: '.toolbar',
 
       search: true,
       showRefresh: true,
@@ -250,6 +290,39 @@
       }
     })
 
+    $alertBtn.click(function () {
+      alert('You pressed on Alert')
+    })
+  })
+
+  $('#sharrreTitle').sharrre({
+    share: {
+      twitter: true,
+      facebook: true
+    },
+    template: '',
+    enableHover: false,
+    enableTracking: true,
+    render: function (api, options) {
+      $("#sharrreTitle").html('Thank you for ' + options.total + ' shares!')
+    },
+    enableTracking: true,
+    url: location.href
+  })
+
+  $('#twitter').sharrre({
+    share: {
+      twitter: true
+    },
+    enableHover: false,
+    enableTracking: true,
+    buttons: { twitter: {via: 'CreativeTim'}},
+    click: function (api, options) {
+      api.simulateClick()
+      api.openPopup('twitter')
+    },
+    template: '<i class="fa fa-twitter"></i> {total}',
+    url: location.href
   })
 
   $('#facebook').sharrre({

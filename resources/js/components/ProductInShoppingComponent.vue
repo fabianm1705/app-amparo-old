@@ -10,10 +10,9 @@
             {{ product.modelo }}<small> - {{ product.descripcion }}</small>
           </div>
         </div>
-        <h6 class="card-title text-center">
+        <h4 class="card-title text-center">
           <small>{{ product.cantidadCuotas }} cuotas de $</small>{{ formatPrice(product.costo * (1+(porccuotas/100)) / product.cantidadCuotas) }}<br>
-          <small>Crédito en 1 pago de $</small>{{ formatPrice(product.costo * (1+(porccredito/100))) }}
-        </h6>
+        </h4>
       </div>
     </a><br>
   </div>

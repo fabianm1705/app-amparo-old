@@ -2561,7 +2561,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     product: {
@@ -39188,7 +39187,7 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _c("h6", { staticClass: "card-title text-center" }, [
+          _c("h4", { staticClass: "card-title text-center" }, [
             _c("small", [
               _vm._v(_vm._s(_vm.product.cantidadCuotas) + " cuotas de $")
             ]),
@@ -39200,14 +39199,7 @@ var render = function() {
                 )
               )
             ),
-            _c("br"),
-            _vm._v(" "),
-            _c("small", [_vm._v("Crédito en 1 pago de $")]),
-            _vm._v(
-              _vm._s(
-                _vm.formatPrice(_vm.product.costo * (1 + _vm.porccredito / 100))
-              ) + "\n      "
-            )
+            _c("br")
           ])
         ])
       ]

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Plan;
+use App\UserInterest;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -90,6 +91,26 @@ class PlanController extends Controller
     {
       $plans = DB::table('plans')->where('group_id', '=', $idGroup)->get();
       return $plans;
+    }
+
+    public function activarPlan()
+    {
+      if((Auth::user()->group->nroSocio<>'1232') and (Auth::user()->group->nroSocio<>'1231')){
+        UserInterest::create([
+          'user_id' => Auth::user()->id,
+          'interest_id' => 11,
+          'obs' => 'Plan Salud Grupal'
+        ]);
+      }
+
+      Plan::create([
+                    'nombre' => 'AMPARO SALUD PLUS',
+                    'monto' => 800,
+                    'group_id' => Auth::user()->group_id,
+                    'subscription_id' => 5
+                  ]);
+      return redirect()
+        ->route('home')->with('message','Plan habilitado! Ya puedes emitir órdenes médicas de consulta.');
     }
 
 }

@@ -98,9 +98,11 @@ Route::delete('/out_user_interest/{id}', 'InterestController@borrar')
 
 //Buscar socios
 Route::get('emergencia', 'UserController@emergencia')
-                    ->name('emergencia');
+              ->middleware('auth')
+              ->name('emergencia');
 Route::get('odontologia', 'UserController@odontologia')
-                    ->name('odontologia');
+              ->middleware('auth')
+              ->name('odontologia');
 Route::get('users/search', 'OrderController@search')
                     ->middleware(['auth','can:orders.create'])
                     ->name('usersSearch');
@@ -108,6 +110,15 @@ Route::post('search/{name?}/{nroDoc?}/', 'UserController@getUsers')
               ->middleware('auth')
               ->where(['nroDoc' => '[0-9]+'])
               ->name('users.search');
+Route::post('activar/plan', 'PlanController@activarPlan')
+              ->middleware('auth')
+              ->name('activar.plan');
+Route::post('activar/salud', 'LayerController@activarSalud')
+              ->middleware('auth')
+              ->name('activar.salud');
+Route::post('activar/odontologia', 'LayerController@activarOdontologia')
+              ->middleware('auth')
+              ->name('activar.odontologia');
 
 
 Route::get('pdf/{id}', 'PDFController@invoice')

@@ -159,6 +159,26 @@ class OrderController extends Controller
       //Para buscar las órdenes de todos
       $orders = Order::whereIn('pacient_id',$usersId)->orderBy('id', 'desc')->paginate(4);
       $users = User::where('group_id',$group_id)->get();
+
+      $usersCount = $users->count();
+      $odontoFlag = true;
+      $saludFlag = true;
+      foreach ($users as $user) {
+        foreach ($user->subscriptions as $subscription) {
+          if($subscription->salud==1){
+            $saludFlag = false;
+          }
+          if($subscription->odontologia==1){
+            $odontoFlag = false;
+          }
+        }
+        foreach ($user->group->subscriptions as $subscription) {
+          if($subscription->salud==1){
+            $saludFlag = false;
+          }
+        }
+      }
+
       $specialties = DB::table('specialties')
                             ->where([
                                         ['vigenteOrden', '=', 1],
@@ -167,7 +187,8 @@ class OrderController extends Controller
                             ->orderBy('descripcion','asc')
                             ->get();
 
-      return view('admin.order.crear',compact("orders","users","specialties"));
+      return view('admin.order.crear',
+      compact("orders","users","specialties","odontoFlag","saludFlag","usersCount"));
     }
 
     public function search(Request $request)

@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class AddGroupIdToPlansTable extends Migration
+class AddGrouupIdToPlansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,7 @@ class AddGroupIdToPlansTable extends Migration
     public function up()
     {
         Schema::table('plans', function (Blueprint $table) {
-          $table->unsignedBigInteger('group_id');
-          $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
+            $table->dropForeign(['group_id']);
         });
     }
 
@@ -27,7 +26,7 @@ class AddGroupIdToPlansTable extends Migration
     public function down()
     {
         Schema::table('plans', function (Blueprint $table) {
-          $table->dropForeign(['group_id']);
+          $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
         });
     }
 }

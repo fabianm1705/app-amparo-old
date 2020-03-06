@@ -19,7 +19,8 @@ class InterestsSeeder extends Seeder
       Interest::create(['description' => 'Selecciona Categoría', 'activo' => 1]);
       Interest::create(['description' => 'Click Producto', 'activo' => 1]);
       Interest::create(['description' => 'Agregar al Carrito', 'activo' => 1]);
-      Interest::create(['description' => 'Agregar al Carrito y Comprar', 'activo' => 1]);
+      Interest::create(['description' => 'Ir al Carrito', 'activo' => 1]);
       Interest::create(['description' => 'Finalizar Compra!', 'activo' => 1]);
+      Interest::create(['description' => 'Activar Plan', 'activo' => 1]);
     }
 }

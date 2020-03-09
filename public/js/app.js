@@ -39154,58 +39154,64 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", {}, [
-    _c(
-      "a",
-      {
-        staticStyle: { "text-decoration": "none" },
-        attrs: { href: "/admin/products/" + _vm.product.id }
-      },
-      [
-        _c("div", { staticClass: "card card-product card-plain shadow-sm" }, [
-          _c("div", { staticClass: "card-header-image" }, [
-            _c("img", {
-              staticClass: "card-img-top",
-              attrs: {
-                src: "../images/" + _vm.product.image_url,
-                alt: _vm.product.modelo
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body text-center" }, [
-            _c(
-              "div",
-              {
-                staticClass: "card-description",
-                staticStyle: { height: "70px", overflow: "auto" }
-              },
-              [
-                _vm._v("\n          " + _vm._s(_vm.product.modelo)),
-                _c("small", [_vm._v(" - " + _vm._s(_vm.product.descripcion))])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("h4", { staticClass: "card-title text-center" }, [
-            _c("small", [
-              _vm._v(_vm._s(_vm.product.cantidadCuotas) + " cuotas de $")
+  return _c(
+    "div",
+    {
+      staticClass: "col-lg-3 col-md-3 col-sm-6 col-xs-6 mt-1 mb-1",
+      attrs: { id: "borrar" }
+    },
+    [
+      _c(
+        "a",
+        {
+          staticStyle: { "text-decoration": "none" },
+          attrs: { href: "/admin/products/" + _vm.product.id }
+        },
+        [
+          _c("div", { staticClass: "card card-product card-plain shadow-sm" }, [
+            _c("div", { staticClass: "card-header-image" }, [
+              _c("img", {
+                staticClass: "card-img-top",
+                attrs: {
+                  src: "../images/" + _vm.product.image_url,
+                  alt: _vm.product.modelo
+                }
+              })
             ]),
-            _vm._v(
-              _vm._s(
-                _vm.formatPrice(
-                  (_vm.product.costo * (1 + _vm.porccuotas / 100)) /
-                    _vm.product.cantidadCuotas
-                )
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body text-center" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "card-description",
+                  staticStyle: { height: "70px", overflow: "auto" }
+                },
+                [
+                  _vm._v("\n          " + _vm._s(_vm.product.modelo)),
+                  _c("small", [_vm._v(" - " + _vm._s(_vm.product.descripcion))])
+                ]
               )
-            ),
-            _c("br")
+            ]),
+            _vm._v(" "),
+            _c("h4", { staticClass: "card-title text-center" }, [
+              _c("small", [
+                _vm._v(_vm._s(_vm.product.cantidadCuotas) + " cuotas de $")
+              ]),
+              _vm._v(
+                _vm._s(
+                  _vm.formatPrice(
+                    (_vm.product.costo * (1 + _vm.porccuotas / 100)) /
+                      _vm.product.cantidadCuotas
+                  )
+                )
+              ),
+              _c("br")
+            ])
           ])
-        ])
-      ]
-    ),
-    _c("br")
-  ])
+        ]
+      )
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

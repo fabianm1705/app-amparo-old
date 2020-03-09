@@ -22,12 +22,12 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Spartan&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app-amparo.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" rel="stylesheet">
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> --}}
     <style media="screen">
         @font-face {
             font-family: 'iProton';
@@ -225,46 +225,41 @@
 </body>
 
 <script type="text/javascript">
-  var $table = $('#fresh-table')
-
-  $(function () {
-    $table.bootstrapTable({
-      classes: 'table table-hover table-striped',
-      // toolbar: '.toolbar',
-
-      search: true,
-      showRefresh: true,
-      showToggle: true,
-      showColumns: true,
-      pagination: true,
-      striped: true,
-      sortable: true,
-      pageSize: 8,
-      pageList: [8, 10, 25, 50, 100],
-
-      formatShowingRows: function (pageFrom, pageTo, totalRows) {
-        return ''
-      },
-      formatRecordsPerPage: function (pageNumber) {
-        return pageNumber + ' rows visible'
-      }
-    })
-
-  })
-
-  $('#facebook').sharrre({
-    share: {
-      facebook: true
-    },
-    enableHover: false,
-    enableTracking: true,
-    click: function (api, options) {
-      api.simulateClick()
-      api.openPopup('facebook')
-    },
-    template: '<i class="fa fa-facebook-square"></i> {total}',
-    url: location.href
-  })
+  // var $table = $('#fresh-table')
+  // $(function () {
+  //   $table.bootstrapTable({
+  //     classes: 'table table-hover table-striped',
+  //     // toolbar: '.toolbar',
+  //     search: true,
+  //     showRefresh: true,
+  //     showToggle: true,
+  //     showColumns: true,
+  //     pagination: true,
+  //     striped: true,
+  //     sortable: true,
+  //     pageSize: 8,
+  //     pageList: [8, 10, 25, 50, 100],
+  //     formatShowingRows: function (pageFrom, pageTo, totalRows) {
+  //       return ''
+  //     },
+  //     formatRecordsPerPage: function (pageNumber) {
+  //       return pageNumber + ' rows visible'
+  //     }
+  //   })
+  // })
+  // $('#facebook').sharrre({
+  //   share: {
+  //     facebook: true
+  //   },
+  //   enableHover: false,
+  //   enableTracking: true,
+  //   click: function (api, options) {
+  //     api.simulateClick()
+  //     api.openPopup('facebook')
+  //   },
+  //   template: '<i class="fa fa-facebook-square"></i> {total}',
+  //   url: location.href
+  // })
 </script>
 
 </html>

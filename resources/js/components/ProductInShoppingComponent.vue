@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div id="borrar" class="col-lg-2 col-md-3 col-sm-6 col-xs-12 mt-1 mb-1">
     <a :href="'/admin/products/'+product.id" style="text-decoration:none;">
       <div class="card card-product card-plain shadow-sm">
         <div class="card-header-image">
@@ -14,7 +14,7 @@
           <small>{{ product.cantidadCuotas }} cuotas de $</small>{{ formatPrice(product.costo * (1+(porccuotas/100)) / product.cantidadCuotas) }}<br>
         </h4>
       </div>
-    </a><br>
+    </a>
   </div>
 </template>
 

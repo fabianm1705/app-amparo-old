@@ -163,13 +163,12 @@ class ProductController extends Controller
         UserInterest::create(['user_id' => Auth::user()->id,'interest_id' => 5]);
       }
 
-      // $payment_methods = PaymentMethod::where('activo',1)->get();
-      // $contados = Category::withCount(['products' => function (Builder $query) {
-      //                                     $query->where('vigente', '=', 1);
-      //                                 }])->get();
-      $products = DB::table('products')->where('vigente', '=', 1)->orderBy('costo')->get();
+      $payment_methods = PaymentMethod::where('activo',1)->get();
+      $contados = Category::withCount(['products' => function (Builder $query) {
+                                          $query->where('vigente', '=', 1);
+                                      }])->get();
       $categories = Category::orderBy('nombre','asc')->get();
-      return view('admin.product.shopping', compact("categories","products"));
+      return view('admin.product.shopping', compact("categories","contados","payment_methods"));
     }
 
     public function getProductsXCategory($id)

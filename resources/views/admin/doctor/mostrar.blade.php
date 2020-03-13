@@ -30,7 +30,7 @@
             Available colors only for the toolbar: toolbar-color-blue, toolbar-color-azure, toolbar-color-green, toolbar-color-red, toolbar-color-orange
           -->
           <div class="row">
-            <h5 class="card-title text-white fontAmparo mt-4 mb-4 ml-4">&nbsp;&nbsp;Profesionales</h5><br>
+            <h5 class="card-title text-white mt-4 mb-4 ml-4">&nbsp;&nbsp;Profesionales</h5><br>
           </div>
           <div class="col-md-12">
             <select class="custom-select mb-4" name="specialty" id="specialty" onchange="cargarProfesionales()">

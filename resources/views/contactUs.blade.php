@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="fresh-table full-color-orange d-flex shadow-sm">
-                <h5 class="card-title text-white fontAmparo mt-4 ml-4 mb-4">Contacto</h5>
+                <h5 class="card-title text-white mt-4 ml-4 mb-4">Contacto</h5>
             </div>
             <div class="card mt-1">
               <div class="card-body">

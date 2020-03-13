@@ -4,11 +4,10 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card shadow-sm">
-                <div class="card-header bgOrange">
-                  <h5 class="card-title text-white">@lang('messages.login')</h5>
-                </div>
-
+            <div class="fresh-table full-color-orange d-flex shadow-sm">
+                <h5 class="card-title text-white mt-4 mb-4 ml-4">@lang('messages.login')</h5>
+            </div>
+            <div class="card shadow-sm mt-1">
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf

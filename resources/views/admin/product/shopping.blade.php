@@ -31,7 +31,7 @@
           -->
           <div class="row">
             <div class="col-md-5 vertical-align-bottom">
-              <h5 class="text-white text-center mt-3 mb-2 fontAmparo">
+              <h5 class="text-white text-center mt-3 mb-2">
                 Seleccione categoría
               </h5>
             </div>

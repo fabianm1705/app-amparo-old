@@ -174,4 +174,52 @@ class UserController extends Controller
       'usersCount' => $usersCount
     ]);
   }
+
+  public function necesitaSalud($user)
+  {
+    $salud = true;
+    foreach ($user->subscriptions as $subscription) {
+      if($subscription->salud==1){
+        $salud = false;
+      }
+    }
+    foreach ($user->group->subscriptions as $subscription) {
+      if($subscription->salud==1){
+        $salud = false;
+      }
+    }
+    return $salud;
+  }
+
+  public function necesitaOdontologia($user)
+  {
+    $odontologia = true;
+    foreach ($user->subscriptions as $subscription) {
+      if($subscription->odontologia==1){
+        $odontologia = false;
+      }
+    }
+    return $odontologia;
+  }
+
+  public function checkSocio($id)
+  {
+    $user = User::find($id);
+    $cantOrders = DB::table('orders')
+                   ->select(DB::raw('count(*) as order_count'))
+                   ->where('pacient_id', '=', $id)
+                   ->whereMonth('fecha','=',now()->month)
+                   ->whereYear('fecha','=',now()->year)
+                   ->get();
+    foreach ($cantOrders as $order) {
+      $order_count = $order->order_count;
+    }
+    $dataSocio = collect([
+      'salud' => $this->necesitaSalud($user),
+      'odontologia' => $this->necesitaOdontologia($user),
+      'cant_orders' => $order_count
+    ]);
+    return $dataSocio;
+  }
+
 }

@@ -5,7 +5,7 @@
   <div class="row justify-content-center">
     <div class="col-md-12">
       <div class="fresh-table full-color-orange d-flex shadow-sm">
-        <h5 class="card-title text-white mt-4 mb-4 ml-4 fontAmparo">Órdenes Médicas</h5>
+        <h5 class="card-title text-white mt-4 mb-4 ml-4">Órdenes Médicas</h5>
         <div class="ml-auto blanco mr-2 mt-2">
           @can('orders.create')
             <a href="{{ route('usersSearch') }}" title="Nueva">

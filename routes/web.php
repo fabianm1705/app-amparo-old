@@ -135,6 +135,13 @@ Route::get('doctors/mostrar', 'DoctorController@mostrar')
 Route::post('/getDoctors/{id}', 'DoctorController@getDoctors')
               ->middleware('auth')
               ->name('getDoctors');
+Route::post('/checkSocio/{id}', 'UserController@checkSocio')
+              ->middleware('auth')
+              ->name('checkSocio');
+Route::post('/getCoseguro/{id}', 'SpecialtyController@getCoseguro')
+              ->middleware('auth')
+              ->name('getCoseguro');
+
 
 //Shopping y productos
 Route::get('/admin/products/{productId}', 'ProductController@show')

@@ -74,8 +74,12 @@ class OrderController extends Controller
       $order->monto_s = $request->input('monto_s');
       $order->monto_a = $request->input('monto_a');
       $order->obs = $request->input('obs');;
-      $order->estado = $request->input('estado');
-      $order->lugarEmision = $request->input('lugarEmision');
+      $order->estado = 'Impresa';
+      if((Auth::user()->group->nroSocio<>'1232') and (Auth::user()->group->nroSocio<>'1231')){
+        $order->lugarEmision = 'Autogestión Amparo';
+      }else{
+        $order->lugarEmision = 'Sede Amparo';
+      }
       $order->pacient_id = $request->input('pacient_id');
       $order->doctor_id = $request->input('doctor_id');
 
@@ -149,46 +153,34 @@ class OrderController extends Controller
 
     public function crear(Request $request)
     {
+      $emiteOficina = true;
       if((Auth::user()->group->nroSocio<>'1232') and (Auth::user()->group->nroSocio<>'1231')){
         UserInterest::create(['user_id' => Auth::user()->id,'interest_id' => 3]);
+        $emiteOficina = false;
+        $group_id = Auth::user()->group_id;
+        //Tomar los Id de todos los usuarios del grupo
+        // $usersId = User::where('group_id',$group_id)->pluck('id')->toArray();
+        //Para buscar las órdenes de todos
+        // $orders = Order::whereIn('pacient_id',$usersId)->orderBy('id', 'desc')->paginate(4);
+        $users = User::where('group_id',$group_id)->get();
+      }else{
+        $users = User::where('id',$request->input('id'))->get();
       }
-
-      $group_id = Auth::user()->group_id;
-      //Tomar los Id de todos los usuarios del grupo
-      $usersId = User::where('group_id',$group_id)->pluck('id')->toArray();
-      //Para buscar las órdenes de todos
-      $orders = Order::whereIn('pacient_id',$usersId)->orderBy('id', 'desc')->paginate(4);
-      $users = User::where('group_id',$group_id)->get();
 
       $usersCount = $users->count();
-      $odontoFlag = true;
-      $saludFlag = true;
-      foreach ($users as $user) {
-        foreach ($user->subscriptions as $subscription) {
-          if($subscription->salud==1){
-            $saludFlag = false;
-          }
-          if($subscription->odontologia==1){
-            $odontoFlag = false;
-          }
-        }
-        foreach ($user->group->subscriptions as $subscription) {
-          if($subscription->salud==1){
-            $saludFlag = false;
-          }
-        }
-      }
-
       $specialties = DB::table('specialties')
-                            ->where([
-                                        ['vigenteOrden', '=', 1],
-                                        ['vigente', '=', 1],
-                                    ])
+                            ->where([['vigenteOrden', '=', 1],['vigente', '=', 1],])
                             ->orderBy('descripcion','asc')
                             ->get();
+      $doctors = DB::table('doctors')->where('id', '=', 0)->get();
 
-      return view('admin.order.crear',
-      compact("orders","users","specialties","odontoFlag","saludFlag","usersCount"));
+      return view('admin.order.crear',compact(
+        "users",
+        "specialties",
+        "usersCount",
+        "doctors",
+        "emiteOficina"
+      ));
     }
 
     public function search(Request $request)

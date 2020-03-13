@@ -10,7 +10,11 @@
             @can('orders.crear')
               <div class="col-md-3 blanco">
                 <button class="btn btn-success m-1 text-light w-100" type="" name="button">
-                  <a class="" href="{{ route('orders.crear') }}">Emitir Orden</a>
+                  @if((Auth::user()->group->nroSocio<>'1232') and (Auth::user()->group->nroSocio<>'1231'))
+                    <a class="" href="{{ route('orders.crear') }}">Emitir Orden</a>
+                  @else
+                    <a class="" href="{{ route('usersSearch') }}">Emitir Orden</a>
+                  @endif
                 </button>
               </div>
             @endcan

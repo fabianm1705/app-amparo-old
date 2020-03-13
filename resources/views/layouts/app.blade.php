@@ -41,7 +41,7 @@
    </style>
    @yield('myLinks')
 </head>
-<body style="background-image: url({{ asset('images/01.jpg' )}})">
+<body onLoad="iniciaEmision()" style="background-image: url({{ asset('images/01.jpg' )}})">
     <div id="app">
         <nav class="navbar navbar-expand-md fixed-top navbar-light bg-white shadow-sm">
             <div class="container">
@@ -66,7 +66,10 @@
                               Admin
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                              <a class="dropdown-item" href="{{ route('orders.index') }}">Orders</a>
+                              {{-- <a class="dropdown-item" href="{{ route('orders.index') }}">Orders</a> --}}
+                              @can('specialties.index')
+                                <a class="dropdown-item" href="{{ route('specialties.index') }}">Specialties</a>
+                              @endcan
                               @can('doctors.index')
                                 <a class="dropdown-item" href="{{ route('doctors.index') }}">Doctors</a>
                               @endcan
@@ -108,7 +111,11 @@
                       @auth
                         @can('orders.indice')
                           <li class="nav-item active">
-                            <a class="nav-link" href="{{ route('orders.indice') }}">Ordenes</a>
+                            @if((Auth::user()->group->nroSocio<>'1232') and (Auth::user()->group->nroSocio<>'1231'))
+                              <a class="nav-link" href="{{ route('orders.indice') }}">Ordenes</a>
+                            @else
+                              <a class="nav-link" href="{{ route('orders.index') }}">Ordenes</a>
+                            @endif
                           </li>
                         @endcan
                         @can('doctors.mostrar')

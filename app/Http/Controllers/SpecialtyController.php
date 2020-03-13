@@ -123,16 +123,13 @@ class SpecialtyController extends Controller
         ->route('specialties.index');
     }
 
-    public function getAllActiveSpecialties(Request $request)
+    public function getCoseguro($id)
     {
-      $specialties = DB::table('specialties')
-                            ->where('vigente', 1)
-                            ->orderBy('descripcion','asc')
-                            ->get();
+      $specialty = Specialty::find($id);
 
-      if($request->ajax()){
-        return $specialties->toJson();
-      }
-      return $specialties;
+      // if($request->ajax()){
+      //   return $specialties->toJson();
+      // }
+      return $specialty;
     }
 }

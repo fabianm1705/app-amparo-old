@@ -10,11 +10,13 @@
             @can('orders.crear')
               <div class="col-md-3 blanco">
                 <button class="btn btn-success m-1 text-light w-100" type="" name="button">
-                  @if((Auth::user()->group->nroSocio<>'1232') and (Auth::user()->group->nroSocio<>'1231'))
-                    <a class="" href="{{ route('orders.crear') }}">Emitir Orden</a>
-                  @else
-                    <a class="" href="{{ route('usersSearch') }}">Emitir Orden</a>
-                  @endif
+                  @foreach (Auth::user()->roles as $role)
+                    @if(($role->slug=='dev') or ($role->slug=='admin'))
+                      <a class="" href="{{ route('usersSearch') }}">Emitir Orden</a>
+                    @else
+                      <a class="" href="{{ route('orders.crear') }}">Emitir Orden</a>
+                    @endif
+                  @endforeach
                 </button>
               </div>
             @endcan
@@ -47,10 +49,10 @@
                 </button>
               </div>
             @endif
-          </div><br>
+          </div>
 
           @if(Auth::user()->password_changed_at==null)
-            <div class="container alert alert-danger">
+            <div class="container alert alert-danger"><br>
               <ul>
                 <li>Por seguridad modifique una vez su contraseña de acceso</li>
               </ul>
@@ -61,7 +63,7 @@
     </div>
   </div>
 </div>
-<div class="container">
+<div class="container mt-2">
     <div class="text-center">
       Oficina Cura Alvarez 615, Paraná, Entre Ríos<br>
       Horario: Lunes a Viernes 8:30 a 18:00hs<br>

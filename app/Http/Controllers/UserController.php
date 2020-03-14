@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\UserInterest;
 use App\Subscription;
 use Caffeinated\Shinobi\Models\Role;
 use App\Http\Requests\ChangePasswordRequest;
@@ -143,6 +144,13 @@ class UserController extends Controller
 
   public function odontologia()
   {
+    if((Auth::user()->group->nroSocio<>'1232') and (Auth::user()->group->nroSocio<>'1231')){
+      UserInterest::create([
+        'user_id' => Auth::user()->id,
+        'interest_id' => 12,
+        'obs' => 'Odontología'
+      ]);
+    }
     $subscriptions = Subscription::where('odontologia',1)->get();
     $users = $subscriptions->flatMap->users->sortBy('name');
     $usersCount = $subscriptions->flatMap->users->count();
@@ -154,6 +162,13 @@ class UserController extends Controller
 
   public function emergencia()
   {
+    if((Auth::user()->group->nroSocio<>'1232') and (Auth::user()->group->nroSocio<>'1231')){
+      UserInterest::create([
+        'user_id' => Auth::user()->id,
+        'interest_id' => 12,
+        'obs' => 'Emergencia'
+      ]);
+    }
     $subscriptions = Subscription::where('salud',1)->get();
     $groups = $subscriptions->flatMap->groups->sortBy('nroSocio');
     $uusers = $subscriptions->flatMap->users->sortBy('name');

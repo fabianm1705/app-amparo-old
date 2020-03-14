@@ -4,17 +4,17 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-11">
-      <div class="card shadow-sm">
-        <div class="card-header card-header-raised card-header-warning d-flex">
-          <h5 class="card-title text-white fontAmparo">Plans/Subscriptions</h5>
-          <div class="ml-auto blanco">
+      <div class="fresh-table full-color-orange d-flex shadow-sm">
+          <h5 class="card-title text-white mt-4 mb-4 ml-4">Plans/Subscriptions</h5>
+          <div class="ml-auto blanco mr-2 mt-2">
             @can('subscriptions.create')
             <a href="{{ route('subscriptions.create') }}" title="Nueva">
               Agregar Nueva
             </a>
             @endcan
            </div>
-        </div>
+       </div>
+       <div class="card shadow-sm mt-1">
         <div class="card-body centrado">
           <table class="table table-hover table-sm table-responsive">
             <thead>

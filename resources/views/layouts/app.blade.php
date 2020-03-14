@@ -68,25 +68,25 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                               {{-- <a class="dropdown-item" href="{{ route('orders.index') }}">Orders</a> --}}
                               @can('specialties.index')
-                                <a class="dropdown-item" href="{{ route('specialties.index') }}">Specialties</a>
+                                <a class="dropdown-item" href="{{ route('specialties.index') }}">Especialidades</a>
                               @endcan
                               @can('doctors.index')
-                                <a class="dropdown-item" href="{{ route('doctors.index') }}">Doctors</a>
+                                <a class="dropdown-item" href="{{ route('doctors.index') }}">Profesionales</a>
                               @endcan
                               @can('categories.index')
-                                <a class="dropdown-item" href="{{ route('categories.index') }}">Categoríes</a>
+                                <a class="dropdown-item" href="{{ route('categories.index') }}">Categorías</a>
                               @endcan
                               @can('products.index')
-                                <a class="dropdown-item" href="{{ route('products.index') }}">Products</a>
+                                <a class="dropdown-item" href="{{ route('products.index') }}">Productos</a>
                               @endcan
                               @can('roles.index')
                                 <a class="dropdown-item" href="{{ route('roles.index') }}">Roles</a>
                               @endcan
                               @can('users.index')
-                                <a class="dropdown-item" href="{{ route('users.index') }}">Users</a>
+                                <a class="dropdown-item" href="{{ route('users.index') }}">Socios</a>
                               @endcan
                               @can('payment_methods.index')
-                                <a class="dropdown-item" href="{{ route('payment_methods.index') }}">Payment Methods</a>
+                                <a class="dropdown-item" href="{{ route('payment_methods.index') }}">Métodos de Pago</a>
                               @endcan
                               @can('shopping_cart.index')
                                 <a class="dropdown-item" href="{{ route('shopping_cart.index') }}">Shopping Carts</a>
@@ -95,10 +95,10 @@
                                 <a class="dropdown-item" href="{{ route('interests.index') }}">Zonas de Interés</a>
                               @endcan
                               @can('interests.index')
-                                <a class="dropdown-item" href="{{ route('interests.visor') }}">Visor: Zonas de Interés</a>
+                                <a class="dropdown-item" href="{{ route('interests.visor') }}">Visor de Accesos</a>
                               @endcan
                               @can('subscriptions.index')
-                                <a class="dropdown-item" href="{{ route('subscriptions.index') }}">Plans/Subscriptions</a>
+                                <a class="dropdown-item" href="{{ route('subscriptions.index') }}">Planes/Subscriptions</a>
                               @endcan
                             </div>
                           </div>
@@ -111,11 +111,13 @@
                       @auth
                         @can('orders.indice')
                           <li class="nav-item active">
-                            @if((Auth::user()->group->nroSocio<>'1232') and (Auth::user()->group->nroSocio<>'1231'))
-                              <a class="nav-link" href="{{ route('orders.indice') }}">Ordenes</a>
-                            @else
-                              <a class="nav-link" href="{{ route('orders.index') }}">Ordenes</a>
-                            @endif
+                            @foreach (Auth::user()->roles as $role)
+                              @if(($role->slug=='dev') or ($role->slug=='admin'))
+                                <a class="nav-link" href="{{ route('orders.index') }}">Ordenes</a>
+                              @else
+                                <a class="nav-link" href="{{ route('orders.indice') }}">Ordenes</a>
+                              @endif
+                            @endforeach
                           </li>
                         @endcan
                         @can('doctors.mostrar')

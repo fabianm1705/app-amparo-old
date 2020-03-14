@@ -4,17 +4,17 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-12">
-      <div class="card shadow-sm">
-        <div class="card-header bgOrange d-flex">
-          <h5 class="card-title text-white">Profesionales</h5>
-          <ul class="nav justify-content-end ml-auto">
+      <div class="fresh-table full-color-orange d-flex shadow-sm">
+          <h5 class="card-title text-white mt-4 mb-4 ml-4">Profesionales</h5>
+          <ul class="nav justify-content-end ml-auto mr-2 mt-2">
               <li class="nav-item ml-2 blanco">
                 @can('doctors.create')
                 <a href="{{ route('doctors.create') }}" title="Nuevo">Agregar Nuevo</a>
                 @endcan
               </li>
           </ul>
-        </div>
+      </div>
+      <div class="card shadow-sm mt-1">
         <div class="card-body">
           <table class="table table-hover table-sm table-responsive">
             <thead>

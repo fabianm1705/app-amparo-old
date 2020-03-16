@@ -95,14 +95,7 @@ class PlanController extends Controller
 
     public function activarPlan()
     {
-      if((Auth::user()->group->nroSocio<>'1232') and (Auth::user()->group->nroSocio<>'1231')){
-        UserInterest::create([
-          'user_id' => Auth::user()->id,
-          'interest_id' => 11,
-          'obs' => 'Plan Salud Grupal'
-        ]);
-      }
-
+      $this->registroAcceso(11,'Plan Salud Grupal');
       Plan::create([
                     'nombre' => 'AMPARO SALUD PLUS',
                     'monto' => 800,
@@ -113,4 +106,14 @@ class PlanController extends Controller
         ->route('home')->with('message','Plan habilitado! Ya puedes emitir órdenes médicas de consulta.');
     }
 
+    public function registroAcceso($interest_id,$obs)
+    {
+      foreach (Auth::user()->roles as $role){
+        if(($role->slug<>'dev') and ($role->slug<>'admin')){
+          UserInterest::create(['user_id' => Auth::user()->id,
+                                'interest_id' => $interest_id,
+                                'obs' => $obs]);
+        }
+      }
+    }
 }

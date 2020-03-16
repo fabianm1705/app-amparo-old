@@ -94,14 +94,7 @@ class LayerController extends Controller
 
     public function activarSalud()
     {
-      if((Auth::user()->group->nroSocio<>'1232') and (Auth::user()->group->nroSocio<>'1231')){
-        UserInterest::create([
-          'user_id' => Auth::user()->id,
-          'interest_id' => 11,
-          'obs' => 'Plan Salud Individual'
-        ]);
-      }
-
+      $this->registroAcceso(11,'Plan Salud Individual');
       Layer::create([
                     'nombre' => 'Amparo Salud',
                     'monto' => 500,
@@ -114,14 +107,7 @@ class LayerController extends Controller
 
     public function activarOdontologia()
     {
-      if((Auth::user()->group->nroSocio<>'1232') and (Auth::user()->group->nroSocio<>'1231')){
-        UserInterest::create([
-          'user_id' => Auth::user()->id,
-          'interest_id' => 11,
-          'obs' => 'Plan Odontológico'
-        ]);
-      }
-
+      $this->registroAcceso(11,'Plan Odontológico');
       Layer::create([
                     'nombre' => 'Amparo Odontológico',
                     'monto' => 200,
@@ -130,5 +116,16 @@ class LayerController extends Controller
                   ]);
       return redirect()
         ->route('home')->with('message','Plan habilitado! Llamanos o escribenos a la oficina para comenzar a utilizarlo.');
+    }
+
+    public function registroAcceso($interest_id,$obs)
+    {
+      foreach (Auth::user()->roles as $role){
+        if(($role->slug<>'dev') and ($role->slug<>'admin')){
+          UserInterest::create(['user_id' => Auth::user()->id,
+                                'interest_id' => $interest_id,
+                                'obs' => $obs]);
+        }
+      }
     }
 }

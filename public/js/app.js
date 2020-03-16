@@ -1893,6 +1893,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     product: {
@@ -38375,20 +38376,25 @@ var render = function() {
     _c(
       "button",
       {
-        staticClass: "btn btn-sm",
-        staticStyle: { "background-color": "transparent" },
+        staticClass: "btn btn-block btn-outline-dark",
         attrs: { title: "agregar al Carrito", type: "submit", name: "button" },
         on: { click: _vm.addToCart }
       },
-      [
-        _c("i", { staticClass: "material-icons" }, [
-          _vm._v("add_shopping_cart")
-        ])
-      ]
+      [_vm._m(0)]
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-flex justify-content-center" }, [
+      _c("i", { staticClass: "material-icons" }, [_vm._v("add_shopping_cart")]),
+      _vm._v("Agregar al Carrito de Compras\n        ")
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -39157,7 +39163,7 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: "col-lg-3 col-md-3 col-sm-6 col-xs-6 mt-1 mb-1",
+      staticClass: "col-md-3 col-sm-6 col-xs-12 mt-1 mb-1",
       attrs: { id: "borrar" }
     },
     [

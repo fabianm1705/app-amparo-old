@@ -97,11 +97,7 @@ class ProductController extends Controller
     public function show($productId)
     {
       $product = Product::find($productId);
-      if((Auth::user()->group->nroSocio<>'1232') and (Auth::user()->group->nroSocio<>'1231')){
-        UserInterest::create(['user_id' => Auth::user()->id,
-                              'interest_id' => 7,
-                              'obs'=>$product->modelo]);
-      }
+      $this->registroAcceso(7,$product->modelo);
       $payment_methods = PaymentMethod::where('activo',1)->get();
       $categories = Category::orderBy('nombre','asc')->get();
       return view('admin.product.show', compact("product","categories","payment_methods"));
@@ -159,14 +155,7 @@ class ProductController extends Controller
 
     public function shopping()
     {
-      if((Auth::user()->group->nroSocio<>'1232') and (Auth::user()->group->nroSocio<>'1231')){
-        UserInterest::create(['user_id' => Auth::user()->id,'interest_id' => 5]);
-      }
-
-      // $payment_methods = PaymentMethod::where('activo',1)->get();
-      // $contados = Category::withCount(['products' => function (Builder $query) {
-      //                                     $query->where('vigente', '=', 1);
-      //                                 }])->get();
+      $this->registroAcceso(5,'');
       $products = DB::table('products')->where('vigente', '=', 1)->orderBy('costo')->get();
       $categories = Category::orderBy('nombre','asc')->get();
       return view('admin.product.shopping', compact("categories","products"));
@@ -178,11 +167,7 @@ class ProductController extends Controller
         $products = DB::table('products')->where('vigente', '=', 1)->orderBy('costo')->get();
       }else{
         $category = Category::find($id);
-        if(Auth::user()->group->nroSocio<>'1232'){
-          UserInterest::create(['user_id' => Auth::user()->id,
-                                'interest_id' => 6,
-                                'obs' => $category->nombre]);
-        }
+        $this->registroAcceso(6,$category->nombre);
         $products = DB::table('products')
               ->where([
                         ['category_id', '=', $id],
@@ -190,5 +175,16 @@ class ProductController extends Controller
                       ])->orderBy('costo')->get();
       }
       return $products;
+    }
+
+    public function registroAcceso($interest_id,$obs)
+    {
+      foreach (Auth::user()->roles as $role){
+        if(($role->slug<>'dev') and ($role->slug<>'admin')){
+          UserInterest::create(['user_id' => Auth::user()->id,
+                                'interest_id' => $interest_id,
+                                'obs' => $obs]);
+        }
+      }
     }
 }

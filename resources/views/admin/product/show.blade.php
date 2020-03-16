@@ -47,7 +47,8 @@
                   <span class="carousel-control-next-icon" aria-hidden="true"></span>
                   <span class="sr-only">Siguiente</span>
                 </a>
-              </div>            </div>
+              </div>
+            </div>
             <div class="col-md-5 col-sm-12">
               <header class="centrado">
                 <h4>{{ $product->modelo }}<small> - by {{ $product->empresa }}</small></h4>
@@ -73,16 +74,29 @@
                       </div>
                     </div></center>
                   @endforeach
-                  <div class="row d-flex">
-                    <div class="col-3">
+                  <div class="row">
+                    <div class="col-md-12 mb-1">
                       <add-to-cart-component :product="{{$product}}">
                       </add-to-cart-component>
                     </div>
-                    <div class="col-9 blanco">
-                      <form action="{{ route('shopping_cart.buy',['product' => $product]) }}" method="get" enctype="multipart/form-data">
+                    <div class="col-md-12 mb-1">
+                      <form action="{{ route('shopping_cart.cart') }}" method="get" enctype="multipart/form-data">
                         @csrf
-                        <add-and-buy-to-cart-component :product="{{$product}}">
-                        </add-and-buy-to-cart-component>
+                        <button class="btn btn-outline-dark btn-block" type="submit" name="button">
+                          <div class="d-flex justify-content-center">
+                            <i class="material-icons">shopping_cart</i>Ir al Carrito de Compras
+                          </div>
+                        </button>
+                      </form>
+                    </div>
+                    <div class="col-md-12 mb-1">
+                      <form action="{{ route('shopping_cart.index') }}" method="get" enctype="multipart/form-data">
+                        @csrf
+                        <button class="btn btn-outline-dark btn-block" type="submit" name="button">
+                          <div class="d-flex justify-content-center">
+                            Seguir comprando
+                          </div>
+                        </button>
                       </form>
                     </div>
                   </div>

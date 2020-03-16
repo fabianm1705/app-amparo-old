@@ -132,10 +132,7 @@ class DoctorController extends Controller
 
     public function mostrar(Request $request)
     {
-      if((Auth::user()->group->nroSocio<>'1232') and (Auth::user()->group->nroSocio<>'1231')){
-        UserInterest::create(['user_id' => Auth::user()->id,'interest_id' => 3]);
-      }
-
+      $this->registroAcceso(3,'');
       $specialties = Cache::remember('specialties', now()->addMonths(1), function () {
            return Specialty::orderBy('descripcion','asc')
                                 ->where('vigente','=',1)
@@ -148,5 +145,16 @@ class DoctorController extends Controller
     {
       $doctors = DB::table('doctors')->where('specialty_id', '=', $id)->get();
       return $doctors;
+    }
+
+    public function registroAcceso($interest_id,$obs)
+    {
+      foreach (Auth::user()->roles as $role){
+        if(($role->slug<>'dev') and ($role->slug<>'admin')){
+          UserInterest::create(['user_id' => Auth::user()->id,
+                                'interest_id' => $interest_id,
+                                'obs' => $obs]);
+        }
+      }
     }
 }

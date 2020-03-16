@@ -65,6 +65,8 @@
           monto_s = document.getElementById("monto_s");
           coseguro = document.getElementById("coseguro");
           if(resp.data.salud){
+            needSalud.style.display = "block";
+            needSalud2.style.display = "block";
             btnGenerarOrden.style.display = "none";
             specialty.style.display = "none";
             doctor_id.style.display = "none";
@@ -73,8 +75,6 @@
             monto_a.style.display = "none";
             msg_monto_s.style.display = "none";
             msg_monto_a.style.display = "none";
-            needSalud.style.display = "block";
-            needSalud2.style.display = "block";
           }else{
             btnGenerarOrden.style.display = "block";
             specialty.style.display = "block";

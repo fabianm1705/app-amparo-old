@@ -154,17 +154,15 @@ class OrderController extends Controller
     public function crear(Request $request)
     {
       $emiteOficina = true;
-      if((Auth::user()->group->nroSocio<>'1232') and (Auth::user()->group->nroSocio<>'1231')){
-        UserInterest::create(['user_id' => Auth::user()->id,'interest_id' => 3]);
-        $emiteOficina = false;
-        $group_id = Auth::user()->group_id;
-        //Tomar los Id de todos los usuarios del grupo
-        // $usersId = User::where('group_id',$group_id)->pluck('id')->toArray();
-        //Para buscar las órdenes de todos
-        // $orders = Order::whereIn('pacient_id',$usersId)->orderBy('id', 'desc')->paginate(4);
-        $users = User::where('group_id',$group_id)->get();
-      }else{
-        $users = User::where('id',$request->input('id'))->get();
+      foreach (Auth::user()->roles as $role){
+        if(($role->slug=='dev') or ($role->slug=='admin')){
+          $users = User::where('id',$request->input('id'))->get();
+        }else{
+          UserInterest::create(['user_id' => Auth::user()->id,'interest_id' => 3]);
+          $emiteOficina = false;
+          $group_id = Auth::user()->group_id;
+          $users = User::where('group_id',$group_id)->get();
+        }
       }
 
       $usersCount = $users->count();

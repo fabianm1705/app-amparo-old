@@ -144,13 +144,7 @@ class UserController extends Controller
 
   public function odontologia()
   {
-    if((Auth::user()->group->nroSocio<>'1232') and (Auth::user()->group->nroSocio<>'1231')){
-      UserInterest::create([
-        'user_id' => Auth::user()->id,
-        'interest_id' => 12,
-        'obs' => 'Odontología'
-      ]);
-    }
+    $this->registroAcceso(12,'Odontología');
     $subscriptions = Subscription::where('odontologia',1)->get();
     $users = $subscriptions->flatMap->users->sortBy('name');
     $usersCount = $subscriptions->flatMap->users->count();
@@ -162,13 +156,7 @@ class UserController extends Controller
 
   public function emergencia()
   {
-    if((Auth::user()->group->nroSocio<>'1232') and (Auth::user()->group->nroSocio<>'1231')){
-      UserInterest::create([
-        'user_id' => Auth::user()->id,
-        'interest_id' => 12,
-        'obs' => 'Emergencia'
-      ]);
-    }
+    $this->registroAcceso(12,'Emergencia');
     $subscriptions = Subscription::where('salud',1)->get();
     $groups = $subscriptions->flatMap->groups->sortBy('nroSocio');
     $uusers = $subscriptions->flatMap->users->sortBy('name');
@@ -235,6 +223,17 @@ class UserController extends Controller
       'cant_orders' => $order_count
     ]);
     return $dataSocio;
+  }
+
+  public function registroAcceso($interest_id,$obs)
+  {
+    foreach (Auth::user()->roles as $role){
+      if(($role->slug<>'dev') and ($role->slug<>'admin')){
+        UserInterest::create(['user_id' => Auth::user()->id,
+                              'interest_id' => $interest_id,
+                              'obs' => $obs]);
+      }
+    }
   }
 
 }

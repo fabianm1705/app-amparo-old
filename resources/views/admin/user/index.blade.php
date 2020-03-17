@@ -49,7 +49,7 @@
                   <td>{{ $user->group->direccion }}</td>
                   <td class="text-right d-flex">
                     @can('users.show')
-                      <a href="{{ route('users.show', ['user' => $user ]) }}" title="Ver Socio" class="">
+                      <a href="{{ route('users.panel', ['id' => $user->id ]) }}" title="Ver Socio" class="">
                         <div class="">
                           <i class="material-icons">search</i>
                         </div>

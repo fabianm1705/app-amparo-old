@@ -19,12 +19,11 @@
           <table class="table table-hover table-sm table-responsive">
             <thead>
               <th>Orden</th>
-              <th>Emisión</th>
-              <th>Impresión</th>
+              <th>Fecha</th>
               <th>Socio</th>
-              <th>Nombre</th>
               <th>Profesional</th>
-              <th>Lugar</th>
+              <th>Coseguro</th>
+              <th>Emisión</th>
               <th>Obs</th>
             </thead>
             <tbody>
@@ -32,10 +31,9 @@
                 <tr>
                   <td>{{ $order->id+5000 }}</td>
                   <td>{{ \Carbon\Carbon::parse($order->fecha)->format('d/m/Y') }}</td>
-                  <td>{{ \Carbon\Carbon::parse($order->fechaImpresion)->format('d/m/Y') }}</td>
-                  <td>{{ $order->user->group->nroSocio }}</td>
                   <td>{{ $order->user->name }}</td>
                   <td>{{ $order->doctor->apeynom }}</td>
+                  <td class="text-right">${{ $order->monto_s }}</td>
                   <td>{{ $order->lugarEmision }}</td>
                   <td>{{ $order->obs }}</td>
                 </tr>

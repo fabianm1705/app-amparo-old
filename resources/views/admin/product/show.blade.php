@@ -90,7 +90,7 @@
                       </form>
                     </div>
                     <div class="col-md-12 mb-1">
-                      <form action="{{ route('shopping_cart.index') }}" method="get" enctype="multipart/form-data">
+                      <form action="{{ route('products.shopping') }}" method="get" enctype="multipart/form-data">
                         @csrf
                         <button class="btn btn-outline-dark btn-block" type="submit" name="button">
                           <div class="d-flex justify-content-center">

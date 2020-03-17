@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Models\Group;
+use App\Models\Plan;
+use App\Models\Layer;
+use App\Models\Order;
 use App\UserInterest;
 use App\Subscription;
 use Caffeinated\Shinobi\Models\Role;
+use Illuminate\Support\Str;
 use App\Http\Requests\ChangePasswordRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -236,4 +241,21 @@ class UserController extends Controller
     }
   }
 
+  public function panel($id)
+  {
+    $user = User::find($id);
+    $usersId = User::where('group_id',$user->group_id)->pluck('id')->toArray();
+    $layers = Layer::whereIn('user_id',$usersId)->get();
+    $orders = Order::whereIn('pacient_id',$usersId)->orderBy('id', 'desc')->take(6)->get();
+    $users = User::where('group_id',$user->group_id)->get();
+    $plans = Plan::where('group_id',$user->group_id)->get();
+    $group = Group::find($user->group_id);
+    return view('admin.user.panel',[
+      'users' => $users,
+      'plans' => $plans,
+      'layers' => $layers,
+      'orders' => $orders,
+      'group' => $group
+    ]);
+  }
 }

@@ -159,6 +159,11 @@
                             <a class="nav-link" href="{{ route('contacto') }}">Contacto</a>
                           </li>
                         @endcan
+                        @can('users.panel')
+                          <li class="nav-item active">
+                            <a class="nav-link" href="{{ route('users.panel', ['id' => Auth::user()->id ]) }}">Mis Datos</a>
+                          </li>
+                        @endcan
                         {{-- @can('instalar.app')
                         <li class="nav-item active">
                             <a href="#" onclick="addToHomeScreen()" class="nav-link">

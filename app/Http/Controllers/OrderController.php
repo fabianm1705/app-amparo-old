@@ -75,13 +75,15 @@ class OrderController extends Controller
       $order->monto_a = $request->input('monto_a');
       $order->obs = $request->input('obs');;
       $order->estado = 'Impresa';
-      if((Auth::user()->group->nroSocio<>'1232') and (Auth::user()->group->nroSocio<>'1231')){
-        $order->lugarEmision = 'Autogestión Amparo';
-      }else{
-        $order->lugarEmision = 'Sede Amparo';
-      }
       $order->pacient_id = $request->input('pacient_id');
       $order->doctor_id = $request->input('doctor_id');
+      foreach (Auth::user()->roles as $role){
+        if(($role->slug=='dev') or ($role->slug=='admin')){
+          $order->lugarEmision = 'Sede Amparo';
+        }else{
+          $order->lugarEmision = 'Autogestión Web';
+        }
+      }
 
       $order->save();
 
@@ -157,19 +159,23 @@ class OrderController extends Controller
       foreach (Auth::user()->roles as $role){
         if(($role->slug=='dev') or ($role->slug=='admin')){
           $users = User::where('id',$request->input('id'))->get();
+          $specialties = DB::table('specialties')
+                                ->where('vigente', '=', 1)
+                                ->orderBy('descripcion','asc')
+                                ->get();
         }else{
           UserInterest::create(['user_id' => Auth::user()->id,'interest_id' => 3]);
           $emiteOficina = false;
           $group_id = Auth::user()->group_id;
           $users = User::where('group_id',$group_id)->get();
+          $specialties = DB::table('specialties')
+                                ->where([['vigenteOrden', '=', 1],['vigente', '=', 1],])
+                                ->orderBy('descripcion','asc')
+                                ->get();
         }
       }
 
       $usersCount = $users->count();
-      $specialties = DB::table('specialties')
-                            ->where([['vigenteOrden', '=', 1],['vigente', '=', 1],])
-                            ->orderBy('descripcion','asc')
-                            ->get();
       $doctors = DB::table('doctors')->where('id', '=', 0)->get();
 
       return view('admin.order.crear',compact(

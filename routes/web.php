@@ -171,6 +171,9 @@ Route::post('cantOrders/{id}', 'OrderController@cantOrders')
               ->middleware('auth')
               ->name('cantOrders');
 
+Route::get('users/panel/{id}', 'UserController@panel')
+              ->middleware(['auth','can:users.panel'])
+              ->name('users.panel');
 Route::get('password/edit', 'UserController@editPassword')
               ->name('password.edit');
 Route::post('password/change', 'UserController@change')

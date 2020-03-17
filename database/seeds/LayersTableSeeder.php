@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Layer;
 use App\User;
 use App\Subscription;
+use Illuminate\Support\Str;
 
 class LayersTableSeeder extends Seeder
 {
@@ -19,7 +20,7 @@ class LayersTableSeeder extends Seeder
       {
         $datos = explode("|", $linea);
         $layer = new Layer();
-        $layer->nombre = utf8_encode(trim($datos[2]));
+        $layer->nombre = Str::title(utf8_encode(trim($datos[2])));
         $layer->monto = intval(trim($datos[3]));
         $layer->emiteOrden = intval(trim($datos[5]));
 

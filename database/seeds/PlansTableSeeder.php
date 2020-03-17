@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Plan;
 use App\Models\Group;
 use App\Subscription;
+use Illuminate\Support\Str;
 
 class PlansTableSeeder extends Seeder
 {
@@ -23,7 +24,7 @@ class PlansTableSeeder extends Seeder
         if(isset($group)){
           $plan = new Plan();
           $plan->group_id=$group->id;
-          $plan->nombre = utf8_encode(trim($datos[1]));
+          $plan->nombre = Str::title(utf8_encode(trim($datos[1])));
           $plan->monto = intval(trim($datos[2]));
           $plan->emiteOrden = intval(trim($datos[3]));
 

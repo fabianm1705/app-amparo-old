@@ -5,7 +5,7 @@
   <div class="row justify-content-center">
     <div class="col-md-11">
       <div class="fresh-table full-color-orange d-flex shadow-sm">
-          <h5 class="card-title text-white mt-4 mb-4 ml-4">Productos</h5>
+          <h5 class="card-title text-white mt-3 mb-3 ml-3">Productos</h5>
           <div class="ml-auto blanco mr-2 mt-2">
             @can('products.create')
               <a href="{{ route('products.create') }}" title="Nuevo">

@@ -14,7 +14,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->truncateTables([
           'layers',
-          'plans'
+          'plans',
+          'sales'
         ]);
         // $this->call(PermissionsTableSeeder::class);
         // $this->call(InterestsSeeder::class);
@@ -28,7 +29,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersTableSeeder::class);
         $this->call(PlansTableSeeder::class);
         $this->call(LayersTableSeeder::class);
-        // $this->call(OrdersTableSeeder::class);
+        $this->call(SalesTableSeeder::class);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 

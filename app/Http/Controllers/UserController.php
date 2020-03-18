@@ -8,6 +8,7 @@ use App\Models\Group;
 use App\Models\Plan;
 use App\Models\Layer;
 use App\Models\Order;
+use App\Models\Sale;
 use App\UserInterest;
 use App\Subscription;
 use Caffeinated\Shinobi\Models\Role;
@@ -249,12 +250,14 @@ class UserController extends Controller
     $orders = Order::whereIn('pacient_id',$usersId)->orderBy('id', 'desc')->take(6)->get();
     $users = User::where('group_id',$user->group_id)->get();
     $plans = Plan::where('group_id',$user->group_id)->get();
+    $sales = Sale::where('group_id',$user->group_id)->orderBy('id','desc')->get();
     $group = Group::find($user->group_id);
     return view('admin.user.panel',[
       'users' => $users,
       'plans' => $plans,
       'layers' => $layers,
       'orders' => $orders,
+      'sales' => $sales,
       'group' => $group
     ]);
   }

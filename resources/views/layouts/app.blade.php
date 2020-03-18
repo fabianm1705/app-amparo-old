@@ -67,6 +67,21 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                               {{-- <a class="dropdown-item" href="{{ route('orders.index') }}">Orders</a> --}}
+                              @can('interests.index')
+                                <a class="dropdown-item" href="{{ route('interests.visor') }}">Visor de Accesos</a>
+                              @endcan
+                              <div class="dropdown-divider"></div>
+                              @can('users.index')
+                                <a class="dropdown-item" href="{{ route('users.index') }}">Socios</a>
+                              @endcan
+                              <div class="dropdown-divider"></div>
+                              @can('products.index')
+                                <a class="dropdown-item" href="{{ route('products.index') }}">Productos</a>
+                              @endcan
+                              @can('shopping_cart.index')
+                                <a class="dropdown-item" href="{{ route('shopping_cart.index') }}">Shopping Carts</a>
+                              @endcan
+                              <div class="dropdown-divider"></div>
                               @can('specialties.index')
                                 <a class="dropdown-item" href="{{ route('specialties.index') }}">Especialidades</a>
                               @endcan
@@ -76,26 +91,14 @@
                               @can('categories.index')
                                 <a class="dropdown-item" href="{{ route('categories.index') }}">Categorías</a>
                               @endcan
-                              @can('products.index')
-                                <a class="dropdown-item" href="{{ route('products.index') }}">Productos</a>
-                              @endcan
                               @can('roles.index')
                                 <a class="dropdown-item" href="{{ route('roles.index') }}">Roles</a>
-                              @endcan
-                              @can('users.index')
-                                <a class="dropdown-item" href="{{ route('users.index') }}">Socios</a>
                               @endcan
                               @can('payment_methods.index')
                                 <a class="dropdown-item" href="{{ route('payment_methods.index') }}">Métodos de Pago</a>
                               @endcan
-                              @can('shopping_cart.index')
-                                <a class="dropdown-item" href="{{ route('shopping_cart.index') }}">Shopping Carts</a>
-                              @endcan
                               @can('interests.index')
                                 <a class="dropdown-item" href="{{ route('interests.index') }}">Zonas de Interés</a>
-                              @endcan
-                              @can('interests.index')
-                                <a class="dropdown-item" href="{{ route('interests.visor') }}">Visor de Accesos</a>
                               @endcan
                               @can('subscriptions.index')
                                 <a class="dropdown-item" href="{{ route('subscriptions.index') }}">Planes/Subscriptions</a>

@@ -5,7 +5,7 @@
   <div class="row justify-content-center">
     <div class="col-md-7">
       <div class="fresh-table full-color-orange d-flex shadow-sm">
-        <h5 class="card-title text-white mt-4 mb-4 ml-4">Padrón - {{ $usersCount }} cápitas</h5>
+        <h5 class="card-title text-white mt-3 mb-3 ml-3">Padrón - {{ $usersCount }} cápitas</h5>
       </div>
       <div class="card shadow-sm mt-1">
         <div class="card-body">

@@ -29,6 +29,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+      \Carbon\Carbon::setlocale('es');
+      \Carbon\Carbon::setlocale(LC_TIME,'es_ES');
       Schema::defaultStringLength(120);
       View::composer('*',function($view){
         $sessionName = 'shopping_cart_id';

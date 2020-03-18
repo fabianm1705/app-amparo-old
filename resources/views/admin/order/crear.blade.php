@@ -103,7 +103,7 @@
           @csrf
           <div class="fresh-table full-color-orange shadow-sm">
             <div class="row">
-              <h5 class="card-title text-white mt-4 mb-4 ml-4">&nbsp;&nbsp;Emisión de Órdenes</h5><br>
+              <h5 class="card-title text-white mt-3 mb-3 ml-4">&nbsp;&nbsp;Emisión de Órdenes</h5><br>
             </div>
             <div class="col-md-12">
               <select class="custom-select mb-1" name="pacient_id" id="pacient_id" onchange="checkSocio()">

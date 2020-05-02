@@ -110,6 +110,15 @@ Route::post('search/{name?}/{nroDoc?}/', 'UserController@getUsers')
               ->middleware('auth')
               ->where(['nroDoc' => '[0-9]+'])
               ->name('users.search');
+
+Route::get('uploadfiles', function () {
+                return view('admin.upload');
+            })->middleware('auth')
+              ->name('users.uploadfiles');
+Route::post('updatedb', 'UserController@upload')
+              ->middleware('auth')
+              ->name('users.updatedb');
+
 Route::post('activar/plan', 'PlanController@activarPlan')
               ->middleware('auth')
               ->name('activar.plan');

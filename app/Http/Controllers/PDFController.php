@@ -15,6 +15,7 @@ class PDFController extends Controller
         $orden = $this->getData($id);
         foreach ($orden as $order)
         {
+
           $view =  \View::make('admin.order.show', compact('order'))->render();
           $pdf = \App::make('dompdf.wrapper');
           $pdf->loadHTML($view);

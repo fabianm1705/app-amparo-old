@@ -2,6 +2,19 @@ importScripts(
 	'https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js'
 );
 
+// if (workbox) { //workbox solo existe en el scope del serviceWorker
+//   console.log('Workbox loaded!');
+// } else {
+//   console.log(`Can't load Workbox`);
+// }
+
+workbox.core.setCacheNameDetails({
+  prefix: 'app-amparo',
+  suffix: 'v3',
+  precache: 'precache-cache',
+  runtime: 'runtime-cache'
+});
+
 workbox.precaching.precacheAndRoute([]);
 
 workbox.routing.registerRoute(

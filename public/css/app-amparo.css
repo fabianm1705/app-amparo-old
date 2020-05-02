@@ -2,9 +2,6 @@
     max-height: 12px;
 }
 
-.margenTotal {
-  margin: 1rem;
-}
 
 .bgAzul {
   background-color: #0000FF;
@@ -38,6 +35,10 @@
 /* Celeste */
 .bgCyan {
   background-color: #6cb2eb;
+}
+
+.margenTotal {
+  margin: 1rem;
 }
 
 .centrado {

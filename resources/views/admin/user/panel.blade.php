@@ -8,7 +8,7 @@
         <div class="alert-icon">
             <i class="material-icons">check</i>
         </div>
-        Recuerda que adhiriendo al débito automático tienes un 15% de descuento por 6 meses.
+        Adhiriendo al débito automático tienes un 15% de descuento por 6 meses.
         <button type="button" class="close ml-auto" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true"><i class="material-icons">clear</i></span>
         </button>
@@ -16,6 +16,33 @@
     </div>
   </div>
   <div class="row">
+    <div class="col-lg-5 col-md-5 col-sm-12 mt-2">
+      <div class="fresh-table full-color-orange d-flex shadow-sm">
+        <h5 class="card-title text-white mt-3 mb-3 ml-3">Afiliados</h5>
+      </div>
+      <div class="card shadow-sm mt-1">
+        <div class="card-body centrado">
+          <table class="table table-hover table-sm table-responsive">
+            <thead>
+              <tr>
+                <th class="text-center">Apellido y Nombres</th>
+                <th>Fecha Nac.</th>
+                <th>Documento</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($users as $user)
+                <tr>
+                  <td>{{ $user->name }}</td>
+                  <td>{{ \Carbon\Carbon::parse($user->fechaNac)->format('d/m/Y') }}</td>
+                  <td>{{ $user->nroDoc }}</td>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
     <div class="col-lg-7 col-md-7 col-sm-12 mt-2">
       <div class="fresh-table full-color-orange d-flex shadow-sm">
         <h5 class="card-title text-white mt-3 mb-3 ml-3">Info General</h5>
@@ -50,33 +77,6 @@
               <input type="text" class="form-control text-center" value="{{ $group->horaCobro }}" readonly id="horaCobro">
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-5 col-md-5 col-sm-12 mt-2">
-      <div class="fresh-table full-color-orange d-flex shadow-sm">
-        <h5 class="card-title text-white mt-3 mb-3 ml-3">Afiliados</h5>
-      </div>
-      <div class="card shadow-sm mt-1">
-        <div class="card-body centrado">
-          <table class="table table-hover table-sm table-responsive">
-            <thead>
-              <tr>
-                <th class="text-center">Apellido y Nombres</th>
-                <th>Fecha Nac.</th>
-                <th>Documento</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach($users as $user)
-                <tr>
-                  <td>{{ $user->name }}</td>
-                  <td>{{ \Carbon\Carbon::parse($user->fechaNac)->format('d/m/Y') }}</td>
-                  <td>{{ $user->nroDoc }}</td>
-                </tr>
-              @endforeach
-            </tbody>
-          </table>
         </div>
       </div>
     </div>

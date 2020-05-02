@@ -12,7 +12,7 @@
             for (i = 0; i < Object.keys(resp.data).length; i++) {
               var valor = Math.round(resp.data[i].costo / 10 * (1+(porc_cuotas/100)) / resp.data[i].cantidadCuotas) * 10;
               var productos = document.getElementById("productos");
-              productos.insertAdjacentHTML("beforeend","<div class='col-lg-3 col-md-3 col-sm-6 col-xs-6 mt-1 mb-1' id='borrar'><a href='/admin/products/"+resp.data[i].id+"' style='text-decoration:none;'><div class='card card-product card-plain shadow-sm'><div class='card-header-image'><img class='card-img-top' src='/images/"+resp.data[i].image_url+"'></div><div class='card-body text-center'><div class='card-description' style='height: 70px;overflow:auto;'>"+resp.data[i].modelo+" <small> - "+resp.data[i].descripcion+"</small></div></div><h4 class='card-title text-center'><small>"+resp.data[i].cantidadCuotas+" cuotas de $</small>"+valor+"<br></h4></div></a></div>");
+              productos.insertAdjacentHTML("beforeend","<div class='col-lg-3 col-md-3 col-sm-6 col-xs-6 mt-1 mb-1' id='borrar'><a href='/admin/products/"+resp.data[i].id+"' style='text-decoration:none;'><div class='card card-product card-plain shadow-sm'><div class='card-header-image'><img class='card-img-top' src='/images/products/"+resp.data[i].image_url+"'></div><div class='card-body text-center'><div class='card-description' style='height: 70px;overflow:auto;'>"+resp.data[i].modelo+" <small> - "+resp.data[i].descripcion+"</small></div></div><h4 class='card-title text-center'><small>"+resp.data[i].cantidadCuotas+" cuotas de $</small>"+valor+"<br></h4></div></a></div>");
             }
           })
           .catch(function (error) {console.log(error);})

@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('myLinks')
+  <script>
+    function iniciaEmision(){}
+  </script>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -16,7 +22,7 @@
                             <label for="nroDoc" class="col-md-4 col-form-label text-md-right">@lang('messages.document')</label>
 
                             <div class="col-md-6">
-                                <input id="nroDoc" type="text" class="form-control @error('nroDoc') is-invalid @enderror" name="nroDoc" value="{{ old('nroDoc') }}" required autocomplete="nroDoc" autofocus>
+                                <input style="font-weight: bold;font-size: 14pt;" id="nroDoc" type="text" class="form-control @error('nroDoc') is-invalid @enderror" name="nroDoc" value="{{ old('nroDoc') }}" required autocomplete="nroDoc" autofocus>
 
                                 @error('nroDoc')
                                     <span class="invalid-feedback" role="alert">
@@ -30,7 +36,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">@lang('messages.password')</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <input style="font-weight: bold;font-size: 14pt;" id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">

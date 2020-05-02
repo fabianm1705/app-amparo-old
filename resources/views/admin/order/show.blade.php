@@ -11,7 +11,7 @@
   <div class="centrado">
     <table class="Estilo1">
       <tr>
-        <td><img src="{{ asset('images/logo.png') }}"></td>
+        <td><img src="{{ public_path('/images/logo.png') }}"></td>
         <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
         <td>
           <span>Lugar de Emisión: Sede Amparo</span><br>

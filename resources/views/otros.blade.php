@@ -3,21 +3,32 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-      <div class="col-md-4 card shadow-sm fresh-table full-color-orange margenTotal">
-        <div class="title text-center text-white"><br>
+      <div class="col-md-4 card shadow-sm margenTotal">
+        <div class="title text-center"><br>
           <div class="fontAmparo">
-            ADMINISTRACION<hr>
+            Formas de Pago<hr>
+          </div>
+          * Débito automático vía CBU (15% de descuento por 6 meses).<br>
+          * Transferencia bancaria.<br>
+          CBU Cta Bco Bica: 4260003300100023798015
+          <br><br>
+        </div>
+      </div>
+      <div class="col-md-3 card shadow-sm margenTotal">
+        <div class="title text-center"><br>
+          <div class="fontAmparo">
+            Administración<hr>
           </div>
           Oficina Cura Alvarez 615, Paraná<br>
           Horario: Lun. a Vie. 8:30 a 18:00hs<br>
           Sepelio: 4235108 / 154-057991<br>
-          SOS Emergencias: 4222322 / 4233333<br><br>
+          SOS Emerg.: 4222322 / 4233333<br><br>
         </div>
       </div>
-      <div class="col-md-4 card shadow-sm fresh-table full-color-orange margenTotal">
-        <div class="title text-center text-white"><br>
+      <div class="col-md-3 card shadow-sm margenTotal">
+        <div class="title text-center"><br>
           <div class="fontAmparo">
-            FARMACIA<hr>
+            Farmacia<hr>
           </div>
           Farmacia Nueva Farma<br>
           30% de descuento sobre vademecum<br>

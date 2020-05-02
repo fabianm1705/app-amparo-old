@@ -2,7 +2,7 @@
     <tr :key="product.id">
       <td>
         <div class="">
-          <img class="card-img-top" style="width:100px;" :src="'../images/'+product.image_url" :alt="product.modelo">
+          <img class="card-img-top" style="width:100px;" :src="'../images/products/'+product.image_url" :alt="product.modelo">
         </div>
       </td>
       <td class="align-middle">

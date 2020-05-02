@@ -55,17 +55,17 @@ class ProductController extends Controller
       if($request->hasFile('image_url')){
         $image_file=$request->file('image_url');
         $image_name=time().$image_file->getClientOriginalName();
-        $image_file->move(public_path().'/images',$image_name);
+        $image_file->move(public_path().'/images/products',$image_name);
       }
       if($request->hasFile('image_url2')){
         $image_file=$request->file('image_url2');
         $image_name2=time().$image_file->getClientOriginalName();
-        $image_file->move(public_path().'/images',$image_name2);
+        $image_file->move(public_path().'/images/products',$image_name2);
       }
       if($request->hasFile('image_url3')){
         $image_file=$request->file('image_url3');
         $image_name3=time().$image_file->getClientOriginalName();
-        $image_file->move(public_path().'/images',$image_name3);
+        $image_file->move(public_path().'/images/products',$image_name3);
       }
 
       $product = new Product;

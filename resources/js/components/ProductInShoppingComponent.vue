@@ -3,7 +3,7 @@
     <a :href="'/admin/products/'+product.id" style="text-decoration:none;">
       <div class="card card-product card-plain shadow-sm">
         <div class="card-header-image">
-          <img class="card-img-top" :src="'../images/'+product.image_url" :alt="product.modelo">
+          <img class="card-img-top" :src="'../images/products/'+product.image_url" :alt="product.modelo">
         </div>
         <div class="card-body text-center">
           <div class="card-description" style="height: 70px;overflow:auto;">

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "832622776362",
+    "firebase_url": "https://app-amparo.firebaseio.com",
+    "project_id": "app-amparo",
+    "storage_bucket": "app-amparo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:832622776362:android:4f319ccc0b68e3d9043353",
+        "android_client_info": {
+          "package_name": "ar.com.amparosrl"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "832622776362-jestj7dpsic9bg0ccdh16r351lgih75e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXfKEZCISaDFquPveN1Pvno7rqds_W6Oo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "832622776362-jestj7dpsic9bg0ccdh16r351lgih75e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

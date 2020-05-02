@@ -3,6 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#f6993f">
+    <meta
+      name="description"
+      content="Amparo es una empresa de servicios sociales nacida en 2003,
+               dedicada a brindar servicios de medicina ambulatoria, sepelio y odontología.">
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('images/apple-icon.png') }}">
     <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
 
@@ -17,38 +22,23 @@
 
     <link rel="manifest" href="/manifest.json" />
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="{{ asset('css/fresh-bootstrap-table.css') }}" rel="stylesheet" />
+    {{-- <link rel="dns-prefetch" href="//fonts.gstatic.com"> --}}
+    <link href="{{ asset('css/fresh-bootstrap-table.min.css') }}" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/app-amparo.css') }}" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" rel="stylesheet">
-    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> --}}
-    <style media="screen">
-        @font-face {
-            font-family: 'iProton';
-            src:
-            url('{{ asset("css/iProton-Bold.otf") }}') format('opentype'),
-            url('{{ asset("css/iProton-Bold.ttf") }}') format('truetype');
-        }
-        .fontAmparo {
-            font-family: 'iProton';
-        }
-   </style>
    @yield('myLinks')
 </head>
-<body onLoad="iniciaEmision()" style="background-image: url({{ asset('images/01.jpg' )}})">
+<body onLoad="iniciaEmision()" style="background-image: url({{ asset('images/01.webp' )}})">
     <div id="app">
         <nav class="navbar navbar-expand-md fixed-top navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand fontAmparo" href="{{ url('/home') }}">
                   <div class="d-flex justify-content-end">
                     <div class="mr-2">
-                      <img src="{{ asset('images/logoSinSSSmall.png') }}" height="35">
+                      <img src="{{ asset('images/logoSinSSSmall.png') }}" height="35" alt="Amparo">
                     </div>
                   </div>
                 </a>
@@ -72,7 +62,10 @@
                               @endcan
                               <div class="dropdown-divider"></div>
                               @can('users.index')
-                                <a class="dropdown-item" href="{{ route('users.index') }}">Socios</a>
+                                <a class="dropdown-item" href="{{ route('users.index') }}">Búsqueda Socios</a>
+                              @endcan
+                              @can('users.upload')
+                                <a class="dropdown-item" href="{{ route('users.uploadfiles') }}">Actualización Padrón</a>
                               @endcan
                               <div class="dropdown-divider"></div>
                               @can('products.index')
@@ -217,13 +210,13 @@
             <div class="row justify-content-center">
               <div class="col-md-8">
                 @if(Session::has('message'))
-                  <div class="container alert alert-success animated fadeOut delay-3s">
+                  <div class="container alert alert-success">
                     {{ Session::get('message') }}
                   </div>
                 @endif
 
                 @if($errors->any())
-                  <div class="container alert alert-danger animated fadeOut delay-3s">
+                  <div class="container alert alert-danger">
                     <ul>
                       @foreach($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -277,6 +270,16 @@
   //   template: '<i class="fa fa-facebook-square"></i> {total}',
   //   url: location.href
   // })
+</script>
+<script>
+  // Nos aseguramos que el navegador implementa la api 'serviceWorker'
+  if ('serviceWorker' in navigator) {
+    // Esperamos al evento load para registrar nuestro service worker
+    window.addEventListener('load', () => {
+    // Registramos el service worker
+    navigator.serviceWorker.register('/service-worker.js');
+    });
+  }
 </script>
 
 </html>

@@ -9,15 +9,35 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "css/app.css",
-    "revision": "55972315e7b86f585b78d3e71bd5be42"
+    "revision": "59d0739fbb4efbdffda1c4f36eb47e97"
+  },
+  {
+    "url": "css/ferozo.css",
+    "revision": "892c0b36995ae7a8f725bee672d14af0"
+  },
+  {
+    "url": "css/fresh-bootstrap-table.css",
+    "revision": "95d9dafe15982cf8b53ebe6cfcacb282"
+  },
+  {
+    "url": "css/material-kit.css",
+    "revision": "8834050e94a5e2db93990635509bad04"
+  },
+  {
+    "url": "img/sprite.png",
+    "revision": "95cf14a14ab5db4dc386b3da2a8fbaa2"
+  },
+  {
+    "url": "js/addToHomeScreen.js",
+    "revision": "03db0a6b6d8a02bf34771f20fd85d224"
   },
   {
     "url": "js/app.js",
-    "revision": "0ff4fed9892a429a027a0140c180c3bc"
+    "revision": "9f56bcf86e02c555120601b33636cacb"
   },
   {
     "url": "material/js/bootstrap.min.js",
-    "revision": "e47e17c7d6dc2f22796754334f06ef8e"
+    "revision": "79b5346433d3bdf736aab2379a008083"
   },
   {
     "url": "material/js/core/bootstrap-material-design.min.js",
@@ -33,11 +53,11 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "material/js/envioForm.js",
-    "revision": "c64186225bb3e7cc1377a49a637d6a20"
+    "revision": "17ba0987693ae97dce473028bbfc66be"
   },
   {
     "url": "material/js/form_object.js",
-    "revision": "9e39c4405efb929d1a97c68c7c52d82d"
+    "revision": "0c5ce72b4793c42b5d532a77d8e56910"
   },
   {
     "url": "material/js/material-kit.js",
@@ -49,11 +69,11 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "material/js/material.min.js",
-    "revision": "2f896bf7aa84a288fc71a6b302f06c91"
+    "revision": "71691fa851c2e609069b7c5c70fdff06"
   },
   {
     "url": "material/js/plugins/bootstrap-datetimepicker.js",
-    "revision": "14382219d09a6c2272e95a95a6bbc5c8"
+    "revision": "4df98b35813fbe2047135171afc23628"
   },
   {
     "url": "material/js/plugins/bootstrap-selectpicker.js",
@@ -93,39 +113,39 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "/welcome",
-    "revision": "3bb220ccc4f81a6f4771f31b03942155"
+    "revision": "11c48f9e545f9bcee00f17db7ad4b412"
   },
   {
     "url": "/contacto",
-    "revision": "6bcf29a275d23e77534e2726975676e1"
+    "revision": "e13d203db1668123189c13673101b184"
   },
   {
     "url": "/home",
-    "revision": "45badbdf21eeef095a1bc3568c3346bf"
+    "revision": "c47cc5f4629505327dff0c60e977036c"
   },
   {
     "url": "/app",
-    "revision": "95deffc861035dd317bda3606a66b63f"
+    "revision": "44e90acc3d3003228d17c7314fb9e072"
   },
   {
     "url": "/doctorsmostrar",
-    "revision": "384f1baee98442f96fc5177752539e87"
+    "revision": "01e1d18da1ed9d8a25c44a9a47421ea4"
   },
   {
     "url": "/orderscrear",
-    "revision": "3cea413effe52b15b2913e940500981c"
+    "revision": "c13e8b80d0ecff889efe7821b58767bb"
   },
   {
     "url": "/ordersindice",
-    "revision": "bb17334df31bd2b3da2988a3599d841c"
+    "revision": "13bfcc88b7e77eed7a54f47520d0ace6"
   },
   {
     "url": "/shopping",
-    "revision": "a0b5f1f9399d59995e9c8ff52199b746"
+    "revision": "b9a4ebad25b37322efe236e472bb9339"
   },
   {
     "url": "/login",
-    "revision": "518c7d39b19367867141fa22047dfbbd"
+    "revision": "5db48c5c3e9d2b37f7f9f86b46e45bb9"
   }
 ]);
 

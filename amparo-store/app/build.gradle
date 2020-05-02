@@ -1,0 +1,43 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId "ar.com.amparosrl"
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 9
+        versionName "9.1"
+        manifestPlaceholders = [
+                hostName: "amparosrl.com.ar",
+                defaultUrl: "https://amparosrl.com.ar/home",
+                launcherName: "Amparo",
+                assetStatements: '[{\n' +
+                        '  "relation": ["delegate_permission/common.handle_all_urls"],\n' +
+                        '  "target" : { "namespace": "app-amparo", "package_name": "ar.com.amparosrl",\n' +
+                        '               "sha256_cert_fingerprints": ["99:91:03:0D:F7:2A:F5:EB:29:81:7D:1E:76:D4:41:D7:C1:59:AF:76:70:C8:92:67:07:D4:E1:63:91:BD:88:65"] }\n' +
+                        '}]'
+        ]
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}

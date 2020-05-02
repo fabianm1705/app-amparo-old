@@ -3,22 +3,28 @@
 
 <head>
   <meta charset="utf-8" />
+  <meta http-equiv="Cache-Control" content="max-age=31536000, public">
+  <meta name="theme-color" content="#ff8c00">
+  <meta
+    name="description"
+    content="Amparo es una empresa de servicios sociales nacida en 2003,
+             dedicada a brindar servicios de medicina ambulatoria, sepelio y odontología.">
   <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('images/apple-icon.png') }}">
   <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
     Amparo Servicios Sociales
   </title>
-  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
   <link rel="manifest" href="/manifest.json" />
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
-  <link href="{{ asset('material/material-kit.css?v=2.1.0') }}" rel="stylesheet" />
-  <link href="{{ asset('css/app-amparo.css') }}" rel="stylesheet">
+  <link href="{{ asset('material/material-kit.min.css?v=2.1.0') }}" rel="stylesheet">
+  <link href="{{ asset('css/app-amparo.css') }}" rel="stylesheet" preload>
   <!-- jquery library -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.0.min.js" crossorigin="anonymous"></script>
   <script>
   $('.container a').click(function(){
 
@@ -37,7 +43,7 @@
     <div class="container">
       <div class="navbar-translate">
         <a class="navbar-brand" href="{{ route('welcome') }}">
-          <img src="{{ asset('images/logoSinSSSmall.png') }}" height="35">
+          <img src="{{ asset('images/logoSinSSSmall.png') }}" height="35" alt="Logo Amparo">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation" data-target=".navbar-ex1-collapse">
           <span class="sr-only">Toggle navigation</span>
@@ -50,9 +56,11 @@
           <ul class="navbar-nav ml-auto">
             <!-- navbar-nav ml-auto -->
               <li class="nav-item">
-                  <a class="nav-link" href="#descarga" onclick="scrollToDownload()">
+                {{-- <button class="btn btn-sm" style="background-color: transparent;"> --}}
+                  <a class="nav-link" onclick="scrollWin(0, 1100)">
                       <i class="material-icons">person_add</i> Quiero Asociarme!
                   </a>
+                {{-- </button> --}}
               </li>
               <li class="nav-item">
                 @if (Route::has('login'))
@@ -79,9 +87,9 @@
             <button type="submit" class="btn btn-warning btn-lg">
                 @if (Route::has('login'))
                     @auth
-                        <a class="" href="{{ url('/home') }}"><i class="material-icons">account_circle</i>&nbsp;Zona Socios</a>
+                        <a href="{{ url('/home') }}"><i class="material-icons">account_circle</i>&nbsp;Zona Socios</a>
                     @else
-                        <a class="" href="{{ route('login') }}"><i class="material-icons">account_circle</i>&nbsp;Zona Socios</a>
+                        <a href="{{ route('login') }}"><i class="material-icons">account_circle</i>&nbsp;Zona Socios</a>
                     @endauth
                 @endif
             </button>
@@ -156,31 +164,31 @@
             </div>
           </div>
       </div>
-      <div class="cd-section">
+      <div class="">
         <div class="container">
           <div class="row">
             <div class="col-md-6">
               <h2 class="title">Nos mantenemos en contacto</h2>
-              <h5 class="description">Recibe toda la información que necesitas sin compromiso alguno,
+              <h5>Recibe toda la información que necesitas sin compromiso alguno,
               dejanos tus datos y un promotor se pondrá en contacto.</h5>
-              <div class="info info-horizontal">
-                <div class="icon icon-warning">
-                  <i class="material-icons">pin_drop</i>
-                </div>
-                <div class="description">
+              <div>
+                <div class="icon icon-warning d-flex">
+                  <i class="material-icons mr-2 mt-2">pin_drop</i>
                   <h4 class="info-title">Encuentranos en la oficina</h4>
+                </div>
+                <div>
                   <p> Cura Alvarez 615,
                     <br> 3100 Paraná,
                     <br> Entre Ríos, Argentina
                   </p>
                 </div>
               </div>
-              <div class="info info-horizontal">
-                <div class="icon icon-warning">
-                  <i class="material-icons">phone</i>
-                </div>
-                <div class="description">
+              <div>
+                <div class="icon icon-warning d-flex">
+                  <i class="material-icons mr-2 mt-2">phone</i>
                   <h4 class="info-title">Llamanos</h4>
+                </div>
+                <div>
                   <p> Leonela o Fabián
                     <br> Fijo: 4235108, Whatsapp: 155-508247,
                     <br> Lun - Vie, 8:30-18:00
@@ -197,28 +205,28 @@
                   </div>
                   <div class="card-body">
                     <div class="form-group label-floating is-empty">
-                      <label class="">Nombre</label>
+                      <label for="name">Nombre</label>
                       <input type="text" name="name" id="name" class="form-control">
                       <span class="material-input"></span>
                     </div>
                     <div class="row">
                       <div class="col-md-8">
                         <div class="form-group label-floating is-empty">
-                          <label class="">Domicilio</label>
+                          <label for="address">Domicilio</label>
                           <input type="text" name="address" id="address" class="form-control">
                           <span class="material-input"></span>
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="form-group label-floating is-empty">
-                          <label class="">Teléfono</label>
+                          <label for="telephone">Teléfono</label>
                           <input type="text" name="telephone" id="telephone" class="form-control">
                           <span class="material-input"></span>
                         </div>
                       </div>
                     </div>
                     <div class="form-group label-floating is-empty">
-                      <label class="bmd-label-floating">Email</label>
+                      <label class="bmd-label-floating" for="email">Email</label>
                       <input type="email" name="email" id="email" class="form-control">
                       <span class="material-input"></span>
                     </div>
@@ -249,7 +257,7 @@
                     </a>
                 </li>
                 <li>
-                  <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.facebook.com/amparosrl" target="_blank" data-original-title="Danos un Me Gusta en Facebook">
+                  <a class="nav-link" rel="noopener" title="Facebook" data-placement="bottom" href="https://www.facebook.com/amparosrl" target="_blank" data-original-title="Danos un Me Gusta en Facebook">
                       <i class="fa fa-facebook-square"></i> Facebook
                   </a>
                 </li>
@@ -257,9 +265,7 @@
         </nav>
         <div class="copyright float-right">
             &copy;
-            <script>
-                document.write(new Date().getFullYear())
-            </script>, <b>Amparo</b> Cura Alvarez 615 - Tel.:4235108
+            <strong id="fecha"></strong>, <b>Amparo</b> Cura Alvarez 615 - Tel.:4235108
         </div>
     </div>
   </footer>
@@ -267,30 +273,30 @@
   <script src="{{ asset('material/js/core/jquery.min.js') }}" type="text/javascript"></script>
   <script src="{{ asset('material/js/core/popper.min.js') }}" type="text/javascript"></script>
   <script src="{{ asset('material/js/core/bootstrap-material-design.min.js') }}" type="text/javascript"></script>
-  <script src="{{ asset('material/js/plugins/moment.min.js') }}" type="text/javascript"></script>
-  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-  <script src="{{ asset('material/js/plugins/nouislider.min.js') }}" type="text/javascript"></script>
-  <script src="{{ asset('material/js/plugins/bootstrap-tagsinput.js') }}" type="text/javascript"></script>
-  <script src="{{ asset('material/js/plugins/bootstrap-datetimepicker.js') }}" type="text/javascript"></script>
   <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
-  <script src="{{ asset('material/js/material-kit.js?v=2.1.0') }}" type="text/javascript"></script>
+  <script src="{{ asset('material/js/material-kit.min.js?v=2.1.0') }}" type="text/javascript"></script>
   <!-- <script src="main.js" type="text/javascript"></script> -->
-  <script src="{{ asset('material/js/form_object.js') }}" type="text/javascript"></script>
-  <script src="{{ asset('material/js/envioForm.js') }}" type="text/javascript"></script>
+  <script src="{{ asset('material/js/form_object.js') }}" type="text/javascript" async></script>
+  <script src="{{ asset('material/js/envioForm.js') }}" type="text/javascript" async></script>
   <script>
+    var ano = (new Date).getFullYear();
     $(document).ready(function() {
-      //init DateTimePickers
-      materialKit.initFormExtendedDatetimepickers();
-
+      $("#fecha").text( ano );
     });
-
-
-    function scrollToDownload() {
-      if ($('.cd-section').length != 0) {
-        $("html, body").animate({
-          scrollTop: $('.cd-section').offset().top
-        }, 1000);
-      }
+  </script>
+  <script>
+  function scrollWin(x, y) {
+    window.scrollBy(x, y);
+  }
+  </script>
+  <script>
+    // Nos aseguramos que el navegador implementa la api 'serviceWorker'
+    if ('serviceWorker' in navigator) {
+      // Esperamos al evento load para registrar nuestro service worker
+      window.addEventListener('load', () => {
+      // Registramos el service worker
+      navigator.serviceWorker.register('/service-worker.js');
+      });
     }
   </script>
 </body>

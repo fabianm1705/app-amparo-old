@@ -97,7 +97,7 @@ class LayerController extends Controller
       $this->registroAcceso(11,'Plan Salud Individual');
       Layer::create([
                     'nombre' => 'Amparo Salud',
-                    'monto' => 500,
+                    'monto' => 600,
                     'user_id' => Auth::user()->id,
                     'subscription_id' => 6
                   ]);

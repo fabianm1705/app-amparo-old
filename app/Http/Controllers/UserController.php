@@ -263,6 +263,21 @@ class UserController extends Controller
     ]);
   }
 
+  public function planes()
+  {
+    foreach (Auth::user()->roles as $role){
+      if(($role->slug=='dev') or ($role->slug=='admin')){
+        $users = User::where('id',Auth::user()->id)->get();
+      }else{
+        UserInterest::create(['user_id' => Auth::user()->id,'interest_id' => 13]);
+        $group_id = Auth::user()->group_id;
+        $users = User::where('group_id',$group_id)->get();
+      }
+    }
+    $usersCount = $users->count();
+    return view('planes',compact("usersCount"));
+  }
+
   public function upload(Request $request)
   {
     dd($request->hasFile('fileToUpload'));

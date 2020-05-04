@@ -175,9 +175,9 @@
           <h5 class="fontAmparo">Plan Salud</h5>
           <h1 class="card-title">
             @if($usersCount===1)
-              <small class="text-white">$</small><strong>500</strong><small class="text-white"> /mes</small>
+              <small class="text-white">$</small><strong>600</strong><small class="text-white"> /mes</small>
             @else
-              <small class="text-white">$</small><strong>800</strong><small class="text-white"> Grupo Fliar</small>
+              <small class="text-white">$</small><strong>900</strong><small class="text-white"> Grupo Fliar</small>
             @endif
           </h1><br>
           Cobertura Ambulatoria Integral<hr>

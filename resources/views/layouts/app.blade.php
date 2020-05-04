@@ -135,11 +135,11 @@
                             </a>
                           </li>
                         @endcan
-                        @can('otros')
+                        {{-- @can('otros')
                           <li class="nav-item active">
                             <a class="nav-link" href="{{ route('otros') }}">+Servicios</a>
                           </li>
-                        @endcan
+                        @endcan --}}
                         @can('aop')
                         <li class="nav-item active">
                           <a class="nav-link" href="{{ route('odontologia') }}">Odontológico</a>
@@ -149,6 +149,11 @@
                         <li class="nav-item active">
                           <a class="nav-link" href="{{ route('emergencia') }}">Padrón</a>
                         </li>
+                        @endcan
+                        @can('otros')
+                          <li class="nav-item active">
+                            <a class="nav-link" href="{{ route('planes') }}">Planes</a>
+                          </li>
                         @endcan
                         @can('contacto')
                           <li class="nav-item active">

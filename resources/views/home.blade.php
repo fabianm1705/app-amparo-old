@@ -49,10 +49,10 @@
               </div>
             @endcan
             @if(Auth::user()->password_changed_at)
-              @can('contacto')
+              @can('otros')
                 <div class="col-md-2 blanco">
                   <button class="btn btn-success m-1 text-light btn-block" type="" name="button">
-                    <a style="text-decoration:none;" href="{{ route('contacto') }}">Contacto</a>
+                    <a style="text-decoration:none;" href="{{ route('planes') }}">Planes</a>
                   </button>
                 </div>
               @endcan

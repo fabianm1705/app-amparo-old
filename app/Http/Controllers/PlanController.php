@@ -98,7 +98,7 @@ class PlanController extends Controller
       $this->registroAcceso(11,'Plan Salud Grupal');
       Plan::create([
                     'nombre' => 'AMPARO SALUD PLUS',
-                    'monto' => 800,
+                    'monto' => 900,
                     'group_id' => Auth::user()->group_id,
                     'subscription_id' => 5
                   ]);

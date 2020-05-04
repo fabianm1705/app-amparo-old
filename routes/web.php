@@ -200,6 +200,9 @@ Route::post('getLayers/{id}', 'LayerController@getLayers')
 Route::get('otros', function () {return view('otros');})
               ->middleware(['auth','can:otros'])
               ->name('otros');
+Route::get('planes', 'UserController@planes')
+              ->middleware(['auth','can:otros'])
+              ->name('planes');
 
 Route::get('contact-us', 'ContactUsController@contactUs')
               ->middleware(['auth','can:contacto'])
